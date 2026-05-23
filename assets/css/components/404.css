@@ -1,0 +1,109 @@
+/* ---------- 404 page ---------- */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.not-found h1 {
+  font-size: 5rem;
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.not-found p {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.not-found-search {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+
+.not-found-search input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s var(--ease-out);
+}
+
+.not-found-search input:focus {
+  border-color: var(--accent-soft);
+}
+
+.not-found-search input::placeholder {
+  color: var(--muted-light);
+}
+
+.not-found-results {
+  margin-top: 0.5rem;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  display: none;
+}
+
+.not-found-results.has-results {
+  display: block;
+}
+
+.not-found-results .search-result-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--hairline);
+  transition: background 0.2s;
+}
+
+.not-found-results .search-result-item:hover {
+  background: var(--accent-wash);
+}
+
+.not-found-results .search-result-item:last-child {
+  border-bottom: none;
+}
+
+.not-found-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  transition: all 0.25s var(--ease-out);
+  letter-spacing: 0.04em;
+}
+
+.not-found-back:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .not-found h1 {
+    font-size: 3.5rem;
+  }
+
+  .not-found-search {
+    max-width: 100%;
+  }
+}

@@ -296,3 +296,136 @@ class SearchController {
 export function initSearch() {
   new SearchController();
 }
+
+/* ---------- Inline search (404 page) ---------- */
+
+/**
+ * Lightweight inline search for the 404 page.
+ * Fetches /posts.json, builds a Fuse index, and renders results
+ * into a dedicated container as the user types.
+ *
+ * @param {string} inputId — CSS selector for the search input
+ * @param {string} resultsId — CSS selector for the results container
+ */
+export function initInlineSearch(inputId, resultsId) {
+  const input = document.getElementById(inputId);
+  const results = document.getElementById(resultsId);
+  if (!input || !results) return;
+
+  let fuse = null;
+  let posts = [];
+  let loading = false;
+  let debounceTimer = null;
+
+  /** Fetch index and initialise Fuse. */
+  async function loadIndex() {
+    if (loading || fuse) return;
+    loading = true;
+    try {
+      const resp = await fetch('/posts.json');
+      if (!resp.ok) throw new Error('Failed to load index');
+      posts = await resp.json();
+      fuse = new Fuse(posts, {
+        keys: [
+          { name: 'title', weight: 0.4 },
+          { name: 'description', weight: 0.2 },
+          { name: 'content', weight: 0.3 },
+          { name: 'categories', weight: 0.1 }
+        ],
+        includeMatches: true,
+        threshold: 0.4,
+        minMatchCharLength: 2
+      });
+    } catch (_) {
+      results.innerHTML = '<p class="search-empty">搜索索引加载失败</p>';
+      results.classList.add('has-results');
+    } finally {
+      loading = false;
+    }
+  }
+
+  input.addEventListener('input', () => {
+    const query = input.value.trim();
+    if (!query) {
+      results.classList.remove('has-results');
+      results.innerHTML = '';
+      return;
+    }
+
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => {
+      if (!fuse) {
+        loadIndex().then(() => { if (fuse) doSearch(query); });
+        return;
+      }
+      doSearch(query);
+    }, 200);
+  });
+
+  input.addEventListener('focus', () => {
+    if (!fuse) loadIndex();
+  });
+
+  function doSearch(query) {
+    const fuseResults = fuse.search(query).slice(0, 8);
+    if (fuseResults.length === 0) {
+      results.innerHTML = '<p class="search-empty">未找到相关内容</p>';
+      results.classList.add('has-results');
+      return;
+    }
+
+    results.classList.add('has-results');
+    results.innerHTML = fuseResults.map(r => {
+      const { item, matches } = r;
+      const titleHTML = highlightText(item.title, getMatchesFor('title', matches));
+      const contentText = item.content || item.description || '';
+      const snippet = extractSnippet(contentText, matches, 100);
+      const snippetHTML = highlightText(snippet, getMatchesFor('content', matches));
+      return `<a href="${escapeHTML(item.permalink)}" class="search-result-item">
+        <div class="search-result-title">${titleHTML}</div>
+        <div class="search-result-snippet">${snippetHTML}</div>
+      </a>`;
+    }).join('');
+  }
+
+  function getMatchesFor(key, matches) {
+    if (!matches) return [];
+    const m = matches.find(m => m.key === key);
+    return m ? m.indices : [];
+  }
+
+  function highlightText(text, indices) {
+    if (!indices || indices.length === 0) return escapeHTML(text);
+    let result = '';
+    let lastEnd = 0;
+    const sorted = [...indices].sort((a, b) => a[0] - b[0]);
+    for (const [start, end] of sorted) {
+      if (start < lastEnd) continue;
+      result += escapeHTML(text.slice(lastEnd, start));
+      result += `<mark class="search-highlight">${escapeHTML(text.slice(start, end + 1))}</mark>`;
+      lastEnd = end + 1;
+    }
+    result += escapeHTML(text.slice(lastEnd));
+    return result;
+  }
+
+  function extractSnippet(text, matches, maxLen) {
+    if (!matches || matches.length === 0) return text.substring(0, maxLen) + (text.length > maxLen ? '...' : '');
+    const firstMatch = matches[0];
+    const indices = firstMatch.indices;
+    if (!indices || indices.length === 0) return text.substring(0, maxLen) + '...';
+    const matchStart = indices[0][0];
+    const context = Math.floor((maxLen - 10) / 2);
+    const start = Math.max(0, matchStart - context);
+    const end = Math.min(text.length, start + maxLen);
+    const prefix = start > 0 ? '...' : '';
+    const suffix = end < text.length ? '...' : '';
+    return prefix + text.slice(start, end) + suffix;
+  }
+
+  function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+}

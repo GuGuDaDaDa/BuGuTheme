@@ -16,5 +16,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <title>{{ block "title" . }}{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s - %s" .Title site.Title }}{{ end }}{{ end }}</title>
+{{ partial "meta.html" . }}
 {{ partialCached "head/css.html" . }}
 {{ partial "google-analytics.html" . }}
