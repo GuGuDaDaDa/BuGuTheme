@@ -269,14 +269,8 @@
   }
 
   .carousel-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
-    opacity: 1;
+    display: none;
   }
-
-  .carousel-btn.prev { left: 8px; }
-  .carousel-btn.next { right: 8px; }
 
   .carousel-accent {
     width: 30px;

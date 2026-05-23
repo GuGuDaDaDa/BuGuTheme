@@ -168,6 +168,10 @@ a:hover {
 
 /* ---------- Responsive (global) ---------- */
 @media (max-width: 720px) {
+  html {
+    font-size: 17px;
+  }
+
   .app-inner {
     padding: 0 14px;
   }
