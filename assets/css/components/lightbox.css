@@ -90,17 +90,18 @@
 
 /* Image container */
 .lightbox-image-container {
-  max-width: 90vw;
-  max-height: 85vh;
-  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 #lightbox-img {
-  max-width: 90vw;
-  max-height: 85vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   transition: transform 0.3s;
   cursor: zoom-in;
