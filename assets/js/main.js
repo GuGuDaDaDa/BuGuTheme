@@ -7,7 +7,6 @@ import { initCarousel } from './carousel.js';
 import { initMasonry } from './masonry-loader.js';
 import { initToc } from './toc.js';
 import { initSearch } from './search.js';
-import { initInlineSearch } from './search.js';
 import { initLightbox } from './lightbox.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMasonry();
   initToc();
   initSearch();
-  initInlineSearch('not-found-search', 'not-found-results');
   initLightbox();
 
   /* ---------- Theme toggle ---------- */
