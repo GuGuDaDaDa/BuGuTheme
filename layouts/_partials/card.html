@@ -15,8 +15,8 @@
 {{- $link := "" }}
 {{- $read := 0 }}
 
-{{- if eq (printf "%T" .) "*hugolib.pageState" }}
-  {{- /* Hugo Page object */}}
+{{- if .IsPage }}
+  {{- /* Hugo Page object (any type: *pageState, pageWithWeight0, etc.) */}}
   {{- $title = .Title }}
   {{- $slug = .Slug | default (.Title | urlize) }}
   {{- $date = .Date | time.Format "2006-01-02" }}

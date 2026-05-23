@@ -1,7 +1,18 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
+<div class="app-inner">
+  <h1 class="term-heading">{{ .Title }}</h1>
+
+  {{- $pages := .Pages }}
+  {{- if $pages }}
+  <div class="masonry">
+    {{- range $pages }}
+      {{- partial "card.html" . }}
+    {{- end }}
+  </div>
+  {{- else }}
+  <p class="term-empty">
+    {{- if eq .Data.Plural "categories" }}该分类下暂无文章{{- else }}该标签下暂无文章{{- end }}
+  </p>
+  {{- end }}
+</div>
 {{ end }}

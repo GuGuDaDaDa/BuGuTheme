@@ -1,0 +1,66 @@
+/* ---------- Taxonomy list page ---------- */
+.taxonomy-page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.taxonomy-title {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 500;
+  margin-bottom: 36px;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+}
+
+/* ---------- Term list (capsule pills) ---------- */
+.terms-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.terms-list li {
+  display: inline-block;
+  margin: 0.3rem 0.6rem;
+}
+
+.term-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.92rem;
+  color: var(--fg-soft);
+  text-decoration: none;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.term-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
+}
+
+.term-count {
+  color: var(--muted-light);
+  font-size: 0.82rem;
+}
+
+/* ---------- Term detail page ---------- */
+.term-heading {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 500;
+  margin: 30px 0 36px;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+}
+
+/* ---------- Empty state ---------- */
+.term-empty {
+  color: var(--muted);
+  font-size: 0.95rem;
+  padding: 2rem 0;
+}

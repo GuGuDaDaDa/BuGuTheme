@@ -1,23 +1,11 @@
 {{- /*
-For a given taxonomy, renders a list of terms assigned to the page.
+  Renders a taxonomy term as a capsule-style pill link.
 
-@context {page} page The current page.
-@context {string} taxonomy The taxonomy.
-
-@example: {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  @context {dict} with keys:
+    - Page: a Hugo Taxonomy page (required)
+    - Count: number of pages in this term (optional)
 */}}
-
-{{- $page := .page }}
-{{- $taxonomy := .taxonomy }}
-
-{{- with $page.GetTerms $taxonomy }}
-  {{- $label := (index . 0).Parent.LinkTitle }}
-  <div>
-    <div>{{ $label }}:</div>
-    <ul>
-      {{- range . }}
-        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-      {{- end }}
-    </ul>
-  </div>
-{{- end }}
+<a href="{{ .Page.RelPermalink }}" class="term-pill">
+  {{ .Page.Title }}
+  {{- with .Count }} <span class="term-count">({{ . }})</span>{{- end }}
+</a>
