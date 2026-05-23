@@ -9,6 +9,9 @@ import { initToc } from './toc.js';
 import { initSearch } from './search.js';
 import { initLightbox } from './lightbox.js';
 import { initPhotoStack } from './photo-stack.js';
+import { start, done } from './progress.js';
+
+start();
 
 document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
@@ -98,3 +101,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (link) window.location.href = link;
   });
 });
+
+window.addEventListener('load', done);
