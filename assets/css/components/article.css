@@ -6,12 +6,15 @@
   gap: 4rem;
 }
 
+.article-header-wrapper {
+  padding-top: 30px;
+}
+
 /* ---------- Article page ---------- */
 .article-page {
   max-width: 680px;
   flex: 1;
   min-width: 0;
-  padding-top: 30px;
 }
 
 /* Cover image */
@@ -324,7 +327,7 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
-  .article-page {
+  .article-header-wrapper {
     padding-top: 20px;
   }
 

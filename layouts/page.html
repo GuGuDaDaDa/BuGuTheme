@@ -1,15 +1,17 @@
 {{ define "main" }}
 <div class="app-inner">
-<div class="article-layout">
-  <article class="article-page">
+  <div class="article-header-wrapper">
     {{ partial "article-header.html" . }}
-    <div class="article-content">
-      {{ .Content }}
-    </div>
-    {{ partial "article-footer.html" . }}
-    {{ partial "disqus.html" . }}
-  </article>
-  {{ partial "toc.html" . }}
-</div>
+  </div>
+  <div class="article-layout">
+    <article class="article-page">
+      <div class="article-content">
+        {{ .Content }}
+      </div>
+      {{ partial "article-footer.html" . }}
+      {{ partial "disqus.html" . }}
+    </article>
+    {{ partial "toc.html" . }}
+  </div>
 </div>
 {{ end }}
