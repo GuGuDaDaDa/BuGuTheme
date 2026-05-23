@@ -1,3 +1,10 @@
+/* ---------- Site header (full width) ---------- */
+.site-header {
+  width: 100%;
+  border-bottom: 1px solid var(--hairline);
+  transition: border-color 0.5s ease;
+}
+
 /* ---------- Header accent bar ---------- */
 .header-accent {
   width: 40px;
@@ -15,7 +22,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 42px 0 20px;
-  border-bottom: 1px solid var(--hairline);
   flex-wrap: wrap;
   gap: 12px;
 }

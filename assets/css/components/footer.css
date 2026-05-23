@@ -1,5 +1,6 @@
-/* ---------- Footer ---------- */
+/* ---------- Footer (full width) ---------- */
 .site-footer {
+  width: 100%;
   border-top: 1px solid var(--hairline);
   padding: 28px 0;
   text-align: center;
@@ -8,6 +9,7 @@
   letter-spacing: 0.06em;
   font-weight: 500;
   margin-top: 10px;
+  transition: border-color 0.5s ease;
 }
 
 .footer-text {

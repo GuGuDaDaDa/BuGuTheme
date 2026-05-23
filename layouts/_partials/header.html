@@ -1,15 +1,17 @@
-<div class="app-inner">
-  <div class="header-accent"></div>
-  <div class="site-header-inner">
-    <a href="{{ "/" | relURL }}" class="site-brand">{{ site.Title }}</a>
-    <div class="header-right">
-      {{ partial "menu.html" . }}
-      <button class="search-trigger" id="search-trigger" aria-label="搜索" title="搜索">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
-      <button class="theme-toggle" id="theme-toggle" aria-label="切换深浅模式" title="切换深浅模式">
-        <span class="theme-icon">🌙</span>
-      </button>
+<header class="site-header">
+  <div class="app-inner">
+    <div class="header-accent"></div>
+    <div class="site-header-inner">
+      <a href="{{ "/" | relURL }}" class="site-brand">{{ site.Title }}</a>
+      <div class="header-right">
+        {{ partial "menu.html" . }}
+        <button class="search-trigger" id="search-trigger" aria-label="搜索" title="搜索">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="切换深浅模式" title="切换深浅模式">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</header>
