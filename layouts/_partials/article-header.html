@@ -1,5 +1,5 @@
 {{- /* Article header: back link, cover, categories, title, meta */}}
-<a class="back-link" href="{{ "/posts/" | relURL }}">&#8592; 返回文章列表</a>
+<a class="back-link" href="{{ "/" | relURL }}">&#8592; 返回首页</a>
 
 {{- with .Params.cover }}
   {{- $img := $.Resources.GetMatch . }}
