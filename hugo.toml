@@ -10,32 +10,27 @@ hasCJKLanguage = true
     weight = 10
 
   [[menus.main]]
-    name = 'Posts'
-    pageRef = '/posts'
-    weight = 20
-
-  [[menus.main]]
     name = 'Categories'
     pageRef = '/categories'
-    weight = 30
+    weight = 20
 
   [[menus.main]]
     name = 'Tags'
     pageRef = '/tags'
-    weight = 40
+    weight = 30
 
   [[menus.main]]
     name = 'About'
     pageRef = '/about'
-    weight = 50
+    weight = 40
 
   [[menus.main]]
     name = 'Friends'
     pageRef = '/friends'
-    weight = 60
+    weight = 50
 
 [params]
-  disqusShortname = ""
+  disqusShortname = "111"
   googleAnalytics = ""
   footerText = '不孤博客 · 海雾深处，字字为灯'
   icp = ''
