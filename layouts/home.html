@@ -26,6 +26,9 @@
         <div class="carousel-content">
           {{- range .Params.categories | default slice | first 3 }}<span class="carousel-category">{{ . }}</span>{{- end }}
           <h2 class="carousel-title">{{ .Title }}</h2>
+          {{- with .Params.subtitle | default .Params.description }}
+          <p class="carousel-subtitle">{{ . }}</p>
+          {{- end }}
           <div class="carousel-meta"><span>{{ .Date | time.Format "2006-01-02" }}</span><span class="dot"></span><span>{{ .ReadingTime }} 分钟</span></div>
         </div>
       </div>

@@ -16,14 +16,23 @@
   min-width: 0;
 }
 
+/* Cover image wrapper — holds aspect ratio, prevents layout shift */
+.article-cover-wrap {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 36px;
+  background: var(--surface-alt);
+  box-shadow: var(--shadow-md);
+}
+
 /* Cover image */
 .article-cover {
   width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin-bottom: 36px;
+  height: 100%;
+  display: block;
+  object-fit: cover;
   filter: var(--img-filter);
-  box-shadow: var(--shadow-md);
   transition: filter 0.5s ease;
 }
 

@@ -48,9 +48,9 @@
 
 <article class="card" data-article-link="{{ $link }}"{{ if $slug }} data-article-slug="{{ $slug }}"{{ end }}>
   {{- if $cover }}
-  <img class="card-cover" src="{{ $cover }}" alt="{{ $title }}" loading="lazy" />
+  <div class="card-cover-wrap"><img class="card-cover" src="{{ $cover }}" alt="{{ $title }}" loading="lazy" /></div>
   {{- else }}
-  <div class="card-cover card-cover-fallback"></div>
+  <div class="card-cover-wrap"><div class="card-cover card-cover-fallback"></div></div>
   {{- end }}
   <div class="card-body">
     {{- range $cats }}

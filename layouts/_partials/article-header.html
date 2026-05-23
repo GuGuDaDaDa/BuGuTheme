@@ -3,12 +3,14 @@
 
 {{- with .Params.cover }}
   {{- $img := $.Resources.GetMatch . }}
+  <div class="article-cover-wrap">
   {{- if $img }}
     {{- $cover := $img.RelPermalink }}
-    <img class="article-cover" src="{{ $cover }}" alt="{{ $.Title }}" />
+    <img class="article-cover" src="{{ $cover }}" alt="{{ $.Title }}" loading="lazy" />
   {{- else }}
-    <img class="article-cover" src="{{ . | absURL }}" alt="{{ $.Title }}" />
+    <img class="article-cover" src="{{ . | absURL }}" alt="{{ $.Title }}" loading="lazy" />
   {{- end }}
+  </div>
 {{- end }}
 
 <h1 class="article-title">{{ .Title }}</h1>

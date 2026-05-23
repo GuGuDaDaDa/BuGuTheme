@@ -16,10 +16,15 @@
   border: 1px solid var(--border);
   overflow: clip;
   overflow-clip-margin: 50px;
-  transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+              border-color 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   position: relative;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .card:hover {
@@ -70,23 +75,35 @@
   height: 30px;
 }
 
+/* Cover wrapper — holds aspect ratio, prevents layout shift */
+.card-cover-wrap {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--surface-alt);
+}
+
 /* Cover image */
 .card-cover {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
   filter: var(--img-filter);
   transition: filter 0.5s ease, transform 0.5s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0) scale(1);
+  will-change: transform;
 }
 
 .card:hover .card-cover {
-  transform: scale(1.02);
+  transform: translateZ(0) scale(1.02);
 }
 
 /* Fallback gradient when no cover */
 .card-cover-fallback {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   background: linear-gradient(135deg, #5b6c7e 0%, #3a4a5c 50%, #6b7c8e 100%);
 }
 
