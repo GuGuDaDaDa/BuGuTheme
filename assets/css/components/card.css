@@ -154,6 +154,18 @@
   opacity: 0.6;
 }
 
+/* Subtitle */
+.card-subtitle {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* Excerpt */
 .card-excerpt {
   font-size: 0.86rem;

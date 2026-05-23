@@ -13,6 +13,7 @@
 {{- $cover := "" }}
 {{- $cats := slice }}
 {{- $link := "" }}
+{{- $subtitle := "" }}
 {{- $read := 0 }}
 
 {{- if .IsPage }}
@@ -24,6 +25,7 @@
   {{- $cover = .Params.cover }}
   {{- $cats = .Params.categories | default slice }}
   {{- $link = .RelPermalink }}
+  {{- $subtitle = .Params.subtitle | default "" }}
   {{- $read = .ReadingTime }}
   {{- if and $cover (not (hasPrefix $cover "http")) }}
     {{- $img := .Resources.GetMatch $cover }}
@@ -40,6 +42,7 @@
   {{- $cover = .cover }}
   {{- $cats = .categories }}
   {{- $link = .permalink }}
+  {{- $subtitle = .subtitle | default "" }}
   {{- $read = .readingTime }}
 {{- end }}
 
@@ -54,6 +57,9 @@
     <span class="card-category">{{ . }}</span>
     {{- end }}
     <h2 class="card-title"><a href="{{ $link }}">{{ $title }}</a></h2>
+    {{- with $subtitle }}
+    <p class="card-subtitle">{{ . }}</p>
+    {{- end }}
     <p class="card-excerpt">{{ $desc | truncate 120 }}</p>
     <div class="card-meta">
       <span>{{ $date }}</span>

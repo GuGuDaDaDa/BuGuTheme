@@ -50,6 +50,13 @@ function renderCard(d) {
   h2.appendChild(a);
   body.appendChild(h2);
 
+  if (d.subtitle) {
+    const sub = document.createElement('p');
+    sub.className = 'card-subtitle';
+    sub.textContent = d.subtitle;
+    body.appendChild(sub);
+  }
+
   const p = document.createElement('p');
   p.className = 'card-excerpt';
   p.textContent = (d.description || '').substring(0, 120);
