@@ -1,0 +1,64 @@
+{{- /*
+  Renders a single article card for the masonry grid.
+
+  Accepts either a Hugo Page object or a dict with keys:
+  title, slug, date, description, cover, categories, permalink, readingTime
+
+  @context {page|dict} . — Page or data map
+*/}}
+{{- $title := "" }}
+{{- $slug := "" }}
+{{- $date := "" }}
+{{- $desc := "" }}
+{{- $cover := "" }}
+{{- $cats := slice }}
+{{- $link := "" }}
+{{- $read := 0 }}
+
+{{- if eq (printf "%T" .) "*hugolib.pageState" }}
+  {{- /* Hugo Page object */}}
+  {{- $title = .Title }}
+  {{- $slug = .Slug | default (.Title | urlize) }}
+  {{- $date = .Date | time.Format "2006-01-02" }}
+  {{- $desc = .Params.description | default .Summary }}
+  {{- $cover = .Params.cover }}
+  {{- $cats = .Params.categories | default slice }}
+  {{- $link = .RelPermalink }}
+  {{- $read = .ReadingTime }}
+  {{- if and $cover (not (hasPrefix $cover "http")) }}
+    {{- $img := .Resources.GetMatch $cover }}
+    {{- if $img }}
+      {{- $cover = $img.RelPermalink }}
+    {{- end }}
+  {{- end }}
+{{- else }}
+  {{- /* Data map (from JS-rendered cards) */}}
+  {{- $title = .title }}
+  {{- $slug = .slug }}
+  {{- $date = .date }}
+  {{- $desc = .description }}
+  {{- $cover = .cover }}
+  {{- $cats = .categories }}
+  {{- $link = .permalink }}
+  {{- $read = .readingTime }}
+{{- end }}
+
+<article class="card"{{ if $slug }} data-article-slug="{{ $slug }}"{{ end }}>
+  {{- if $cover }}
+  <img class="card-cover" src="{{ $cover }}" alt="{{ $title }}" loading="lazy" />
+  {{- else }}
+  <div class="card-cover card-cover-fallback"></div>
+  {{- end }}
+  <div class="card-body">
+    {{- range $cats }}
+    <span class="card-category">{{ . }}</span>
+    {{- end }}
+    <h2 class="card-title"><a href="{{ $link }}">{{ $title }}</a></h2>
+    <p class="card-excerpt">{{ $desc | truncate 120 }}</p>
+    <div class="card-meta">
+      <span>{{ $date }}</span>
+      <span class="dot"></span>
+      <span>{{ $read }} 分钟</span>
+    </div>
+  </div>
+</article>

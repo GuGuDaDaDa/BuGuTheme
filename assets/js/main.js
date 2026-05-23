@@ -4,9 +4,11 @@
  */
 
 import { initCarousel } from './carousel.js';
+import { initMasonry } from './masonry-loader.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
+  initMasonry();
   /* ---------- Theme toggle ---------- */
   /** @type {HTMLButtonElement|null} */
   const themeToggle = document.getElementById('theme-toggle');

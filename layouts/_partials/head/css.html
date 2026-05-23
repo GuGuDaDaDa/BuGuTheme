@@ -1,1 +1,16 @@
-<link rel="stylesheet" href="{{ "main.css" | relURL }}">
+{{- $assets := slice
+    (resources.Get "css/main.css")
+    (resources.Get "css/components/header.css")
+    (resources.Get "css/components/footer.css")
+    (resources.Get "css/components/carousel.css")
+    (resources.Get "css/components/card.css")
+  }}
+  {{- with $assets | resources.Concat "css/bundle.css" }}
+    {{- if hugo.IsDevelopment }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{- else }}
+      {{- with . | resources.Minify | fingerprint }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+      {{- end }}
+    {{- end }}
+  {{- end }}

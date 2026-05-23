@@ -1,11 +1,10 @@
 {{ define "main" }}
-  {{- /* Query featured posts */}}
+  {{- /* Query featured posts for carousel */}}
   {{- $featured := where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true }}
   {{- $featured = sort $featured "Date" "desc" | first 5 }}
-  {{- /* Collect featured slugs for masonry dedup */}}
   {{- $excludeSlugs := slice }}
   {{- range $featured }}
-    {{- $excludeSlugs = $excludeSlugs | append .Slug }}
+    {{- $excludeSlugs = $excludeSlugs | append (.Slug | default (.Title | urlize)) }}
   {{- end }}
 
   {{- if $featured }}
@@ -14,35 +13,20 @@
     <div class="carousel-track" id="carousel-track">
       {{- range $featured }}
       <div class="carousel-slide" data-article-url="{{ .RelPermalink }}">
-        {{- $coverURL := "" }}
-        {{- $hasCover := false }}
+        {{- $coverURL := "" }}{{- $hasCover := false }}
         {{- if .Params.cover }}
           {{- $img := .Resources.GetMatch .Params.cover }}
-          {{- if $img }}
-            {{- $coverURL = $img.RelPermalink }}
-            {{- $hasCover = true }}
-          {{- else }}
-            {{- $coverURL = .Params.cover | absURL }}
-            {{- $hasCover = true }}
+          {{- if $img }}{{- $coverURL = $img.RelPermalink }}{{- $hasCover = true }}
+          {{- else }}{{- $coverURL = .Params.cover | absURL }}{{- $hasCover = true }}
           {{- end }}
         {{- end }}
-        {{- if $hasCover }}
-        <img class="carousel-bg" src="{{ $coverURL }}" alt="{{ .Title }}" />
-        {{- else }}
-        <div class="carousel-bg carousel-bg-fallback"></div>
-        {{- end }}
+        {{- if $hasCover }}<img class="carousel-bg" src="{{ $coverURL }}" alt="{{ .Title }}" />
+        {{- else }}<div class="carousel-bg carousel-bg-fallback"></div>{{- end }}
         <div class="carousel-overlay"></div>
         <div class="carousel-content">
-          {{- $categories := .Params.categories | default slice | first 3 }}
-          {{- range $categories }}
-          <span class="carousel-category">{{ . }}</span>
-          {{- end }}
+          {{- range .Params.categories | default slice | first 3 }}<span class="carousel-category">{{ . }}</span>{{- end }}
           <h2 class="carousel-title">{{ .Title }}</h2>
-          <div class="carousel-meta">
-            <span>{{ .Date | time.Format "2006-01-02" }}</span>
-            <span class="dot"></span>
-            <span>{{ .ReadingTime }} 分钟</span>
-          </div>
+          <div class="carousel-meta"><span>{{ .Date | time.Format "2006-01-02" }}</span><span class="dot"></span><span>{{ .ReadingTime }} 分钟</span></div>
         </div>
       </div>
       {{- end }}
@@ -53,11 +37,36 @@
   </section>
   {{- end }}
 
+  {{- /* Query non-draft, non-carousel articles for masonry */}}
+  {{- $allPosts := where site.RegularPages "Params.draft" "!=" true }}
+  {{- $masonryPosts := slice }}
+  {{- range $allPosts }}
+    {{- if not (in $excludeSlugs (.Slug | default (.Title | urlize))) }}
+      {{- $masonryPosts = $masonryPosts | append . }}
+    {{- end }}
+  {{- end }}
+  {{- $masonryPosts = sort $masonryPosts "Date" "desc" }}
+  {{- $initLoad := 12 }}
+  {{- $total := len $masonryPosts }}
+  {{- $loaded := math.Min $initLoad $total }}
+
   <div class="app-inner">
     <div class="section-ornament">最新文章</div>
-    <div class="masonry" id="masonry-grid" data-exclude="{{ delimit $excludeSlugs "," }}"></div>
+    <div class="masonry" id="masonry-grid"
+         data-exclude="{{ delimit $excludeSlugs "," }}"
+         data-loaded-count="{{ $loaded }}"
+         data-total-count="{{ $total }}">
+      {{- range first $initLoad $masonryPosts }}
+        {{- partial "card.html" . }}
+      {{- end }}
+      {{- if gt $total $initLoad }}
+      <div class="masonry-sentinel" id="masonry-sentinel"></div>
+      {{- end }}
+    </div>
+    {{- if gt $total $initLoad }}
     <div class="load-more-wrap">
       <button class="btn-load-more" id="btn-load-more">加载更多 <span class="arrow">↓</span></button>
     </div>
+    {{- end }}
   </div>
 {{ end }}

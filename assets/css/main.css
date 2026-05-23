@@ -1,8 +1,3 @@
-@import "tailwindcss";
-
-@source "../layouts/**/*.html";
-@source "../../content/**/*.md";
-
 /* ============================================================
    BuGuBlog Design System — CSS Variables & Base Styles
    Per infer.md and bugublog-v13.html
@@ -78,6 +73,16 @@
   padding: 0;
 }
 
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  vertical-align: middle;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -123,11 +128,6 @@ a:hover {
   opacity: 0.6;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
 /* ---------- Utility ---------- */
 .app-shell {
   position: relative;
@@ -158,8 +158,3 @@ img {
   clip: rect(0,0,0,0);
   border: 0;
 }
-
-/* ---------- Component imports ---------- */
-@import "./components/header.css";
-@import "./components/footer.css";
-@import "./components/carousel.css";

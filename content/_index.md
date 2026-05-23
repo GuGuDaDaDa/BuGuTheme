@@ -2,8 +2,7 @@
 title = 'Home'
 date = 2023-01-01T08:00:00-07:00
 draft = false
+outputs = ['html', 'json']
 +++
 
-Laborum voluptate pariatur ex culpa magna nostrud est incididunt fugiat
-pariatur do dolor ipsum enim. Consequat tempor do dolor eu. Non id id anim anim
-excepteur excepteur pariatur nostrud qui irure ullamco.
+欢迎来到不孤博客——海雾深处，字字为灯。

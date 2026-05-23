@@ -1,0 +1,31 @@
+{{- /* JSON feed of non-draft, non-carousel articles */}}
+{{- $featured := where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true | first 5 }}
+{{- $excludeSlugs := slice }}
+{{- range $featured }}
+  {{- $s := .Slug | default (.Title | urlize) }}
+  {{- if $s }}
+    {{- $excludeSlugs = $excludeSlugs | append $s }}
+  {{- end }}
+{{- end }}
+{{- $all := where site.RegularPages "Params.draft" "!=" true }}
+{{- $posts := slice }}
+{{- range $all }}
+  {{- $s := .Slug | default (.Title | urlize) }}
+  {{- if not (in $excludeSlugs $s) }}
+    {{- $posts = $posts | append . }}
+  {{- end }}
+{{- end }}
+[
+  {{- range $i, $p := $posts }}
+  {{- if $i }},{{ end }}
+  {
+    "title": {{ $p.Title | jsonify }},
+    "slug": {{ $p.Slug | default ($p.Title | urlize) | jsonify }},
+    "date": {{ $p.Date | time.Format "2006-01-02" | jsonify }},
+    "description": {{ $p.Params.description | default $p.Summary | jsonify }},
+    "cover": {{ $p.Params.cover | jsonify }},
+    "categories": {{ $p.Params.categories | default slice | jsonify }},
+    "permalink": {{ $p.RelPermalink | jsonify }},
+    "readingTime": {{ $p.ReadingTime }}
+  }{{- end }}
+]

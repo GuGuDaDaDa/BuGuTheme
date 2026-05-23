@@ -46,3 +46,10 @@ hasCJKLanguage = true
   [module.hugoVersion]
     extended = false
     min = '0.146.0'
+
+[outputFormats.json]
+  name = "json"
+  mediaType = "application/json"
+  baseName = "posts"
+  isPlainText = true
+  notAlternative = true
