@@ -1,0 +1,7 @@
+{{- /* TOC sidebar — rendered only when there are actual headings */}}
+{{- $toc := .TableOfContents }}
+{{- if and $toc (findRE "<a\\s" $toc) }}
+<aside class="toc" id="toc">
+  {{ $toc }}
+</aside>
+{{- end }}

@@ -1,0 +1,46 @@
+/* ---------- TOC sidebar ---------- */
+.toc {
+  position: absolute;
+  left: calc(100% + 4rem);
+  top: 15rem;
+  width: 220px;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  font-size: 0.88rem;
+}
+
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc ul ul {
+  padding-left: 1rem;
+}
+
+.toc a {
+  display: block;
+  padding: 0.25rem 0 0.25rem 0.75rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.toc a:hover {
+  color: var(--accent-soft);
+}
+
+.toc a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 500;
+}
+
+@media (max-width: 1199px) {
+  .toc {
+    display: none;
+  }
+}

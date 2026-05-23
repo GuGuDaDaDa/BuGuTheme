@@ -158,3 +158,10 @@ a:hover {
   clip: rect(0,0,0,0);
   border: 0;
 }
+
+/* ---------- Responsive (global) ---------- */
+@media (max-width: 720px) {
+  .app-inner {
+    padding: 0 14px;
+  }
+}

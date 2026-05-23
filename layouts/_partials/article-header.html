@@ -1,0 +1,26 @@
+{{- /* Article header: back link, cover, categories, title, meta */}}
+<a class="back-link" href="{{ "/posts/" | relURL }}">&#8592; 返回文章列表</a>
+
+{{- with .Params.cover }}
+  {{- $img := $.Resources.GetMatch . }}
+  {{- if $img }}
+    {{- $cover := $img.RelPermalink }}
+    <img class="article-cover" src="{{ $cover }}" alt="{{ $.Title }}" />
+  {{- else }}
+    <img class="article-cover" src="{{ . | absURL }}" alt="{{ $.Title }}" />
+  {{- end }}
+{{- end }}
+
+<h1 class="article-title">{{ .Title }}</h1>
+
+{{- with .Params.categories }}
+  {{- range . }}
+    <span class="article-category">{{ . }}</span>
+  {{- end }}
+{{- end }}
+
+<div class="article-meta">
+  <span>{{ .Date | time.Format "2006-01-02" }}</span>
+  <span>&middot;</span>
+  <span>{{ .ReadingTime }} 分钟</span>
+</div>

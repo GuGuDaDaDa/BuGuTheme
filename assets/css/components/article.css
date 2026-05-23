@@ -1,0 +1,330 @@
+/* ---------- Article page ---------- */
+.article-page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding-top: 30px;
+  position: relative;
+}
+
+/* Cover image */
+.article-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 36px;
+  filter: var(--img-filter);
+  box-shadow: var(--shadow-md);
+  transition: filter 0.5s ease;
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  margin-bottom: 30px;
+  transition: all 0.25s;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 10px;
+}
+
+/* Category tag */
+.article-category {
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-soft);
+  margin-bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.article-category::before {
+  content: '\2014';
+  color: var(--accent-soft);
+  font-weight: 400;
+}
+
+/* Title */
+.article-title {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 500;
+  margin-bottom: 18px;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+}
+
+/* Meta */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.03em;
+}
+
+.article-meta span:last-child {
+  color: var(--muted-light);
+}
+
+/* ---------- Article content ---------- */
+.article-content {
+  font-size: 1.02rem;
+  line-height: 1.9;
+  color: var(--fg);
+}
+
+.article-content p {
+  margin-bottom: 1.5em;
+}
+
+.article-content p:first-child {
+  font-size: 1.12rem;
+  color: var(--fg-strong);
+  line-height: 1.85;
+}
+
+.article-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.article-content a:hover {
+  color: var(--accent-soft);
+}
+
+.article-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-content hr {
+  border: none;
+  border-top: 1px solid var(--hairline);
+  margin: 3rem 0;
+}
+
+.article-content ul,
+.article-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-content li {
+  margin-bottom: 0.4rem;
+}
+
+/* ---------- Blockquote ---------- */
+.article-content blockquote {
+  margin: 2.2em 0;
+  padding: 22px 28px;
+  border-left: 3px solid var(--accent-soft);
+  background: var(--accent-wash);
+  font-style: italic;
+  color: var(--fg-soft);
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  position: relative;
+}
+
+.article-content blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  font-size: 3rem;
+  color: var(--accent-soft);
+  opacity: 0.25;
+  font-family: var(--font-serif);
+  line-height: 1;
+}
+
+.article-content blockquote p {
+  margin-bottom: 0.8em;
+}
+
+.article-content blockquote p:first-child {
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+
+/* ---------- Headings ---------- */
+.article-content h2 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: 2.2em 0 0.6em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.article-content h2::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin-top: 2px;
+}
+
+.article-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 1.6em 0 0.5em;
+}
+
+/* ---------- Code blocks ---------- */
+.article-content pre {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 1.8em 0;
+}
+
+.article-content code {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+.article-content :not(pre) > code {
+  background: var(--accent-wash);
+  border-radius: 3px;
+  padding: 0.15em 0.4em;
+  color: var(--accent);
+}
+
+/* ---------- Tags ---------- */
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent-soft);
+  background: var(--accent-wash);
+  padding: 2px 12px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.tag:hover {
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+/* ---------- Prev / Next navigation ---------- */
+.article-nav {
+  display: flex;
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.article-nav-item {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 18px 22px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.article-nav-item:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.article-nav-item a {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.article-nav-item.next a {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.article-nav-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--muted-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.article-nav-title {
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: var(--fg-strong);
+  line-height: 1.45;
+}
+
+.article-nav-item a:hover .article-nav-title {
+  color: var(--accent);
+}
+
+.article-nav-empty {
+  display: flex;
+  flex-direction: column;
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: default;
+}
+
+.article-nav-empty .article-nav-title {
+  color: var(--muted-light);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .article-page {
+    padding-top: 20px;
+  }
+
+  .article-title {
+    font-size: 1.4rem;
+  }
+
+  .article-content {
+    font-size: 0.9rem;
+  }
+}

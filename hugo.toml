@@ -42,6 +42,11 @@ hasCJKLanguage = true
     twitter = ''
     email = ''
 
+[markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
 [module]
   [module.hugoVersion]
     extended = false
