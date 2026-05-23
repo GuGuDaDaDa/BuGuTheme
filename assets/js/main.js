@@ -8,6 +8,7 @@ import { initMasonry } from './masonry-loader.js';
 import { initToc } from './toc.js';
 import { initSearch } from './search.js';
 import { initLightbox } from './lightbox.js';
+import { initPhotoStack } from './photo-stack.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initToc();
   initSearch();
   initLightbox();
+  document.querySelectorAll('.photo-stack').forEach(el => initPhotoStack(el));
 
   /* ---------- Theme toggle ---------- */
   /** @type {HTMLButtonElement|null} */

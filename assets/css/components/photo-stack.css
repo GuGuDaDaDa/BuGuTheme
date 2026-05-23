@@ -1,0 +1,356 @@
+/* ---------- Photo Stack Component ---------- */
+/* ── CSS custom properties ── */
+.photo-stack {
+  --ps-bg: #e8e5e0;
+  --ps-grain: rgba(0, 0, 0, 0.025);
+  --ps-highlight: rgba(255, 255, 255, 0.45);
+  --ps-photo-border: #fafaf8;
+  --ps-photo-inner: #eae6e0;
+  --ps-shadow-near: rgba(0, 0, 0, 0.1);
+  --ps-shadow-mid: rgba(0, 0, 0, 0.07);
+  --ps-shadow-far: rgba(0, 0, 0, 0.04);
+  --ps-shadow-stack: rgba(0, 0, 0, 0.14);
+  --ps-nav-bg: rgba(255, 255, 255, 0.7);
+  --ps-nav-fg: #3a3a3a;
+  --ps-nav-hover-bg: rgba(255, 255, 255, 0.9);
+  --ps-counter-fg: #6b6560;
+  --ps-dot-inactive: #c5c0b8;
+  --ps-dot-active: #5a5550;
+
+  width: 100%;
+  max-width: 1100px;
+  aspect-ratio: 16 / 9;
+  min-height: 420px;
+  max-height: 75vh;
+  position: relative;
+  border-radius: 4px;
+  cursor: default;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin: 2.5em auto;
+
+  background:
+    repeating-conic-gradient(var(--ps-grain) 0% 25%, transparent 0% 50%) 50% / 3px 3px,
+    radial-gradient(ellipse at 55% 35%, var(--ps-highlight) 0%, transparent 60%),
+    var(--ps-bg);
+  background-color: var(--ps-bg);
+  overflow: hidden;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+.photo-stack::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.5s;
+}
+
+/* ── Stack area ── */
+.stack-area {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  pointer-events: none;
+}
+
+.stack-track {
+  position: relative;
+  width: 70%;
+  max-width: 750px;
+  aspect-ratio: 4 / 3;
+  pointer-events: auto;
+}
+
+/* ── Cards ── */
+.stack-card {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  transition:
+    transform 0.65s cubic-bezier(0.34, 1.2, 0.6, 1),
+    opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    z-index 0s step-end;
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+.photo-print {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--ps-photo-border);
+  padding: 9px 9px 14px 9px;
+  border-radius: 2px;
+  box-shadow:
+    0 2px 4px var(--ps-shadow-near),
+    0 6px 20px var(--ps-shadow-mid),
+    0 14px 40px var(--ps-shadow-far);
+  transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+
+.photo-image {
+  display: block;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 1px;
+  background: #d5d0c8;
+  transition: background 0.4s;
+}
+
+.photo-caption {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--ps-counter-fg);
+  padding-top: 5px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+/* Only show caption on the top card */
+.stack-card:not(.pos-top) .photo-caption {
+  opacity: 0;
+}
+
+/* ── Stack positions ── */
+.stack-card.pos-top {
+  z-index: 6;
+  transform: translate(0, 0) rotate(0deg) scale(1);
+  opacity: 1;
+}
+.stack-card.pos-second {
+  z-index: 5;
+  transform: translate(4px, -3px) rotate(1.8deg) scale(0.98);
+  opacity: 0.92;
+}
+.stack-card.pos-third {
+  z-index: 4;
+  transform: translate(-5px, 5px) rotate(-2.4deg) scale(0.96);
+  opacity: 0.78;
+}
+.stack-card.pos-fourth {
+  z-index: 3;
+  transform: translate(3px, 9px) rotate(0.9deg) scale(0.94);
+  opacity: 0.55;
+}
+.stack-card.pos-below {
+  z-index: 2;
+  transform: translate(-4px, 15px) rotate(-1.6deg) scale(0.90);
+  opacity: 0.3;
+  pointer-events: none;
+}
+.stack-card.pos-hidden {
+  z-index: 1;
+  transform: translate(0, 20px) rotate(0deg) scale(0.85);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* ── Hover (top card only) ── */
+.stack-card.pos-top:hover .photo-print {
+  box-shadow:
+    0 4px 8px var(--ps-shadow-near),
+    0 10px 28px var(--ps-shadow-mid),
+    0 20px 50px var(--ps-shadow-far);
+  transform: scale(1.015);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.stack-card.pos-top:active .photo-print {
+  transform: scale(0.98);
+  box-shadow:
+    0 1px 2px var(--ps-shadow-near),
+    0 3px 8px var(--ps-shadow-mid);
+  transition: box-shadow 0.1s, transform 0.1s;
+}
+.stack-card:not(.pos-top) {
+  cursor: default;
+}
+
+/* ── Flip animation ── */
+.stack-card.animating-out {
+  z-index: 10 !important;
+  transition:
+    transform 0.7s cubic-bezier(0.5, 0, 0.3, 1),
+    opacity 0.55s ease,
+    z-index 0s 0.7s step-end;
+}
+
+/* ── Navigation arrows ── */
+.stack-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ps-nav-bg);
+  color: var(--ps-nav-fg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s, color 0.25s, opacity 0.25s, transform 0.25s;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.photo-stack.touch-active .stack-nav,
+.photo-stack:focus-within .stack-nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+.stack-nav:hover {
+  background: var(--ps-nav-hover-bg);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+}
+.stack-nav:active {
+  transform: translateY(-50%) scale(0.92);
+  transition: transform 0.1s;
+}
+.stack-nav.prev { left: 16px; }
+.stack-nav.next { right: 16px; }
+.stack-nav svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Counter ── */
+.stack-counter {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  z-index: 10;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ps-counter-fg);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  transition: color 0.4s;
+}
+
+/* ── Hint ── */
+.stack-hint {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 11px;
+  color: var(--ps-counter-fg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.photo-stack.touch-active .stack-hint {
+  opacity: 0.7;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] .photo-stack {
+  --ps-bg: #25282e;
+  --ps-grain: rgba(255, 255, 255, 0.012);
+  --ps-highlight: rgba(255, 255, 255, 0.025);
+  --ps-photo-border: #f2f0ec;
+  --ps-photo-inner: #d5d0c8;
+  --ps-shadow-near: rgba(0, 0, 0, 0.4);
+  --ps-shadow-mid: rgba(0, 0, 0, 0.25);
+  --ps-shadow-far: rgba(0, 0, 0, 0.15);
+  --ps-shadow-stack: rgba(0, 0, 0, 0.5);
+  --ps-nav-bg: rgba(40, 42, 48, 0.75);
+  --ps-nav-fg: #d0ccc6;
+  --ps-nav-hover-bg: rgba(50, 53, 60, 0.9);
+  --ps-counter-fg: #9a948c;
+  --ps-dot-inactive: #4a4640;
+  --ps-dot-active: #c5bfb6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .photo-stack {
+    aspect-ratio: 4 / 3;
+    min-height: 340px;
+    max-height: 60vh;
+    border-radius: 2px;
+  }
+  .stack-track {
+    width: 72%;
+    max-width: 440px;
+  }
+  .photo-print {
+    padding: 6px 6px 10px 6px;
+  }
+  .stack-nav {
+    width: 36px;
+    height: 36px;
+    opacity: 0.5;
+    pointer-events: auto;
+  }
+  .stack-nav.prev { left: 8px; }
+  .stack-nav.next { right: 8px; }
+  .photo-caption {
+    font-size: 0.68rem;
+  }
+  .stack-counter {
+    bottom: 10px;
+    right: 12px;
+    font-size: 10px;
+  }
+  .stack-hint {
+    bottom: 2px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-stack {
+    aspect-ratio: 1 / 1;
+    min-height: 320px;
+    max-height: 55vh;
+  }
+  .stack-track {
+    width: 82%;
+    max-width: 320px;
+  }
+  .photo-print {
+    padding: 5px 5px 8px 5px;
+    border-radius: 1px;
+  }
+  .stack-nav {
+    width: 30px;
+    height: 30px;
+    opacity: 0.45;
+    pointer-events: auto;
+  }
+  .stack-nav.prev { left: 4px; }
+  .stack-nav.next { right: 4px; }
+}
