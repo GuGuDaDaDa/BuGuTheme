@@ -1,7 +1,0 @@
-# Sample friend links — edit or replace with your own
-- name: "友链博客示例"
-  url: "https://example.com"
-  avatar: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-- name: "另一个博客"
-  url: "https://example.org"
-  avatar: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y"

@@ -1,4 +1,4 @@
-# BuGuTheme (不孤博客)
+# BuGuTheme
 
 A minimalist, content-focused Hugo theme with masonry layout, featured carousel, photo stack, client-side search, lightbox, and built-in Chinese/English i18n.
 
@@ -212,13 +212,22 @@ layout = 'friends'
 +++
 ```
 
-Then create `data/friends.json` (or `.yaml`/`.toml`) in your project root:
+Then create `data/friends.yaml` (or `friends.json` / `friends.toml`) in your project root:
 
-```json
-[
-  { "name": "Friend's Blog", "url": "https://example.com", "avatar": "https://example.com/avatar.jpg" }
-]
+```yaml
+# data/friends.yaml
+- name: "Friend's Blog"
+  url: "https://example.com"
+  avatar: "https://example.com/avatar.jpg"
+- name: "Another Blog"
+  url: "https://example.org"
+  avatar: "https://example.org/avatar.jpg"
 ```
+
+Each entry requires:
+- `name` — displayed name
+- `url` — link target
+- `avatar` — image URL (Gravatar, static image, or external)
 
 ### 5. Run
 
@@ -278,7 +287,7 @@ my-blog/
 │   └── friends/
 │       └── _index.md       # friends page
 ├── data/
-│   └── friends.json        # friends list
+│   └── friends.yaml        # friends list (.yaml / .json / .toml)
 ├── assets/                 # optional: override theme assets
 ├── static/                 # static files (images, etc.)
 └── themes/
