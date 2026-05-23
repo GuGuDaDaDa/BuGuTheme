@@ -75,35 +75,23 @@
   height: 30px;
 }
 
-/* Cover wrapper — holds aspect ratio, prevents layout shift */
-.card-cover-wrap {
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: var(--surface-alt);
-}
-
 /* Cover image */
 .card-cover {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
-  object-fit: cover;
   filter: var(--img-filter);
   transition: filter 0.5s ease, transform 0.5s ease;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: translateZ(0) scale(1);
-  will-change: transform;
 }
 
 .card:hover .card-cover {
-  transform: translateZ(0) scale(1.02);
+  transform: scale(1.02);
 }
 
 /* Fallback gradient when no cover */
 .card-cover-fallback {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 9;
   background: linear-gradient(135deg, #5b6c7e 0%, #3a4a5c 50%, #6b7c8e 100%);
 }
 
