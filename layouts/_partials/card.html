@@ -46,7 +46,7 @@
   {{- $read = .readingTime }}
 {{- end }}
 
-<article class="card"{{ if $slug }} data-article-slug="{{ $slug }}"{{ end }}>
+<article class="card" data-article-link="{{ $link }}"{{ if $slug }} data-article-slug="{{ $slug }}"{{ end }}>
   {{- if $cover }}
   <img class="card-cover" src="{{ $cover }}" alt="{{ $title }}" loading="lazy" />
   {{- else }}

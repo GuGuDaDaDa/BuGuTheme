@@ -87,4 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  /* ---------- Card click delegation ---------- */
+  document.addEventListener('click', (e) => {
+    const card = /** @type {HTMLElement|null} */ (e.target.closest('.card'));
+    if (!card) return;
+    // Don't intercept clicks on links inside the card
+    if (e.target.closest('a')) return;
+    const link = card.getAttribute('data-article-link');
+    if (link) window.location.href = link;
+  });
 });
