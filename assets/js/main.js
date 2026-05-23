@@ -6,11 +6,13 @@
 import { initCarousel } from './carousel.js';
 import { initMasonry } from './masonry-loader.js';
 import { initToc } from './toc.js';
+import { initSearch } from './search.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
   initMasonry();
   initToc();
+  initSearch();
   /* ---------- Theme toggle ---------- */
   /** @type {HTMLButtonElement|null} */
   const themeToggle = document.getElementById('theme-toggle');

@@ -1,0 +1,25 @@
+{{- /* Client-side search modal — Fuse.js based */}}
+<div class="search-modal" id="search-modal" aria-hidden="true">
+  <div class="search-backdrop" id="search-backdrop"></div>
+  <div class="search-panel">
+    <div class="search-header">
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="搜索文章..."
+        autocomplete="off"
+        aria-label="搜索文章"
+      />
+      <button class="search-close" id="search-close" aria-label="关闭搜索">&times;</button>
+    </div>
+    <div class="search-body" id="search-body">
+      <p class="search-hint" id="search-hint">输入关键词开始搜索</p>
+      <div class="search-loading" id="search-loading" style="display:none">
+        <span class="search-spinner"></span>
+        <span>正在加载索引...</span>
+      </div>
+      <div class="search-results" id="search-results" style="display:none"></div>
+    </div>
+  </div>
+</div>

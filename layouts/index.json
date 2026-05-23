@@ -1,4 +1,4 @@
-{{- /* JSON feed of non-draft, non-carousel articles */}}
+{{- /* JSON feed of non-draft, non-carousel articles — used by masonry loader and search */}}
 {{- $featured := where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true | first 5 }}
 {{- $excludeSlugs := slice }}
 {{- range $featured }}
@@ -23,6 +23,7 @@
     "slug": {{ $p.Slug | default ($p.Title | urlize) | jsonify }},
     "date": {{ $p.Date | time.Format "2006-01-02" | jsonify }},
     "description": {{ $p.Params.description | default $p.Summary | jsonify }},
+    "content": {{ $p.Plain | jsonify }},
     "cover": {{ $p.Params.cover | jsonify }},
     "categories": {{ $p.Params.categories | default slice | jsonify }},
     "permalink": {{ $p.RelPermalink | jsonify }},
