@@ -1,6 +1,6 @@
 {{ define "main" }}
   {{- /* Query featured posts for carousel */}}
-  {{- $featured := where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true }}
+  {{- $featured := where (where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true) "Layout" "ne" "about" }}
   {{- $featured = sort $featured "Date" "desc" | first 5 }}
   {{- $excludeSlugs := slice }}
   {{- range $featured }}
@@ -37,8 +37,8 @@
   </section>
   {{- end }}
 
-  {{- /* Query non-draft, non-carousel articles for masonry */}}
-  {{- $allPosts := where site.RegularPages "Params.draft" "!=" true }}
+  {{- /* Query non-draft, non-carousel articles for masonry — exclude about/friends pages */}}
+  {{- $allPosts := where (where (where site.RegularPages "Params.draft" "!=" true) "Layout" "ne" "about") "Layout" "ne" "friends" }}
   {{- $masonryPosts := slice }}
   {{- range $allPosts }}
     {{- if not (in $excludeSlugs (.Slug | default (.Title | urlize))) }}

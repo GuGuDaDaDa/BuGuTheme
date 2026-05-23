@@ -7,7 +7,7 @@
     {{- $excludeSlugs = $excludeSlugs | append $s }}
   {{- end }}
 {{- end }}
-{{- $all := where site.RegularPages "Params.draft" "!=" true }}
+{{- $all := where (where (where site.RegularPages "Params.draft" "!=" true) "Layout" "ne" "about") "Layout" "ne" "friends" }}
 {{- $posts := slice }}
 {{- range $all }}
   {{- $s := .Slug | default (.Title | urlize) }}
