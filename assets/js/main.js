@@ -1,9 +1,12 @@
 /**
  * BuGuBlog — Main JavaScript
- * Theme toggle + hamburger menu + cross-tab sync.
+ * Theme toggle + hamburger menu + cross-tab sync + carousel.
  */
 
+import { initCarousel } from './carousel.js';
+
 document.addEventListener('DOMContentLoaded', () => {
+  initCarousel();
   /* ---------- Theme toggle ---------- */
   /** @type {HTMLButtonElement|null} */
   const themeToggle = document.getElementById('theme-toggle');

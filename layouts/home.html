@@ -1,9 +1,63 @@
 {{ define "main" }}
-  {{ .Content }}
-  {{ range site.RegularPages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+  {{- /* Query featured posts */}}
+  {{- $featured := where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true }}
+  {{- $featured = sort $featured "Date" "desc" | first 5 }}
+  {{- /* Collect featured slugs for masonry dedup */}}
+  {{- $excludeSlugs := slice }}
+  {{- range $featured }}
+    {{- $excludeSlugs = $excludeSlugs | append .Slug }}
+  {{- end }}
+
+  {{- if $featured }}
+  <section class="featured-carousel" id="featured-carousel" aria-label="编辑推荐">
+    <div class="carousel-accent"></div>
+    <div class="carousel-track" id="carousel-track">
+      {{- range $featured }}
+      <div class="carousel-slide" data-article-url="{{ .RelPermalink }}">
+        {{- $coverURL := "" }}
+        {{- $hasCover := false }}
+        {{- if .Params.cover }}
+          {{- $img := .Resources.GetMatch .Params.cover }}
+          {{- if $img }}
+            {{- $coverURL = $img.RelPermalink }}
+            {{- $hasCover = true }}
+          {{- else }}
+            {{- $coverURL = .Params.cover | absURL }}
+            {{- $hasCover = true }}
+          {{- end }}
+        {{- end }}
+        {{- if $hasCover }}
+        <img class="carousel-bg" src="{{ $coverURL }}" alt="{{ .Title }}" />
+        {{- else }}
+        <div class="carousel-bg carousel-bg-fallback"></div>
+        {{- end }}
+        <div class="carousel-overlay"></div>
+        <div class="carousel-content">
+          {{- $categories := .Params.categories | default slice | first 3 }}
+          {{- range $categories }}
+          <span class="carousel-category">{{ . }}</span>
+          {{- end }}
+          <h2 class="carousel-title">{{ .Title }}</h2>
+          <div class="carousel-meta">
+            <span>{{ .Date | time.Format "2006-01-02" }}</span>
+            <span class="dot"></span>
+            <span>{{ .ReadingTime }} 分钟</span>
+          </div>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+    <button class="carousel-btn prev" id="carousel-prev" aria-label="上一张">&#8249;</button>
+    <button class="carousel-btn next" id="carousel-next" aria-label="下一张">&#8250;</button>
+    <div class="carousel-dots" id="carousel-dots"></div>
+  </section>
+  {{- end }}
+
+  <div class="app-inner">
+    <div class="section-ornament">最新文章</div>
+    <div class="masonry" id="masonry-grid" data-exclude="{{ delimit $excludeSlugs "," }}"></div>
+    <div class="load-more-wrap">
+      <button class="btn-load-more" id="btn-load-more">加载更多 <span class="arrow">↓</span></button>
+    </div>
+  </div>
 {{ end }}
