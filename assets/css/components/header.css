@@ -12,7 +12,7 @@
 /* ---------- Header layout ---------- */
 .site-header-inner {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   padding: 42px 0 20px;
   border-bottom: 1px solid var(--hairline);
