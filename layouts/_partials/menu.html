@@ -2,9 +2,10 @@
   {{- $currentPage := . }}
   {{- range site.Menus.main }}
     {{- $active := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
-    <a href="{{ .URL }}" class="{{ if $active }}active{{ end }}">{{ .Name }}</a>
+    {{- $label := or (and .Identifier (i18n (printf "menu.%s" .Identifier))) .Name }}
+    <a href="{{ .URL }}" class="{{ if $active }}active{{ end }}">{{ $label }}</a>
   {{- end }}
 </nav>
-<button class="hamburger" id="hamburger" aria-label="菜单" aria-expanded="false">
+<button class="hamburger" id="hamburger" aria-label="{{ i18n `header.navMenu` }}" aria-expanded="false">
   <span></span><span></span><span></span>
 </button>

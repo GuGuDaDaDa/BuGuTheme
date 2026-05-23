@@ -1,0 +1,65 @@
+# i18n — English
+# Menu items — match menu entry identifiers in hugo.toml
+
+[menu]
+  [menu.home]
+    other = "Home"
+  [menu.categories]
+    other = "Categories"
+  [menu.tags]
+    other = "Tags"
+  [menu.about]
+    other = "About"
+  [menu.friends]
+    other = "Friends"
+
+# Header / Navigation
+[header]
+  [header.search]
+    other = "Search"
+  [header.themeToggle]
+    other = "Toggle theme"
+  [header.navMenu]
+    other = "Menu"
+
+# Search modal
+[search]
+  [search.placeholder]
+    other = "Search posts..."
+  [search.hint]
+    other = "Type a keyword to search"
+  [search.loading]
+    other = "Loading index..."
+  [search.close]
+    other = "Close search"
+
+# Article navigation
+[article]
+  [article.prev]
+    other = "← Previous"
+  [article.next]
+    other = "Next →"
+  [article.noPrev]
+    other = "First post"
+  [article.noNext]
+    other = "Last post"
+
+# Taxonomy / Terms
+[taxonomy]
+  [taxonomy.noCategories]
+    other = "No categories"
+  [taxonomy.noTags]
+    other = "No tags"
+
+[term]
+  [term.noCategoryPosts]
+    other = "No posts in this category"
+  [term.noTagPosts]
+    other = "No posts with this tag"
+
+# 404
+[notFound]
+  [notFound.title]
+    other = "Page not found"
+  [notFound.back]
+    other = "← Back home"

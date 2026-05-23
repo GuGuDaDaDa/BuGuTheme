@@ -1,7 +1,11 @@
 {{ define "main" }}
 <div class="app-inner">
 <div class="taxonomy-page">
-  <h1 class="taxonomy-title">{{ .Title }}</h1>
+  <h1 class="taxonomy-title">
+    {{- if eq .Data.Plural "categories" }}{{ i18n "menu.categories" }}
+    {{- else if eq .Data.Plural "tags" }}{{ i18n "menu.tags" }}
+    {{- else }}{{ .Title }}{{ end -}}
+  </h1>
 
   {{- $terms := .Data.Terms.Alphabetical }}
   {{- if $terms }}
@@ -14,7 +18,7 @@
   </ul>
   {{- else }}
   <p class="term-empty">
-    {{- if eq .Data.Plural "categories" }}暂无分类{{- else }}暂无标签{{- end }}
+    {{- if eq .Data.Plural "categories" }}{{ i18n "taxonomy.noCategories" }}{{ else }}{{ i18n "taxonomy.noTags" }}{{ end -}}
   </p>
   {{- end }}
 </div>

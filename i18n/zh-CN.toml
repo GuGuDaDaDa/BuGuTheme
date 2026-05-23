@@ -1,0 +1,65 @@
+# i18n — 中文 (简体)
+# Menu items — match menu entry identifiers in hugo.toml
+
+[menu]
+  [menu.home]
+    other = "首页"
+  [menu.categories]
+    other = "分类"
+  [menu.tags]
+    other = "标签"
+  [menu.about]
+    other = "关于"
+  [menu.friends]
+    other = "友链"
+
+# Header / Navigation
+[header]
+  [header.search]
+    other = "搜索"
+  [header.themeToggle]
+    other = "切换深浅模式"
+  [header.navMenu]
+    other = "菜单"
+
+# Search modal
+[search]
+  [search.placeholder]
+    other = "搜索文章..."
+  [search.hint]
+    other = "输入关键词开始搜索"
+  [search.loading]
+    other = "正在加载索引..."
+  [search.close]
+    other = "关闭搜索"
+
+# Article navigation
+[article]
+  [article.prev]
+    other = "← 上一篇"
+  [article.next]
+    other = "下一篇 →"
+  [article.noPrev]
+    other = "已经是第一篇了"
+  [article.noNext]
+    other = "已经是最后一篇了"
+
+# Taxonomy / Terms
+[taxonomy]
+  [taxonomy.noCategories]
+    other = "暂无分类"
+  [taxonomy.noTags]
+    other = "暂无标签"
+
+[term]
+  [term.noCategoryPosts]
+    other = "该分类下暂无文章"
+  [term.noTagPosts]
+    other = "该标签下暂无文章"
+
+# 404
+[notFound]
+  [notFound.title]
+    other = "页面不存在"
+  [notFound.back]
+    other = "← 返回首页"

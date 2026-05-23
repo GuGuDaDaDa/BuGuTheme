@@ -11,7 +11,7 @@
   </div>
   {{- else }}
   <p class="term-empty">
-    {{- if eq .Data.Plural "categories" }}该分类下暂无文章{{- else }}该标签下暂无文章{{- end }}
+    {{- if eq .Data.Plural "categories" }}{{ i18n "term.noCategoryPosts" }}{{ else }}{{ i18n "term.noTagPosts" }}{{ end -}}
   </p>
   {{- end }}
 </div>

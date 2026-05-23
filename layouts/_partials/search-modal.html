@@ -7,17 +7,17 @@
         type="text"
         id="search-input"
         class="search-input"
-        placeholder="搜索文章..."
+        placeholder="{{ i18n `search.placeholder` }}"
         autocomplete="off"
-        aria-label="搜索文章"
+        aria-label="{{ i18n `search.placeholder` }}"
       />
-      <button class="search-close" id="search-close" aria-label="关闭搜索">&times;</button>
+      <button class="search-close" id="search-close" aria-label="{{ i18n `search.close` }}">&times;</button>
     </div>
     <div class="search-body" id="search-body">
-      <p class="search-hint" id="search-hint">输入关键词开始搜索</p>
+      <p class="search-hint" id="search-hint">{{ i18n "search.hint" }}</p>
       <div class="search-loading" id="search-loading" style="display:none">
         <span class="search-spinner"></span>
-        <span>正在加载索引...</span>
+        <span>{{ i18n "search.loading" }}</span>
       </div>
       <div class="search-results" id="search-results" style="display:none"></div>
     </div>

@@ -11,26 +11,26 @@
   <div class="article-nav-item prev">
     {{- with .PrevInSection }}
     <a href="{{ .RelPermalink }}">
-      <span class="article-nav-label">&#8592; 上一篇</span>
+      <span class="article-nav-label">{{ i18n "article.prev" }}</span>
       <span class="article-nav-title">{{ .Title }}</span>
     </a>
     {{- else }}
     <span class="article-nav-empty">
-      <span class="article-nav-label">&#8592; 上一篇</span>
-      <span class="article-nav-title">已经是第一篇了</span>
+      <span class="article-nav-label">{{ i18n "article.prev" }}</span>
+      <span class="article-nav-title">{{ i18n "article.noPrev" }}</span>
     </span>
     {{- end }}
   </div>
   <div class="article-nav-item next">
     {{- with .NextInSection }}
     <a href="{{ .RelPermalink }}">
-      <span class="article-nav-label">下一篇 &#8594;</span>
+      <span class="article-nav-label">{{ i18n "article.next" }}</span>
       <span class="article-nav-title">{{ .Title }}</span>
     </a>
     {{- else }}
     <span class="article-nav-empty">
-      <span class="article-nav-label">下一篇 &#8594;</span>
-      <span class="article-nav-title">已经是最后一篇了</span>
+      <span class="article-nav-label">{{ i18n "article.next" }}</span>
+      <span class="article-nav-title">{{ i18n "article.noNext" }}</span>
     </span>
     {{- end }}
   </div>

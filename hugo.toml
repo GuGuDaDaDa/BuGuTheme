@@ -1,43 +1,5 @@
 baseURL = 'https://example.org/'
-locale = 'zh-CN'
-title = '不孤博客'
-hasCJKLanguage = true
-
-[menus]
-  [[menus.main]]
-    name = 'Home'
-    pageRef = '/'
-    weight = 10
-
-  [[menus.main]]
-    name = 'Categories'
-    pageRef = '/categories'
-    weight = 20
-
-  [[menus.main]]
-    name = 'Tags'
-    pageRef = '/tags'
-    weight = 30
-
-  [[menus.main]]
-    name = 'About'
-    pageRef = '/about'
-    weight = 40
-
-  [[menus.main]]
-    name = 'Friends'
-    pageRef = '/friends'
-    weight = 50
-
-[params]
-  disqusShortname = "111"
-  googleAnalytics = ""
-  footerText = '不孤博客 · 海雾深处，字字为灯'
-  icp = ''
-  [params.social]
-    github = ''
-    twitter = ''
-    email = ''
+defaultContentLanguage = 'zh-cn'
 
 [markup]
   [markup.tableOfContents]
@@ -55,3 +17,97 @@ hasCJKLanguage = true
   baseName = "posts"
   isPlainText = true
   notAlternative = true
+
+# ── Languages ──
+
+[languages]
+  [languages.'zh-cn']
+    locale = 'zh-CN'
+    title = '不孤博客'
+    hasCJKLanguage = true
+    weight = 10
+
+    [[languages.'zh-cn'.menus.main]]
+      identifier = 'home'
+      name = '首页'
+      pageRef = '/'
+      weight = 10
+
+    [[languages.'zh-cn'.menus.main]]
+      identifier = 'categories'
+      name = '分类'
+      pageRef = '/categories'
+      weight = 20
+
+    [[languages.'zh-cn'.menus.main]]
+      identifier = 'tags'
+      name = '标签'
+      pageRef = '/tags'
+      weight = 30
+
+    [[languages.'zh-cn'.menus.main]]
+      identifier = 'about'
+      name = '关于'
+      pageRef = '/about'
+      weight = 40
+
+    [[languages.'zh-cn'.menus.main]]
+      identifier = 'friends'
+      name = '友链'
+      pageRef = '/friends'
+      weight = 50
+
+    [languages.'zh-cn'.params]
+      disqusShortname = "111"
+      googleAnalytics = ""
+      footerText = '不孤博客 · 海雾深处，字字为灯'
+      icp = ''
+      [languages.'zh-cn'.params.social]
+        github = ''
+        twitter = ''
+        email = ''
+
+  [languages.en]
+    locale = 'en'
+    title = 'BuGu Blog'
+    weight = 20
+
+    [[languages.en.menus.main]]
+      identifier = 'home'
+      name = 'Home'
+      pageRef = '/'
+      weight = 10
+
+    [[languages.en.menus.main]]
+      identifier = 'categories'
+      name = 'Categories'
+      pageRef = '/categories'
+      weight = 20
+
+    [[languages.en.menus.main]]
+      identifier = 'tags'
+      name = 'Tags'
+      pageRef = '/tags'
+      weight = 30
+
+    [[languages.en.menus.main]]
+      identifier = 'about'
+      name = 'About'
+      pageRef = '/about'
+      weight = 40
+
+    [[languages.en.menus.main]]
+      identifier = 'friends'
+      name = 'Friends'
+      pageRef = '/friends'
+      weight = 50
+
+    [languages.en.params]
+      disqusShortname = "111"
+      googleAnalytics = ""
+      footerText = 'BuGu Blog · A light in the sea of mist'
+      icp = ''
+      [languages.en.params.social]
+        github = ''
+        twitter = ''
+        email = ''
