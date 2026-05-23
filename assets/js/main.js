@@ -17,9 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initInlineSearch('not-found-search', 'not-found-results');
   initLightbox();
-  initMasonry();
-  initToc();
-  initSearch();
+
   /* ---------- Theme toggle ---------- */
   /** @type {HTMLButtonElement|null} */
   const themeToggle = document.getElementById('theme-toggle');
