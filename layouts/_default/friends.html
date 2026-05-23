@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="app-inner">
+<div class="friends-page">
+  <h1 class="friends-title font-display">{{ .Title }}</h1>
+
+  {{- with hugo.Data.friends }}
+    <ul class="friends-list">
+      {{- range . }}
+      <li class="friend-item">
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+          <img class="friend-avatar" src="{{ .avatar }}" alt="{{ .name }}" width="48" height="48" loading="lazy" />
+          <span class="friend-name">{{ .name }}</span>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  {{- else }}
+    <p class="friend-empty">暂无友情链接</p>
+  {{- end }}
+</div>
+</div>
+{{ end }}

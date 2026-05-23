@@ -1,0 +1,78 @@
+/* ---------- Friends page ---------- */
+.friends-page {
+  max-width: 540px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.friends-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 28px;
+  letter-spacing: 0.05em;
+}
+
+.friends-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.friend-item a {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--hairline);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s var(--ease-out);
+}
+
+.friend-item a:hover {
+  background: var(--accent-wash);
+  opacity: 1;
+}
+
+.friend-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.friend-name {
+  font-size: 1.05rem;
+  color: var(--fg-strong);
+  font-weight: 500;
+}
+
+.friend-empty {
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .friends-page {
+    padding: 20px 4px 0;
+  }
+
+  .friends-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
+  .friend-avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.75rem;
+  }
+
+  .friend-name {
+    font-size: 0.98rem;
+  }
+}

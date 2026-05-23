@@ -1,0 +1,139 @@
+/* ---------- About page ---------- */
+.about-page {
+  max-width: 540px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.about-avatar {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s var(--ease-out);
+  display: block;
+}
+
+.about-avatar:hover {
+  border-color: var(--accent-soft);
+  box-shadow: var(--shadow-glow);
+  transform: scale(1.04);
+}
+
+.about-avatar-placeholder {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  color: var(--fg-strong);
+  transition: all 0.35s var(--ease-out);
+}
+
+.about-avatar-placeholder:hover {
+  border-color: var(--accent-soft);
+  box-shadow: var(--shadow-glow);
+  transform: scale(1.04);
+}
+
+.about-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+
+.about-tagline {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  line-height: 1.75;
+  letter-spacing: 0.03em;
+}
+
+.about-tagline strong {
+  color: var(--fg-strong);
+  font-weight: 500;
+}
+
+.about-bio {
+  text-align: left;
+  font-size: 0.92rem;
+  line-height: 1.95;
+  color: var(--fg);
+  margin-bottom: 36px;
+}
+
+.about-bio p {
+  margin-bottom: 1.4em;
+}
+
+.about-bio strong {
+  color: var(--fg-strong);
+  font-weight: 500;
+}
+
+.about-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.about-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--border-strong);
+  color: var(--fg-soft);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s var(--ease-out);
+  background: var(--surface);
+  letter-spacing: 0.03em;
+}
+
+.about-links a:hover {
+  border-color: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
+.about-social-icon {
+  flex-shrink: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .about-page {
+    padding: 20px 4px 0;
+  }
+
+  .about-avatar,
+  .about-avatar-placeholder {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 18px;
+  }
+
+  .about-name {
+    font-size: 1.3rem;
+  }
+
+  .about-links a {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+  }
+}
