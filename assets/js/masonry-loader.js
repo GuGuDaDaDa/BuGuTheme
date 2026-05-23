@@ -57,11 +57,6 @@ function renderCard(d) {
     body.appendChild(sub);
   }
 
-  const p = document.createElement('p');
-  p.className = 'card-excerpt';
-  p.textContent = (d.description || '').substring(0, 120);
-  body.appendChild(p);
-
   const meta = document.createElement('div');
   meta.className = 'card-meta';
   const dateSpan = document.createElement('span');
