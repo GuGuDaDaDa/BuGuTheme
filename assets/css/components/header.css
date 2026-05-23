@@ -1,4 +1,4 @@
 header {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--hairline);
   margin-bottom: 1rem;
 }

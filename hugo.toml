@@ -1,6 +1,7 @@
 baseURL = 'https://example.org/'
-locale = 'en-US'
-title = 'My New Hugo Project'
+locale = 'zh-CN'
+title = '不孤博客'
+hasCJKLanguage = true
 
 [menus]
   [[menus.main]]
@@ -14,9 +15,26 @@ title = 'My New Hugo Project'
     weight = 20
 
   [[menus.main]]
+    name = 'Categories'
+    pageRef = '/categories'
+    weight = 30
+
+  [[menus.main]]
     name = 'Tags'
     pageRef = '/tags'
-    weight = 30
+    weight = 40
+
+  [[menus.main]]
+    name = 'About'
+    pageRef = '/about'
+    weight = 50
+
+  [[menus.main]]
+    name = 'Friends'
+    pageRef = '/friends'
+    weight = 60
+
+[params]
 
 [module]
   [module.hugoVersion]
