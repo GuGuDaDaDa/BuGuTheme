@@ -1,0 +1,13 @@
+# Hugo generated
+/public/
+/resources/
+/.hugo_build.lock
+
+# npm
+/node_modules/
+/package.json
+/package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
