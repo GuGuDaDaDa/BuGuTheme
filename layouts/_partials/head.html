@@ -9,6 +9,12 @@
     }
   })();
 </script>
+<style>
+  html { background-color: #fcfcfb; }
+  html[data-theme="dark"] { background-color: #1a1a1a; }
+  .theme-icon::before { content: '🌙'; }
+  html[data-theme="dark"] .theme-icon::before { content: '☀️'; }
+</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {{ block "meta" . }}{{ end }}

@@ -34,17 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function setTheme(theme) {
     html.setAttribute('data-theme', theme);
     try { localStorage.setItem('bugublog-theme', theme); } catch (_) {}
-    if (themeToggle) {
-      const icon = themeToggle.querySelector('.theme-icon');
-      if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    }
   }
 
   if (themeToggle) {
-    const current = html.getAttribute('data-theme') || 'light';
-    const icon = themeToggle.querySelector('.theme-icon');
-    if (icon) icon.textContent = current === 'dark' ? '☀️' : '🌙';
-
     themeToggle.addEventListener('click', () => {
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       setTheme(next);
