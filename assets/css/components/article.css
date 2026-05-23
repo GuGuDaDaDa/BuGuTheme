@@ -1,9 +1,17 @@
+/* ---------- Article layout (article + TOC side-by-side) ---------- */
+.article-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4rem;
+}
+
 /* ---------- Article page ---------- */
 .article-page {
   max-width: 680px;
-  margin: 0 auto;
+  flex: 1;
+  min-width: 0;
   padding-top: 30px;
-  position: relative;
 }
 
 /* Cover image */
