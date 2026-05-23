@@ -5,8 +5,8 @@
   overflow: hidden;
   box-shadow: var(--shadow-md);
   background: var(--surface-alt);
-  aspect-ratio: 16 / 7;
-  min-height: 340px;
+  aspect-ratio: 16 / 5;
+  min-height: 240px;
 }
 
 .carousel-track {
@@ -226,8 +226,8 @@
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
   .featured-carousel {
-    aspect-ratio: 4 / 3;
-    min-height: 280px;
+    aspect-ratio: 16 / 9;
+    min-height: 220px;
     margin-bottom: 32px;
   }
 
