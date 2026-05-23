@@ -1,7 +1,8 @@
-{{- /* TOC sidebar — rendered only when there are actual headings */}}
-{{- $toc := .TableOfContents }}
-{{- if and $toc (findRE "<a\\s" $toc) }}
-<aside class="toc" id="toc">
-  {{ $toc }}
-</aside>
+{{- /* TOC sidebar — rendered only when toc is enabled in frontmatter */}}
+{{- if and .Params.toc .TableOfContents (findRE "<a\\s" .TableOfContents) }}
+<div class="toc-wrapper">
+  <aside class="toc" id="toc">
+    {{ .TableOfContents }}
+  </aside>
+</div>
 {{- end }}

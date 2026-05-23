@@ -1,19 +1,18 @@
 /* ---------- Article layout (article + TOC side-by-side) ---------- */
 .article-layout {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 4rem;
+  position: relative;
 }
 
 .article-header-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
   padding-top: 30px;
 }
 
 /* ---------- Article page ---------- */
 .article-page {
   max-width: 680px;
-  flex: 1;
+  margin: 0 auto;
   min-width: 0;
 }
 

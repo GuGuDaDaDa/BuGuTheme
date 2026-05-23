@@ -1,51 +1,86 @@
+/* ---------- TOC wrapper (absolute for horizontal placement) ---------- */
+.toc-wrapper {
+  position: absolute;
+  top: 0;
+  left: calc(50% + 400px);
+  width: 220px;
+  bottom: 0;
+}
+
 /* ---------- TOC sidebar ---------- */
 .toc {
   position: sticky;
   top: 2rem;
-  width: 220px;
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
-  font-size: 0.88rem;
-  flex-shrink: 0;
-  align-self: flex-start;
+  font-size: 0.84rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 0;
+  box-shadow: var(--shadow-sm);
 }
 
-.toc ul {
+.toc #TableOfContents > ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.toc ul ul {
-  padding-left: 1rem;
+.toc ul {
+  list-style: none;
+  padding: 0 0 0 1.2rem;
+  margin: 0;
+}
+
+.toc li {
+  position: relative;
+  margin: 0;
 }
 
 .toc a {
   display: block;
-  padding: 0.25rem 0 0.25rem 0.75rem;
+  padding: 4px 12px 4px 20px;
   color: var(--muted);
-  font-size: 0.88rem;
   text-decoration: none;
-  border-left: 2px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
+  border-radius: 0 4px 4px 0;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+  line-height: 1.55;
+  font-size: 0.82rem;
+}
+
+.toc a::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  transition: background 0.2s;
 }
 
 .toc a:hover {
   color: var(--accent-soft);
+  background: var(--accent-wash);
 }
 
 .toc a.active {
   color: var(--accent);
-  border-left-color: var(--accent);
+  background: var(--accent-wash);
   font-weight: 500;
 }
 
-@media (max-width: 1199px) {
-  .article-layout {
-    gap: 0;
-  }
+.toc a.active::before {
+  background: var(--accent);
+}
 
-  .toc {
+/* ── Responsive ── */
+@media (max-width: 1199px) {
+  .toc-wrapper {
     display: none;
   }
 }

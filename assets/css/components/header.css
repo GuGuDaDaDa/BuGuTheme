@@ -1,8 +1,9 @@
 /* ---------- Site header (full width) ---------- */
 .site-header {
   width: 100%;
+  background: var(--surface);
   border-bottom: 1px solid var(--hairline);
-  transition: border-color 0.5s ease;
+  transition: border-color 0.5s ease, background 0.5s ease;
 }
 
 /* ---------- Header accent bar ---------- */

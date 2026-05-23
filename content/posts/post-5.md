@@ -7,6 +7,7 @@ featured = true
 categories = ['red']
 tags = ['red', 'green']
 cover = ''
+toc = true
 draft = false
 +++
 
