@@ -35,6 +35,12 @@ hasCJKLanguage = true
     weight = 60
 
 [params]
+  footerText = '不孤博客 · 海雾深处，字字为灯'
+  icp = ''
+  [params.social]
+    github = ''
+    twitter = ''
+    email = ''
 
 [module]
   [module.hugoVersion]

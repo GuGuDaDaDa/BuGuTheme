@@ -129,6 +129,17 @@ img {
 }
 
 /* ---------- Utility ---------- */
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.app-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
 .font-display, h1, h2, h3, h4, .serif {
   font-family: var(--font-serif);
   font-weight: 400;

@@ -1,4 +1,60 @@
-footer {
+/* ---------- Footer ---------- */
+.site-footer {
   border-top: 1px solid var(--hairline);
-  margin-top: 1rem;
+  padding: 28px 0;
+  text-align: center;
+  color: var(--muted-light);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.footer-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.footer-text::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.footer-icp {
+  margin-top: 6px;
+  opacity: 0.6;
+  font-size: 0.72rem;
+}
+
+/* ---------- Footer socials ---------- */
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.footer-socials a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  color: var(--muted);
+  transition: all 0.3s;
+}
+
+.footer-socials a:hover {
+  border-color: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: var(--shadow-glow);
+  opacity: 1;
 }
