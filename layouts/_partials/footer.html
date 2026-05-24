@@ -21,5 +21,21 @@
     {{- with site.Params.icp }}
     <p class="footer-icp">{{ . }}</p>
     {{- end }}
+    <div class="footer-meta">
+      <span>&copy; {{ now.Year }} {{ site.Params.copyright | default site.Title }}</span>
+      <span class="footer-meta-sep"></span>
+      <span>
+        {{- i18n "poweredBy" | default "Powered by" }}
+        <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a>
+        &middot;
+        {{- i18n "theme" | default "Theme" }}
+        {{- $themeName := site.Params.themeName | default "mytheme" }}
+        {{- with site.Params.themeURL }}
+        <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $themeName }}</a>
+        {{- else }}
+        <span>{{ $themeName }}</span>
+        {{- end }}
+      </span>
+    </div>
   </div>
 </footer>

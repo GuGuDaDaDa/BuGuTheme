@@ -63,3 +63,9 @@
     other = "Page not found"
   [notFound.back]
     other = "← Back home"
+
+# Footer
+[poweredBy]
+  other = "Powered by"
+[theme]
+  other = "Theme"

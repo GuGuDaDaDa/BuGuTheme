@@ -95,6 +95,9 @@ theme = 'bu-gu-theme'
 
   [languages.'zh-cn'.params]
     footerText = '你的博客名 · 一句话描述'
+    copyright = '你的博客名'       # © 年份 + 此处文字；留空则用 title
+    themeName = 'BuGuTheme'        # footer 主题名；留空显示 "mytheme"
+    themeURL  = 'https://github.com/GuGuDaDaDa/BuGuTheme'  # 主题链接；留空则不生成链接
     icp = ''
     [languages.'zh-cn'.params.social]
       github = 'https://github.com/yourname'
@@ -139,6 +142,9 @@ theme = 'bu-gu-theme'
 
   [languages.en.params]
     footerText = 'Your Blog · A catchy tagline'
+    copyright = 'Your Blog'
+    themeName = 'BuGuTheme'
+    themeURL  = 'https://github.com/GuGuDaDaDa/BuGuTheme'
     icp = ''
     [languages.en.params.social]
       github = 'https://github.com/yourname'
@@ -293,6 +299,25 @@ my-blog/
 └── themes/
     └── bu-gu-theme/        # the theme
 ```
+
+---
+
+## Site Params Reference
+
+All params live under `[languages.<lang>.params]` in `hugo.toml`.
+
+| Param | Type | Default | Description |
+|-------|------|---------|-------------|
+| `footerText` | string | — | Slogan shown in the footer center, e.g. `博客名 · 一句话描述` |
+| `copyright` | string | site `title` | Name shown after © in the footer meta row |
+| `themeName` | string | `"mytheme"` | Theme name shown in the footer "Theme" link |
+| `themeURL` | string | — | URL for the theme name link; omit to render plain text |
+| `icp` | string | — | ICP license number (shown below footer slogan, China only) |
+| `social.github` | string | — | Full GitHub profile URL |
+| `social.twitter` | string | — | Full Twitter/X profile URL |
+| `social.email` | string | — | Email address (generates `mailto:` link) |
+| `disqusShortname` | string | — | Disqus shortname for comment integration |
+| `googleAnalytics` | string | — | Google Analytics measurement ID |
 
 ---
 

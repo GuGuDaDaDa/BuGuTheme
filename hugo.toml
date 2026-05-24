@@ -23,7 +23,7 @@ defaultContentLanguage = 'zh-cn'
 [languages]
   [languages.'zh-cn']
     locale = 'zh-CN'
-    title = '不孤博客'
+    title = 'BuGu'
     hasCJKLanguage = true
     weight = 10
 
@@ -60,7 +60,10 @@ defaultContentLanguage = 'zh-cn'
     [languages.'zh-cn'.params]
       disqusShortname = "111"
       googleAnalytics = ""
-      footerText = '不孤博客 · 海雾深处，字字为灯'
+      footerText = 'BuGu · 海雾深处，字字为灯'
+      copyright = 'BuGuBuGu'
+      themeName = 'BuGuTheme'
+      themeURL = 'https://github.com/GuGuDaDaDa/BuGuTheme'
       icp = ''
       [languages.'zh-cn'.params.social]
         github = ''
@@ -103,9 +106,12 @@ defaultContentLanguage = 'zh-cn'
       weight = 50
 
     [languages.en.params]
-      disqusShortname = "111"
+      disqusShortname = ""
       googleAnalytics = ""
       footerText = 'BuGu Blog · A light in the sea of mist'
+      copyright = 'BuGu Blog'
+      themeName = 'BuGuTheme'
+      themeURL = 'https://github.com/GuGuDaDaDa/BuGuTheme'
       icp = ''
       [languages.en.params.social]
         github = ''

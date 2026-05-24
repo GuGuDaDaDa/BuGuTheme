@@ -63,3 +63,9 @@
     other = "页面不存在"
   [notFound.back]
     other = "← 返回首页"
+
+# Footer
+[poweredBy]
+  other = "Powered by"
+[theme]
+  other = "Theme"
