@@ -147,7 +147,7 @@
 /* ---------- Blockquote ---------- */
 .article-content blockquote {
   margin: 2.2em 0;
-  padding: 28px 56px 36px 68px;
+  padding: 28px 56px 36px 72px;
   background: none;
   border: none;
   font-style: italic;
@@ -165,7 +165,7 @@
   content: '\201C';
   position: absolute;
   top: 10px;
-  left: 20px;
+  left: 24px;
   font-size: 3.2rem;
   color: var(--muted-light);
   opacity: 0.45;
@@ -204,13 +204,13 @@
 
 @media (max-width: 720px) {
   .article-content blockquote {
-    padding: 28px 50px 32px 60px;
+    padding: 28px 44px 32px 68px;
   }
 
   .article-content blockquote::before {
-    left: 16px;
-    font-size: 2.6rem;
-    top: 12px;
+    left: 22px;
+    font-size: 2.4rem;
+    top: 14px;
   }
 
   .article-content blockquote::after {
