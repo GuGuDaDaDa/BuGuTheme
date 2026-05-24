@@ -162,10 +162,10 @@
 
 /* 左上开引号 */
 .article-content blockquote::before {
-  content: '\201C\00A0';
+  content: '\201C';
   position: absolute;
   top: 10px;
-  left: 24px;
+  left: 0px;
   font-size: 3.2rem;
   color: var(--muted-light);
   opacity: 0.45;
@@ -178,7 +178,6 @@
 .article-content blockquote::after {
   content: '\201D';
   position: absolute;
-  bottom: 2px;
   right: 22px;
   font-size: 3.2rem;
   color: var(--muted-light);
