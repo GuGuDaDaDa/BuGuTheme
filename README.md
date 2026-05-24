@@ -6,7 +6,7 @@ A minimalist, content-focused Hugo theme with masonry layout, featured carousel,
 
 - **Masonry card grid** — responsive 2-column layout on desktop, single column on mobile
 - **Featured carousel** — hero slider for featured posts with cover images, categories, subtitles
-- **Article page** — clean typography with optional floating TOC sidebar, prev/next navigation, tags, Disqus comments
+- **Article page** — clean typography with optional floating TOC sidebar, prev/next navigation, tags, Giscus comments
 - **Photo stack** — interactive flipable photo gallery via `{{< photos >}}` shortcode
 - **AI Summary** — collapsible AI-generated summary block via `{{< ai-summary >}}`
 - **AI Warning** — dismissible AI disclosure notice via `{{< ai-warning >}}`
@@ -19,7 +19,7 @@ A minimalist, content-focused Hugo theme with masonry layout, featured carousel,
 - **Progress bar** — subtle top-of-page loading indicator
 - **Responsive** — adapts from 4K down to mobile (320px)
 - **Google Analytics** — optional tracking code
-- **Disqus** — optional comment integration
+- **Giscus** — optional comment integration via GitHub Discussions
 
 ---
 
@@ -101,6 +101,10 @@ theme = 'bu-gu-theme'
     copyright = '你的博客名'       # © 年份 + 此处文字；留空则用 title
     themeName = 'BuGuTheme'        # footer 主题名；留空显示 "mytheme"
     themeURL  = 'https://github.com/GuGuDaDaDa/BuGuTheme'  # 主题链接；留空则不生成链接
+    giscusRepo = ''                # GitHub 仓库（如 "user/repo"）
+    giscusRepoId = ''              # 仓库节点 ID
+    giscusCategory = ''            # Discussion 分类名
+    giscusCategoryId = ''          # 分类节点 ID
     icp = ''
     [languages.'zh-cn'.params.social]
       github = 'https://github.com/yourname'
@@ -148,6 +152,10 @@ theme = 'bu-gu-theme'
     copyright = 'Your Blog'
     themeName = 'BuGuTheme'
     themeURL  = 'https://github.com/GuGuDaDaDa/BuGuTheme'
+    giscusRepo = ''                # GitHub repo (e.g., "user/repo")
+    giscusRepoId = ''              # Repository node ID
+    giscusCategory = ''            # Discussion category name
+    giscusCategoryId = ''          # Category node ID
     icp = ''
     [languages.en.params.social]
       github = 'https://github.com/yourname'
@@ -384,7 +392,13 @@ All params live under `[languages.<lang>.params]` in `hugo.toml`.
 | `social.github` | string | — | Full GitHub profile URL |
 | `social.twitter` | string | — | Full Twitter/X profile URL |
 | `social.email` | string | — | Email address (generates `mailto:` link) |
-| `disqusShortname` | string | — | Disqus shortname for comment integration |
+| `giscusRepo` | string | — | GitHub repo (e.g., `user/repo`) for Giscus comments |
+| `giscusRepoId` | string | — | Repository node ID from GitHub |
+| `giscusCategory` | string | — | Discussion category name |
+| `giscusCategoryId` | string | — | Discussion category node ID |
+| `giscusMapping` | string | `pathname` | Mapping between page and discussion |
+| `giscusReactionsEnabled` | string | `1` | Enable reactions (`1` or `0`) |
+| `giscusLang` | string | site lang | Interface language for Giscus |
 | `googleAnalytics` | string | — | Google Analytics measurement ID |
 
 ---

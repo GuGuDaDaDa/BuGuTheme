@@ -58,8 +58,11 @@ defaultContentLanguage = 'zh-cn'
       weight = 50
 
     [languages.'zh-cn'.params]
-      disqusShortname = "111"
       googleAnalytics = ""
+      giscusRepo = ""
+      giscusRepoId = ""
+      giscusCategory = ""
+      giscusCategoryId = ""
       footerText = 'BuGu · 海雾深处，字字为灯'
       copyright = 'BuGuBuGu'
       themeName = 'BuGuTheme'
