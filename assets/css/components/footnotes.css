@@ -348,6 +348,8 @@
 .fn-item-source {
   color: var(--muted);
   font-size: 0.8em;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .fn-item-link {
