@@ -12,6 +12,11 @@ import { initPhotoStack } from './photo-stack.js';
 import { start, done } from './progress.js';
 import { initFootnotes } from './footnotes.js';
 
+// Detect iOS devices (iPhone, iPad, iPod) and tag <html> for mobile layout
+if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+  document.documentElement.classList.add('ios');
+}
+
 start();
 
 document.addEventListener('DOMContentLoaded', () => {

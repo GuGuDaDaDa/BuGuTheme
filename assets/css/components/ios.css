@@ -1,0 +1,152 @@
+/* ============================================================
+   iOS overrides — force mobile layout on iPads/iPhones
+   Applied via .ios class on <html> (set by main.js)
+   ============================================================ */
+
+/* ---------- Typography (mirrors ≤768px article + ≤720px home) ---------- */
+.ios .article-title {
+  font-size: 1.8rem;
+}
+
+.ios .article-content {
+  font-size: 1.25rem;
+}
+
+.ios .article-content p {
+  text-indent: 1.5em;
+}
+
+.ios .article-content h2 {
+  font-size: 1.55rem;
+}
+
+.ios .article-content h3 {
+  font-size: 1.35rem;
+}
+
+.ios .article-content blockquote {
+  font-size: 1.15rem;
+}
+
+/* ---------- Carousel ---------- */
+.ios .carousel-title {
+  font-size: 1.75rem;
+}
+
+.ios .carousel-subtitle {
+  font-size: 1.0rem;
+}
+
+.ios .carousel-category {
+  font-size: 0.8rem;
+}
+
+.ios .carousel-meta {
+  font-size: 0.88rem;
+}
+
+.ios .section-ornament {
+  font-size: 0.8rem;
+}
+
+/* ---------- Cards ---------- */
+.ios .masonry {
+  columns: 1;
+  column-gap: 0;
+}
+
+.ios .masonry > * {
+  margin-bottom: 18px;
+}
+
+.ios .card-body {
+  padding: 18px 18px 20px;
+}
+
+.ios .card-title {
+  font-size: 1.3rem;
+}
+
+.ios .card-subtitle {
+  font-size: 1.0rem;
+}
+
+.ios .card-excerpt {
+  font-size: 1.05rem;
+}
+
+.ios .card-category {
+  font-size: 0.8rem;
+}
+
+.ios .card-meta {
+  font-size: 0.88rem;
+}
+
+.ios .masonry-loading-inner {
+  font-size: 1.0rem;
+}
+
+/* ---------- Footnotes ---------- */
+.ios .fn-item {
+  padding: 10px 0 10px 28px;
+}
+
+.ios .fn-item-num {
+  font-size: 0.75rem;
+  min-width: 20px;
+}
+
+/* ---------- Blockquote ---------- */
+.ios .article-content blockquote {
+  padding: 28px 42px 32px 72px;
+}
+
+.ios .article-content blockquote::before {
+  left: 28px;
+  font-size: 2.2rem;
+  top: 14px;
+}
+
+.ios .article-content blockquote::after {
+  right: 12px;
+  font-size: 2.2rem;
+  bottom: 6px;
+}
+
+/* ---------- Carousel layout ---------- */
+.ios .featured-carousel {
+  aspect-ratio: 16 / 9;
+  min-height: 220px;
+  margin-bottom: 32px;
+}
+
+.ios .carousel-content {
+  padding: 0 14px;
+  bottom: 8%;
+}
+
+.ios .carousel-btn {
+  display: none;
+}
+
+.ios .carousel-accent {
+  width: 30px;
+  height: 30px;
+  top: 16px;
+  right: 18px;
+}
+
+/* ---------- Card corner accents ---------- */
+.ios .card::before,
+.ios .card::after {
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+}
+
+.ios .card:hover::before,
+.ios .card:hover::after {
+  width: 22px;
+  height: 22px;
+}
