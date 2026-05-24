@@ -204,19 +204,19 @@
 
 @media (max-width: 720px) {
   .article-content blockquote {
-    padding: 28px 44px 32px 68px;
+    padding: 28px 42px 32px 72px;
   }
 
   .article-content blockquote::before {
-    left: 22px;
-    font-size: 2.4rem;
+    left: 28px;
+    font-size: 2.2rem;
     top: 14px;
   }
 
   .article-content blockquote::after {
-    right: 14px;
-    font-size: 2.6rem;
-    bottom: 4px;
+    right: 12px;
+    font-size: 2.2rem;
+    bottom: 6px;
   }
 }
 
