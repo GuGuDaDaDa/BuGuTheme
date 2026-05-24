@@ -227,17 +227,10 @@ export function initFootnotes() {
     });
     ref.addEventListener('blur', () => hideTooltip());
 
-    // Click → scroll to footnote (desktop) or open panel (touch-only)
+    // Click → scroll to footnote (both desktop and mobile)
     ref.addEventListener('click', e => {
       e.preventDefault();
-      if (isTouchOnly) {
-        if (currentActiveRef) currentActiveRef.classList.remove('active');
-        ref.classList.add('active');
-        currentActiveRef = ref;
-        showPanel(fnNum);
-      } else {
-        scrollToFootnote(fnNum);
-      }
+      scrollToFootnote(fnNum);
     });
   });
 
