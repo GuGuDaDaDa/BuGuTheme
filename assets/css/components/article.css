@@ -162,7 +162,7 @@
 
 /* 左上开引号 */
 .article-content blockquote::before {
-  content: '\201C';
+  content: '\201C\00A0';
   position: absolute;
   top: 10px;
   left: 24px;
