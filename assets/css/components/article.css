@@ -147,7 +147,7 @@
 /* ---------- Blockquote ---------- */
 .article-content blockquote {
   margin: 2.2em 0;
-  padding: 28px 56px 36px 64px;
+  padding: 28px 56px 36px 68px;
   background: none;
   border: none;
   font-style: italic;
@@ -157,6 +157,7 @@
   line-height: 1.8;
   position: relative;
   text-align: left;
+  overflow: visible;
 }
 
 /* 左上开引号 */
@@ -164,7 +165,7 @@
   content: '\201C';
   position: absolute;
   top: 10px;
-  left: 14px;
+  left: 20px;
   font-size: 3.2rem;
   color: var(--muted-light);
   opacity: 0.45;
@@ -178,7 +179,7 @@
   content: '\201D';
   position: absolute;
   bottom: 2px;
-  right: 16px;
+  right: 22px;
   font-size: 3.2rem;
   color: var(--muted-light);
   opacity: 0.45;
@@ -203,7 +204,19 @@
 
 @media (max-width: 720px) {
   .article-content blockquote {
-    padding: 28px 52px 36px 64px;
+    padding: 28px 50px 32px 60px;
+  }
+
+  .article-content blockquote::before {
+    left: 16px;
+    font-size: 2.6rem;
+    top: 12px;
+  }
+
+  .article-content blockquote::after {
+    right: 14px;
+    font-size: 2.6rem;
+    bottom: 4px;
   }
 }
 
