@@ -1,0 +1,15 @@
+{{- /* Article footer: author, date, copyright notice (v15 style, right-aligned) */ -}}
+{{- $author := .Params.author | default site.Params.author | default "" -}}
+{{- $copyright := "商业转载请联系站长获得授权；非商业转载请注明来源及链接。" -}}
+{{- if or $author $copyright }}
+<footer class="article-footer">
+  {{- if $author }}
+  <div class="author-row">
+    <a href="{{ "/about/" | relURL }}">文/{{ $author }}</a>， <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006 年 1 月 2 日" }}</time>
+  </div>
+  {{- end }}
+  {{- if $copyright }}
+  <div class="copyright-row">{{ $copyright }}</div>
+  {{- end }}
+</footer>
+{{- end }}

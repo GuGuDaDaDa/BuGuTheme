@@ -95,19 +95,19 @@
 
 /* ---------- Article content ---------- */
 .article-content {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
   font-size: 1.02rem;
   line-height: 1.9;
   color: var(--fg);
 }
 
 .article-content p {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.4em;
+  text-indent: 2em;
 }
 
-.article-content p:first-child {
-  font-size: 1.12rem;
-  color: var(--fg-strong);
-  line-height: 1.85;
+.article-content p:first-of-type {
+  text-indent: 0;
 }
 
 .article-content a {
@@ -201,7 +201,7 @@
   line-height: inherit;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .article-content blockquote {
     padding: 28px 42px 32px 72px;
   }
@@ -365,7 +365,7 @@
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .article-header-wrapper {
     padding-top: 20px;
   }
@@ -375,6 +375,16 @@
   }
 
   .article-content {
-    font-size: 1rem;
+    font-size: 0.96rem;
+  }
+
+  .article-content p {
+    text-indent: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .article-content {
+    font-size: 0.92rem;
   }
 }

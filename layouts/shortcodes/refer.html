@@ -1,13 +1,17 @@
-{{- $desc := .Get "desc" | default (.Get 0) -}}
-{{- $url  := .Get "url"  | default (.Get 1) -}}
-{{- $num  := .Get "num"  | default "" -}}
-<li class="ref-item">
-  <span class="ref-item-num">{{- $num -}}</span>
-  <div class="ref-item-content">
-    {{- if $url }}
-    <a class="ref-item-title" href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $desc }}</a>
-    {{- else }}
-    <span class="ref-item-title">{{ $desc }}</span>
-    {{- end }}
-  </div>
+{{- $num    := .Get "num"    | default "" -}}
+{{- $source := .Get "source" | default "" -}}
+{{- $desc   := .Get "desc"   | default "" -}}
+{{- $url    := .Get "url"    | default "" -}}
+{{- $noref  := .Get "noref"  | default false -}}
+{{- $inner  := .Inner | markdownify -}}
+<li class="fn-item" id="fn-{{- $num -}}">
+  <span class="fn-item-num">[{{- $num -}}]</span>
+  {{- if $url }}<a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="fn-item-link">
+  {{- end }}
+  {{- if $inner }}{{ $inner }}
+  {{- else if $desc }}{{ $desc }}
+  {{- end }}
+  {{- if $source }} <span class="fn-item-source">— {{ $source }}</span>{{- end }}
+  {{- if $url }}</a>{{- end }}
+  {{- if not $noref }}<a class="fn-backref" href="#fnref-{{- $num -}}" data-backref="{{- $num -}}">↩</a>{{- end }}
 </li>

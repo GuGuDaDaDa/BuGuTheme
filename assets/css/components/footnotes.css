@@ -1,0 +1,457 @@
+/* ============================================================
+   Footnotes — inline refs, tooltip, mobile panel, footnote list
+   fn-ref / fn-tooltip: maintained from bugublog-v14 style
+   fn-item / panel: updated to bugublog-v15 style
+   ============================================================ */
+
+/* ---------- Inline Footnote Reference (superscript in body) ---------- */
+/* Kept as-is per user request */
+.fn-ref {
+  position: relative;
+  display: inline;
+  cursor: pointer;
+  color: var(--accent-soft);
+  font-weight: 600;
+  font-size: 0.78em;
+  vertical-align: super;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0 0.15em;
+  border-radius: 2px;
+  border-bottom: 1px dashed transparent;
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  text-decoration: none;
+}
+
+.fn-ref:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  background: var(--accent-wash);
+}
+
+.fn-ref:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.fn-ref.active {
+  color: var(--accent);
+  background: var(--accent-wash);
+  border-bottom-color: var(--accent);
+}
+
+.fn-ref.highlight-flash {
+  animation: fn-ref-pulse 1.4s ease-out;
+}
+
+@keyframes fn-ref-pulse {
+  0%   { background: var(--accent-glow); outline: 3px solid var(--accent-glow); }
+  100% { background: transparent; outline: 3px solid transparent; }
+}
+
+/* ---------- Desktop Tooltip ---------- */
+/* Kept as-is per user request */
+.fn-tooltip {
+  position: fixed;
+  z-index: 200;
+  max-width: 420px;
+  min-width: 240px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  padding: 16px 18px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--fg-soft);
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+  box-shadow: var(--shadow-lg);
+}
+
+.fn-tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.fn-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid var(--accent-soft);
+  border-left: 2px solid var(--accent-soft);
+}
+
+.fn-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-bottom: 2px solid var(--accent-soft);
+  border-right: 2px solid var(--accent-soft);
+}
+
+.fn-tooltip-arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--surface);
+  border-left: 1px solid var(--border-strong);
+  border-top: 1px solid var(--border-strong);
+  transform: rotate(45deg);
+  transition: background 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+[data-theme="dark"] .fn-tooltip-arrow {
+  background: var(--surface);
+}
+
+.fn-tooltip-num {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.8rem;
+  margin-right: 6px;
+  min-width: 1.3em;
+}
+
+.fn-tooltip-content {
+  display: inline;
+}
+
+.fn-tooltip-source {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.fn-tooltip-goto {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fn-tooltip-goto:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Mobile Panel Overlay ---------- */
+.fn-panel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+[data-theme="dark"] .fn-panel-overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.fn-panel-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---------- Mobile Bottom Panel (v15 style) ---------- */
+.fn-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 301;
+  background: var(--surface);
+  max-height: 55vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  border-radius: 16px 16px 0 0;
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fn-panel.visible {
+  transform: translateY(0);
+}
+
+.fn-panel-handle {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 4px;
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  z-index: 2;
+  border-radius: 16px 16px 0 0;
+}
+
+.fn-panel-handle-bar {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+.fn-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 20px 10px;
+  position: sticky;
+  top: 20px;
+  background: var(--surface);
+  z-index: 2;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.fn-panel-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--fg);
+}
+
+.fn-panel-close {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  border-radius: 6px;
+  transition: all 0.18s ease;
+}
+
+.fn-panel-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.fn-panel-body {
+  padding: 14px 20px 28px;
+}
+
+.fn-panel-item-num {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.82rem;
+  margin-bottom: 4px;
+}
+
+.fn-panel-item-content {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--fg-soft);
+}
+
+.fn-panel-item-source {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.fn-panel-goto {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.fn-panel-goto:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Footnotes Section ---------- */
+.footnotes-section {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+}
+
+.footnotes-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footnotes-title .fn-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  border: 1.5px solid var(--accent-soft);
+}
+
+.footnotes-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* ---------- Footnote Items (v15 style — inline content, bottom border) ---------- */
+.fn-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 0;
+  margin-bottom: 0;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--fg-soft);
+  scroll-margin-top: 80px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.fn-item:last-child {
+  border-bottom: none;
+}
+
+.fn-item-num {
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--accent);
+  min-width: 24px;
+}
+
+.fn-item-source {
+  color: var(--muted);
+  font-size: 0.8em;
+}
+
+.fn-item-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fn-item-link:hover {
+  text-decoration: underline;
+}
+
+.fn-item-source-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fn-item-source-link:hover {
+  text-decoration: underline;
+}
+
+.fn-backref {
+  display: inline;
+  font-size: 0.73rem;
+  color: var(--accent);
+  text-decoration: none;
+  margin-left: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.fn-backref:hover {
+  text-decoration: underline;
+}
+
+.fn-item:target,
+.fn-item.highlight-flash {
+  animation: fn-highlight 1.6s ease-out;
+}
+
+@keyframes fn-highlight {
+  0%   { background: var(--accent-wash); }
+  100% { background: transparent; }
+}
+
+/* ---------- Article Footer (v15 style — right-aligned) ---------- */
+.article-footer {
+  margin-top: 48px;
+  text-align: right;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.article-footer .author-row {
+  margin-bottom: 4px;
+}
+
+.article-footer .author-row a {
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.article-footer .author-row a:hover {
+  text-decoration: underline;
+}
+
+.article-footer .copyright-row {
+  color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .fn-tooltip {
+    display: none !important;
+  }
+
+  .fn-item {
+    padding: 10px 0;
+    gap: 6px;
+  }
+
+  .fn-item-num {
+    font-size: 0.75rem;
+    min-width: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footnotes-section {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+}
+
+@media print {
+  .fn-tooltip,
+  .fn-panel-overlay,
+  .fn-panel {
+    display: none !important;
+  }
+
+  .fn-ref {
+    color: inherit;
+    border-bottom: none;
+  }
+}

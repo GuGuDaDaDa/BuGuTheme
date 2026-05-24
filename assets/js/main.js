@@ -10,6 +10,7 @@ import { initSearch } from './search.js';
 import { initLightbox } from './lightbox.js';
 import { initPhotoStack } from './photo-stack.js';
 import { start, done } from './progress.js';
+import { initFootnotes } from './footnotes.js';
 
 start();
 
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initToc();
   initSearch();
   initLightbox();
+  initFootnotes();
   document.querySelectorAll('.photo-stack').forEach(el => initPhotoStack(el));
 
   /* ---------- Theme toggle ---------- */

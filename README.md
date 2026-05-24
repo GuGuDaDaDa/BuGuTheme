@@ -10,7 +10,7 @@ A minimalist, content-focused Hugo theme with masonry layout, featured carousel,
 - **Photo stack** — interactive flipable photo gallery via `{{< photos >}}` shortcode
 - **AI Summary** — collapsible AI-generated summary block via `{{< ai-summary >}}`
 - **AI Warning** — dismissible AI disclosure notice via `{{< ai-warning >}}`
-- **References** — styled reference list via `{{< refers >}}` + `{{< refer >}}`
+- **References** — inline footnote references with desktop tooltip + mobile bottom panel, styled footnotes section via `{{< refers >}}` + `{{< refer >}}` + `{{< fnref >}}`
 - **Client-side search** — Fuse.js fuzzy search with modal UI
 - **Image lightbox** — click to enlarge images in article content
 - **Dark mode** — system-aware theme toggle with persistent preference
@@ -58,6 +58,9 @@ theme = 'bu-gu-theme'
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 3
+
+[params]
+  author = '布谷'
 
 # ── Language: Chinese (default) ──
 [languages.'zh-cn']
@@ -305,31 +308,74 @@ Renders a dismissible notice bar with a left accent line and a close button. Clo
 
 ---
 
-### References — styled reference list
+### References — inline footnotes with tooltip + panel
 
-Use `{{< refers >}}` as the container and one `{{< refer >}}` per entry. The list is auto-numbered via CSS counter; pass `num` to override.
+The reference system has three parts: **inline markers** in body text, a **desktop tooltip** on hover, a **mobile bottom panel** on tap, and the **footnotes section** at the end. Each footnote entry supports full Markdown syntax.
+
+#### Inline reference markers
+
+Place `{{< fnref N >}}` in body text where you want a clickable superscript reference:
 
 ```
-{{< refers >}}
-{{< refer desc="文章或书籍标题" url="https://example.com" >}}
-{{< refer desc="另一篇参考，无需链接" >}}
-{{< refer num="*" desc="用星号或自定义标记代替序号" url="https://example.org" >}}
+CSS 布局的演进经历了多个阶段{{< fnref 1 >}}。
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `0` (positional) | number | Footnote number, must match a `num` in `{{< refer >}}` |
+
+#### Footnotes section
+
+Use `{{< refers >}}` as the container and one paired `{{< refer >}}` per entry. Each `refer` body supports **full Markdown** (bold, italic, links, inline code, etc.).
+
+```
+{{< refers title="参考文献与注释" >}}
+
+{{< refer num="1" source="w3.org/TR/css-layout-evolution" >}}
+W3C CSS Working Group. **CSS Layout Module Level 3**. W3C Working Draft, 2024.
+{{< /refer >}}
+
+{{< refer num="2" source="O'Reilly Media, ISBN 978-1449393199" >}}
+Meyer, Eric A. **CSS: The Definitive Guide**, 4th Edition. 第9章.
+{{< /refer >}}
+
 {{< /refers >}}
 ```
 
-`{{< refers >}}` accepts an optional `title` parameter (default: `参考资料`):
+`{{< refers >}}` parameters:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `title` | string | `参考文献与注释` | Section heading |
+
+`{{< refer >}}` parameters:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `num` | string | — | Reference number (required; matches `{{< fnref N >}}`) |
+| `source` | string | — | Source attribution, shown inline after content in muted style |
+| `noref` | bool | `false` | Set to `true` for extra references without a body superscript (omit the backref link) |
+| inner content | markdown | — | The reference text; supports full Markdown rendering |
+
+Extra references without a body superscript — set `noref="true"` to omit the backref link:
 
 ```
-{{< refers title="References" >}}
-…
+{{< refer num="3" noref="true" source="..." >}}...{{< /refer >}}
+```
+
+**Backward-compatible usage** (`desc` + `url` style, no Markdown inner content):
+
+```
+{{< refers >}}
+{{< refer num="1" desc="文章标题" url="https://example.com" >}}
+{{< refer num="2" desc="纯文本条目" >}}
 {{< /refers >}}
 ```
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `desc` (or positional `0`) | string | — | Description / title of the reference |
-| `url` (or positional `1`) | string | — | Link URL; omit to render plain text |
-| `num` | string | auto | Override the sequence number badge |
+| `desc` | string | — | Plain-text description |
+| `url` | string | — | Link URL; omit to render as plain text |
 
 ---
 

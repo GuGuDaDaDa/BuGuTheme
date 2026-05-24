@@ -8,6 +8,7 @@
       <div class="article-content">
         {{ .Content }}
       </div>
+      {{ partial "article-copyright.html" . }}
       {{ partial "article-footer.html" . }}
       {{ partial "giscus.html" . }}
     </article>
