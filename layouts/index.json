@@ -1,22 +1,7 @@
-{{- /* JSON feed of non-draft, non-carousel articles — used by masonry loader and search */}}
-{{- $featured := where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true | first 5 }}
-{{- $excludeSlugs := slice }}
-{{- range $featured }}
-  {{- $s := .Slug | default (.Title | urlize) }}
-  {{- if $s }}
-    {{- $excludeSlugs = $excludeSlugs | append $s }}
-  {{- end }}
-{{- end }}
+{{- /* JSON feed of all non-draft articles — used by masonry loader and search */}}
 {{- $all := where (where (where site.RegularPages "Params.draft" "!=" true) "Layout" "ne" "about") "Layout" "ne" "friends" }}
-{{- $posts := slice }}
-{{- range $all }}
-  {{- $s := .Slug | default (.Title | urlize) }}
-  {{- if not (in $excludeSlugs $s) }}
-    {{- $posts = $posts | append . }}
-  {{- end }}
-{{- end }}
 [
-  {{- range $i, $p := $posts }}
+  {{- range $i, $p := $all }}
   {{- if $i }},{{ end }}
   {
     "title": {{ $p.Title | jsonify }},
@@ -27,6 +12,8 @@
     "subtitle": {{ $p.Params.subtitle | jsonify }},
     "cover": {{ $p.Params.cover | jsonify }},
     "categories": {{ $p.Params.categories | default slice | jsonify }},
+    "tags": {{ $p.Params.tags | default slice | jsonify }},
+    "featured": {{ $p.Params.featured | default false }},
     "permalink": {{ $p.RelPermalink | jsonify }},
     "readingTime": {{ $p.ReadingTime }}
   }{{- end }}

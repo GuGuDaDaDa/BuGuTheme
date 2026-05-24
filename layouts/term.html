@@ -2,13 +2,38 @@
 <div class="app-inner">
   <h1 class="term-heading">{{ .Title }}</h1>
 
-  {{- $pages := .Pages }}
-  {{- if $pages }}
-  <div class="masonry">
-    {{- range $pages }}
+  {{- $allPages := sort .Pages "Date" "desc" }}
+  {{- $initLoad := 12 }}
+  {{- $total := len $allPages }}
+  {{- $loaded := math.Min $initLoad $total }}
+
+  {{- if $allPages }}
+  <div class="masonry" id="masonry-grid"
+       data-loaded-count="{{ $loaded }}"
+       data-total-count="{{ $total }}"
+       data-taxonomy="{{ .Data.Plural }}"
+       data-term="{{ .Data.Term }}">
+    {{- range first $initLoad $allPages }}
       {{- partial "card.html" . }}
     {{- end }}
+    {{- if gt $total $initLoad }}
+    <div class="masonry-sentinel" id="masonry-sentinel"></div>
+    {{- end }}
   </div>
+  {{- if gt $total $initLoad }}
+  <div class="masonry-loading" id="masonry-loading">
+    <div class="masonry-loading-inner">
+      <span class="masonry-spinner"></span>
+      <span class="masonry-loading-text">加载中…</span>
+    </div>
+  </div>
+  {{- else }}
+  <div class="masonry-loading done" id="masonry-loading">
+    <div class="masonry-loading-inner">
+      <span class="masonry-loading-text">已经看完啦</span>
+    </div>
+  </div>
+  {{- end }}
   {{- else }}
   <p class="term-empty">
     {{- if eq .Data.Plural "categories" }}{{ i18n "term.noCategoryPosts" }}{{ else }}{{ i18n "term.noTagPosts" }}{{ end -}}

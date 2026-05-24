@@ -67,8 +67,17 @@
       {{- end }}
     </div>
     {{- if gt $total $initLoad }}
-    <div class="load-more-wrap">
-      <button class="btn-load-more" id="btn-load-more">加载更多 <span class="arrow">↓</span></button>
+    <div class="masonry-loading" id="masonry-loading">
+      <div class="masonry-loading-inner">
+        <span class="masonry-spinner"></span>
+        <span class="masonry-loading-text">加载中…</span>
+      </div>
+    </div>
+    {{- else }}
+    <div class="masonry-loading done" id="masonry-loading">
+      <div class="masonry-loading-inner">
+        <span class="masonry-loading-text">已经看完啦</span>
+      </div>
     </div>
     {{- end }}
   </div>

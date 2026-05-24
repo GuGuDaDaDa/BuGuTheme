@@ -88,17 +88,6 @@
   transform: scale(1.02);
 }
 
-/* Fallback gradient when no cover */
-.card-cover-fallback {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, #5b6c7e 0%, #3a4a5c 50%, #6b7c8e 100%);
-}
-
-[data-theme="dark"] .card-cover-fallback {
-  background: linear-gradient(135deg, #4a5a6a 0%, #2a3a4c 50%, #5a6a7a 100%);
-}
-
 /* Card body */
 .card-body {
   padding: 20px 22px 24px;
@@ -221,14 +210,20 @@
   height: 1px;
 }
 
-/* ---------- Load more button (fallback) ---------- */
-.load-more-wrap {
-  text-align: center;
-  margin: 8px 0 64px;
+/* ---------- Infinite scroll loading indicator ---------- */
+.masonry-loading {
+  display: none;
+  justify-content: center;
+  padding: 8px 0 64px;
 }
 
-.btn-load-more {
-  display: inline-flex;
+.masonry-loading.visible,
+.masonry-loading.done {
+  display: flex;
+}
+
+.masonry-loading-inner {
+  display: flex;
   align-items: center;
   gap: 8px;
   padding: 13px 40px;
@@ -237,34 +232,38 @@
   color: var(--fg-soft);
   font-size: 0.88rem;
   font-weight: 500;
-  cursor: pointer;
-  transition: all 0.35s;
-  font-family: inherit;
   letter-spacing: 0.05em;
   box-shadow: var(--shadow-sm);
+  font-family: inherit;
 }
 
-.btn-load-more:hover {
-  border-color: var(--accent-soft);
-  color: var(--accent);
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-1px);
+.masonry-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: masonry-spin 0.7s linear infinite;
 }
 
-.btn-load-more:active {
-  transform: scale(0.97);
+@keyframes masonry-spin {
+  to { transform: rotate(360deg); }
 }
 
-.btn-load-more .arrow {
-  display: inline-block;
-  transition: transform 0.35s;
-  font-size: 0.8rem;
-  opacity: 0.7;
+.masonry-loading.done .masonry-loading-inner {
+  opacity: 0.35;
+  pointer-events: none;
 }
 
-.btn-load-more:hover .arrow {
-  transform: translateY(3px);
-  opacity: 1;
+.masonry-loading.done .masonry-spinner {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .masonry-loading-inner {
+    padding: 11px 28px;
+    font-size: 0.82rem;
+  }
 }
 
 /* ---------- Responsive ---------- */
@@ -297,11 +296,6 @@
 
   .card-title {
     font-size: 1.06rem;
-  }
-
-  .btn-load-more {
-    padding: 11px 28px;
-    font-size: 0.82rem;
   }
 }
 

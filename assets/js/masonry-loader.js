@@ -2,7 +2,7 @@
  * BuGuBlog — Masonry Infinite Scroll Loader
  *
  * Fetches /posts.json, renders cards client-side,
- * and loads more via Intersection Observer.
+ * and auto-loads via Intersection Observer on scroll.
  *
  * @module masonry-loader
  */
@@ -25,11 +25,8 @@ function renderCard(d) {
     img.src = d.cover;
     img.alt = d.title;
     img.loading = 'lazy';
+    img.addEventListener('error', () => img.remove());
     article.appendChild(img);
-  } else {
-    const fb = document.createElement('div');
-    fb.className = 'card-cover card-cover-fallback';
-    article.appendChild(fb);
   }
 
   const body = document.createElement('div');
@@ -88,15 +85,18 @@ export function initMasonry() {
 
   /** @type {HTMLElement|null} */
   const sentinel = document.getElementById('masonry-sentinel');
-  /** @type {HTMLButtonElement|null} */
-  const loadBtn = document.getElementById('btn-load-more');
+  /** @type {HTMLElement|null} */
+  const loadingEl = document.getElementById('masonry-loading');
 
-  // Extract carousel slugs to exclude
+  // Homepage: exclude carousel slugs. Term pages: filter by taxonomy.
   const excludeRaw = grid.getAttribute('data-exclude') || '';
   const excludeSlugs = excludeRaw ? excludeRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+  const taxonomy = grid.getAttribute('data-taxonomy') || '';
+  const term = grid.getAttribute('data-term') || '';
 
   /** @type {object[]|null} */
   let cachedPosts = null;
+  let isLoading = false;
 
   /**
    * Fetch and cache the JSON article feed.
@@ -108,8 +108,14 @@ export function initMasonry() {
     if (!resp.ok) throw new Error('Failed to fetch /posts.json');
     /** @type {object[]} */
     const data = await resp.json();
-    // Filter out carousel slugs
-    cachedPosts = data.filter(p => !excludeSlugs.includes(p.slug));
+    if (taxonomy && term) {
+      // Term page: filter by category or tag
+      const key = taxonomy === 'tags' ? 'tags' : 'categories';
+      cachedPosts = data.filter(p => (p[key] || []).includes(term));
+    } else {
+      // Homepage: filter out carousel slugs
+      cachedPosts = data.filter(p => !excludeSlugs.includes(p.slug));
+    }
     return cachedPosts;
   }
 
@@ -118,17 +124,26 @@ export function initMasonry() {
    * @param {number} count — how many to load
    */
   async function loadMore(count = 6) {
-    if (loadedCount >= totalCount) return;
+    if (loadedCount >= totalCount || isLoading) return;
+
+    isLoading = true;
+    if (loadingEl) loadingEl.classList.add('visible');
 
     let posts;
     try {
       posts = await fetchPosts();
     } catch (_) {
-      return; // silent fail
+      if (loadingEl) loadingEl.classList.remove('visible');
+      isLoading = false;
+      return;
     }
 
     const next = posts.slice(loadedCount, loadedCount + count);
-    if (next.length === 0) return;
+    if (next.length === 0) {
+      if (loadingEl) loadingEl.classList.remove('visible');
+      isLoading = false;
+      return;
+    }
 
     const fragment = document.createDocumentFragment();
     next.forEach(d => fragment.appendChild(renderCard(d)));
@@ -143,20 +158,28 @@ export function initMasonry() {
     loadedCount += next.length;
     grid.setAttribute('data-loaded-count', String(loadedCount));
 
-    // Animate new cards
+    // Staggered entrance animation — double rAF ensures browser
+    // paints the initial hidden state before transitions begin.
+    const newCards = grid.querySelectorAll('.card-appear:not(.visible)');
     requestAnimationFrame(() => {
-      const newCards = grid.querySelectorAll('.card-appear:not(.visible)');
-      newCards.forEach(c => c.classList.add('visible'));
+      requestAnimationFrame(() => {
+        newCards.forEach((c, i) => {
+          setTimeout(() => c.classList.add('visible'), i * 60);
+        });
+      });
     });
+
+    if (loadingEl) loadingEl.classList.remove('visible');
+    isLoading = false;
 
     // Clean up when all loaded
     if (loadedCount >= totalCount) {
       if (sentinel) sentinel.remove();
-      if (loadBtn) {
-        loadBtn.textContent = '已经看完啦';
-        loadBtn.disabled = true;
-        loadBtn.style.opacity = '0.35';
-        loadBtn.style.pointerEvents = 'none';
+      if (loadingEl) {
+        const textEl = loadingEl.querySelector('.masonry-loading-text');
+        if (textEl) textEl.textContent = '已经看完啦';
+        loadingEl.classList.remove('visible');
+        loadingEl.classList.add('done');
       }
     }
   }
@@ -169,10 +192,5 @@ export function initMasonry() {
       }
     }, { rootMargin: '200px' });
     observer.observe(sentinel);
-  }
-
-  /* ---------- Fallback: load more button ---------- */
-  if (loadBtn) {
-    loadBtn.addEventListener('click', () => loadMore(6));
   }
 }
