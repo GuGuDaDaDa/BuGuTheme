@@ -371,20 +371,44 @@
   }
 
   .article-title {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 
   .article-content {
-    font-size: 0.96rem;
+    font-size: 1.25rem;
   }
 
   .article-content p {
     text-indent: 1.5em;
   }
+
+  .article-content h2 {
+    font-size: 1.55rem;
+  }
+
+  .article-content h3 {
+    font-size: 1.35rem;
+  }
+
+  .article-content blockquote {
+    font-size: 1.15rem;
+  }
 }
 
 @media (max-width: 480px) {
   .article-content {
-    font-size: 0.92rem;
+    font-size: 1.15rem;
+  }
+
+  .article-title {
+    font-size: 1.55rem;
+  }
+
+  .article-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .article-content h3 {
+    font-size: 1.25rem;
   }
 }

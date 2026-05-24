@@ -262,7 +262,7 @@
 @media (max-width: 720px) {
   .masonry-loading-inner {
     padding: 11px 28px;
-    font-size: 0.82rem;
+    font-size: 1.0rem;
   }
 }
 
@@ -291,11 +291,27 @@
   }
 
   .card-body {
-    padding: 16px 16px 18px;
+    padding: 18px 18px 20px;
   }
 
   .card-title {
-    font-size: 1.06rem;
+    font-size: 1.3rem;
+  }
+
+  .card-subtitle {
+    font-size: 1.0rem;
+  }
+
+  .card-excerpt {
+    font-size: 1.05rem;
+  }
+
+  .card-category {
+    font-size: 0.8rem;
+  }
+
+  .card-meta {
+    font-size: 0.88rem;
   }
 }
 
