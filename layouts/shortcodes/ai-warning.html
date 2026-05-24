@@ -1,0 +1,10 @@
+<div class="ai-disclosure">
+  <span class="ai-disclosure-icon">i</span>
+  <span class="ai-disclosure-text">
+    {{- with .Get "title" }}<strong>{{ . }}</strong> · {{ end -}}
+    {{- .Inner | markdownify -}}
+  </span>
+  <button class="ai-disclosure-close"
+          onclick="this.closest('.ai-disclosure').classList.add('dismissed')"
+          aria-label="关闭提示">&times;</button>
+</div>

@@ -1,29 +1,24 @@
 {{- /* Photo Stack shortcode — renders a stack of photos with flip interaction.
-  Usage: {{< photos "img1.jpg|Caption 1,img2.jpg,img3.jpg|Caption 3" >}}
-  Separate src and optional label with | per entry.
+  Usage:
+    {{< photos >}}
+    {{< photo src="img1.jpg" caption="Caption 1" >}}
+    {{< photo src="img2.jpg" >}}
+    {{< /photos >}}
 */ -}}
-{{- $raw := "" -}}
-{{- if .IsNamedParams -}}
-  {{- $raw = .Get "src" -}}
-{{- else -}}
-  {{- $raw = .Get 0 -}}
-{{- end -}}
-{{- if not $raw -}}
-  {{- errorf "photos shortcode requires a comma-separated list of image paths" -}}
+{{- $id := printf "photoStack_%d" .Ordinal -}}
+
+{{- /* Collect JSON objects emitted by each nested {{< photo >}} call */ -}}
+{{- $inner := .Inner | strings.TrimSpace -}}
+{{- $items := slice -}}
+{{- range (split $inner "\n") -}}
+  {{- $line := strings.TrimSpace . -}}
+  {{- if and $line (strings.HasPrefix $line "{") -}}
+    {{- $items = $items | append ($line | transform.Unmarshal) -}}
+  {{- end -}}
 {{- end -}}
 
-{{- $entries := split $raw "," -}}
-{{- $id := printf "photoStack_%d" .Ordinal -}}
-{{- $data := slice -}}
-{{- range $entries -}}
-  {{- $entry := trim . " " -}}
-  {{- $parts := split $entry "|" -}}
-  {{- $src := trim (index $parts 0) " " -}}
-  {{- $label := "" -}}
-  {{- if gt (len $parts) 1 -}}
-    {{- $label = trim (index $parts 1) " " -}}
-  {{- end -}}
-  {{- $data = $data | append (dict "src" $src "label" $label) -}}
+{{- if not $items -}}
+  {{- errorf "photos shortcode requires at least one {{< photo >}} entry" -}}
 {{- end -}}
 
 <div class="photo-stack" id="{{ $id }}" role="region" aria-label="照片堆叠 · 点击翻页" tabindex="0">
@@ -41,5 +36,5 @@
   <div class="stack-counter"></div>
   <div class="stack-hint">点击桌面翻页 · 左右键切换</div>
 
-  <script type="application/json" class="photo-stack-data">{{ $data | jsonify | safeJS }}</script>
+  <script type="application/json" class="photo-stack-data">{{ $items | jsonify | safeJS }}</script>
 </div>

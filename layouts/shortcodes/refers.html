@@ -1,0 +1,9 @@
+<div class="article-references">
+  <div class="ref-heading">
+    <span class="ref-heading-icon"></span>
+    <span class="ref-heading-label">{{ .Get "title" | default "参考资料" }}</span>
+  </div>
+  <ol class="ref-list">
+    {{- .Inner -}}
+  </ol>
+</div>

@@ -8,6 +8,9 @@ A minimalist, content-focused Hugo theme with masonry layout, featured carousel,
 - **Featured carousel** — hero slider for featured posts with cover images, categories, subtitles
 - **Article page** — clean typography with optional floating TOC sidebar, prev/next navigation, tags, Disqus comments
 - **Photo stack** — interactive flipable photo gallery via `{{< photos >}}` shortcode
+- **AI Summary** — collapsible AI-generated summary block via `{{< ai-summary >}}`
+- **AI Warning** — dismissible AI disclosure notice via `{{< ai-warning >}}`
+- **References** — styled reference list via `{{< refers >}}` + `{{< refer >}}`
 - **Client-side search** — Fuse.js fuzzy search with modal UI
 - **Image lightbox** — click to enlarge images in article content
 - **Dark mode** — system-aware theme toggle with persistent preference
@@ -250,10 +253,75 @@ Visit `http://localhost:1313/`.
 ### Photos — interactive photo stack
 
 ```
-{{< photos "img1.jpg|Caption one,img2.jpg,img3.jpg|Caption three" >}}
+{{< photos >}}
+{{< photo src="img1.jpg" caption="Caption one" >}}
+{{< photo src="img2.jpg" >}}
+{{< photo src="img3.jpg" caption="Caption three" >}}
+{{< /photos >}}
 ```
 
-Each entry is separated by comma. Optionally append `|Caption` to add a caption. Supports click, keyboard (arrow keys), and touch swipe to flip through photos.
+Each `{{< photo >}}` is one image. `caption` is optional. Supports click, keyboard (arrow keys), and touch swipe to flip through photos.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `src` | string | Image filename (page resource) or external URL |
+| `caption` | string | Optional caption shown below the image |
+
+---
+
+### AI Summary — collapsible summary block
+
+Renders a collapsible panel labeled "AI 摘要". Click the toggle button to expand or collapse. State resets on page reload (no localStorage).
+
+```
+{{< ai-summary >}}
+本文探讨了……（支持 Markdown）
+{{< /ai-summary >}}
+```
+
+---
+
+### AI Warning — dismissible disclosure notice
+
+Renders a dismissible notice bar with a left accent line and a close button. Closing hides it for the current page session only (no localStorage).
+
+```
+{{< ai-warning title="透明声明" >}}
+本文部分内容在 AI 辅助下完成，所有文字均经过作者逐段审校与修改。
+{{< /ai-warning >}}
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `title` | string | — | Bold prefix before the notice text; omit to show plain text only |
+
+---
+
+### References — styled reference list
+
+Use `{{< refers >}}` as the container and one `{{< refer >}}` per entry. The list is auto-numbered via CSS counter; pass `num` to override.
+
+```
+{{< refers >}}
+{{< refer desc="文章或书籍标题" url="https://example.com" >}}
+{{< refer desc="另一篇参考，无需链接" >}}
+{{< refer num="*" desc="用星号或自定义标记代替序号" url="https://example.org" >}}
+{{< /refers >}}
+```
+
+`{{< refers >}}` accepts an optional `title` parameter (default: `参考资料`):
+
+```
+{{< refers title="References" >}}
+…
+{{< /refers >}}
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `desc` (or positional `0`) | string | — | Description / title of the reference |
+| `url` (or positional `1`) | string | — | Link URL; omit to render plain text |
+| `num` | string | auto | Override the sequence number badge |
 
 ---
 

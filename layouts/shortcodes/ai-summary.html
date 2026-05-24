@@ -1,0 +1,15 @@
+{{- $id := printf "ai-summary-%s" (now.UnixNano | string) -}}
+<div class="ai-summary" id="{{ $id }}">
+  <div class="ai-summary-header">
+    <span class="ai-summary-icon"></span>
+    <span class="ai-summary-label">AI 摘要</span>
+    <button class="ai-summary-toggle"
+            onclick="(function(btn){var box=btn.closest('.ai-summary');box.classList.toggle('collapsed');btn.setAttribute('aria-label',box.classList.contains('collapsed')?'展开摘要':'收起摘要');})(this)"
+            aria-label="收起摘要">
+      <span class="ai-summary-chevron"></span>
+    </button>
+  </div>
+  <div class="ai-summary-body">
+    {{- .Inner | markdownify -}}
+  </div>
+</div>

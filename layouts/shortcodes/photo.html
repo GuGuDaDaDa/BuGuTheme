@@ -1,0 +1,6 @@
+{{- /* Single entry for the photos shortcode. Used inside {{< photos >}}...{{< /photos >}}.
+  Usage: {{< photo src="img.jpg" caption="Optional caption" >}}
+*/ -}}
+{{- $src     := .Get "src"     | default (.Get 0) -}}
+{{- $caption := .Get "caption" | default (.Get 1) | default "" -}}
+{{- dict "src" $src "label" $caption | jsonify -}}

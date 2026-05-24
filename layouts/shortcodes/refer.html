@@ -1,0 +1,13 @@
+{{- $desc := .Get "desc" | default (.Get 0) -}}
+{{- $url  := .Get "url"  | default (.Get 1) -}}
+{{- $num  := .Get "num"  | default "" -}}
+<li class="ref-item">
+  <span class="ref-item-num">{{- $num -}}</span>
+  <div class="ref-item-content">
+    {{- if $url }}
+    <a class="ref-item-title" href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $desc }}</a>
+    {{- else }}
+    <span class="ref-item-title">{{ $desc }}</span>
+    {{- end }}
+  </div>
+</li>
