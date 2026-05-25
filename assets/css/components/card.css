@@ -294,6 +294,11 @@
     padding: 18px 18px 20px;
   }
 
+  .card-cover {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
   .card-title {
     font-size: 1.3rem;
   }

@@ -141,11 +141,19 @@
   padding: 4px 0;
 }
 
+.ios .featured-side-wrap {
+  width: auto;
+  flex-shrink: 1;
+  contain: none;
+  overflow: visible;
+}
+
 .ios .featured-side {
   flex-direction: row;
   gap: 10px;
   width: auto;
   height: auto;
+  overflow-y: visible;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;

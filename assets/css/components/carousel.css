@@ -12,7 +12,7 @@
 
 /* ---------- Main card ---------- */
 .featured-main {
-  flex: 1;
+  flex: 3;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -22,6 +22,7 @@
   background: var(--surface-alt);
   min-width: 0;
   aspect-ratio: 16 / 9;
+  max-height: 50vh;
 }
 
 .featured-main:hover {
@@ -129,15 +130,31 @@
 }
 
 /* ---------- Side items ---------- */
+.featured-side-wrap {
+  flex: 1;
+  min-width: 280px;
+  contain: size;
+  overflow: hidden;
+}
+
 .featured-side {
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 320px;
-  flex-shrink: 0;
+  padding: 0 4px;
+}
+
+.featured-side::-webkit-scrollbar {
+  display: none;
 }
 
 .featured-side-item {
+  flex: 0 0 calc((100% - 24px) / 3);
+  min-height: 0;
+  overflow: hidden;
   display: flex;
   gap: 14px;
   padding: 14px;
@@ -175,8 +192,8 @@
 }
 
 .featured-side-thumb {
-  width: 100px;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   flex-shrink: 0;
   filter: var(--img-filter);
@@ -258,11 +275,19 @@
     font-size: 1.15rem;
   }
 
+  .featured-side-wrap {
+    flex: auto;
+    min-width: 0;
+    contain: none;
+    overflow: visible;
+  }
+
   .featured-side {
     flex-direction: row;
     gap: 14px;
     width: auto;
     height: auto;
+    overflow-y: visible;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
@@ -333,11 +358,19 @@
     font-size: 1.15rem;
   }
 
+  .featured-side-wrap {
+    flex: auto;
+    min-width: 0;
+    contain: none;
+    overflow: visible;
+  }
+
   .featured-side {
     flex-direction: row;
     gap: 10px;
     width: auto;
     height: auto;
+    overflow-y: visible;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
@@ -350,9 +383,8 @@
 
   .featured-side-item {
     flex: 0 0 auto;
-    width: 48vw;
-    max-width: 200px;
-    min-width: 170px;
+    width: calc(100% * 2 / 3);
+    aspect-ratio: 5 / 2;
     padding: 12px;
     gap: 10px;
     scroll-snap-align: start;
@@ -365,15 +397,15 @@
   }
 
   .featured-side-thumb {
-    width: 68px;
-    height: 48px;
-    aspect-ratio: auto;
+    height: 80%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     flex-shrink: 0;
   }
 
   .featured-side-title {
     font-size: 0.8rem;
+    -webkit-line-clamp: 1;
   }
 }
 
@@ -387,8 +419,8 @@
     width: 340px;
   }
 
-  .featured-side {
-    width: 360px;
+  .featured-side-wrap {
+    min-width: 320px;
   }
 }
 

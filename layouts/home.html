@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{- /* Query featured posts for the featured layout */}}
   {{- $featured := where (where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true) "Layout" "ne" "about" }}
-  {{- $featured = sort $featured "Date" "desc" | first 5 }}
+  {{- $featured = sort $featured "Date" "desc" }}
   {{- $excludeSlugs := slice }}
   {{- range $featured }}
     {{- $excludeSlugs = $excludeSlugs | append (.Slug | default (.Title | urlize)) }}
@@ -33,6 +33,7 @@
       </div>
 
       {{- /* Side items */}}
+      <div class="featured-side-wrap">
       <div class="featured-side" id="featured-side">
         {{- range $i, $p := $featured }}
         {{- $sideCover := "" }}{{- $sideHasCover := false }}
@@ -61,6 +62,7 @@
           </div>
         </div>
         {{- end }}
+      </div>
       </div>
     </div>
   </section>
