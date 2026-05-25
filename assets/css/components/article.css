@@ -103,11 +103,9 @@
 
 .article-content p {
   margin-bottom: 1.4em;
-  text-indent: 2em;
 }
 
 .article-content p:first-of-type {
-  text-indent: 0;
   font-size: 1.12rem;
   color: var(--fg-strong);
   line-height: 1.85;
@@ -389,7 +387,6 @@
     line-height: 1.8;
     margin-bottom: 1.5rem;
     letter-spacing: 0.03em;
-    text-indent: 1.5em;
   }
 
   .article-content h2 {
