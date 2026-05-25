@@ -13,6 +13,8 @@
 
 .ios .article-content {
   font-size: 1.0625rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ios .article-content p {

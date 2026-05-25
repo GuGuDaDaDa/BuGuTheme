@@ -12,8 +12,8 @@ import { initPhotoStack } from './photo-stack.js';
 import { start, done } from './progress.js';
 import { initFootnotes } from './footnotes.js';
 
-// Detect iOS devices (iPhone, iPad, iPod) and tag <html> for mobile layout
-if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+// Detect iOS/Android devices and tag <html> for mobile layout
+if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || /Android/.test(navigator.userAgent)) {
   document.documentElement.classList.add('ios');
 }
 
