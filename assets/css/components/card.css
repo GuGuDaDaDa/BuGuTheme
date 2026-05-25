@@ -101,7 +101,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.66rem;
+  font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.13em;
@@ -127,7 +127,7 @@
 /* Title */
 .card-title {
   font-family: var(--font-serif);
-  font-size: 1.18rem;
+  font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.5;
   color: var(--fg-strong);
@@ -150,7 +150,7 @@
 
 /* Subtitle */
 .card-subtitle {
-  font-size: 0.82rem;
+  font-size: 1.05rem;
   color: var(--muted);
   line-height: 1.5;
   margin-bottom: 8px;
@@ -162,7 +162,7 @@
 
 /* Excerpt */
 .card-excerpt {
-  font-size: 0.86rem;
+  font-size: 1.1rem;
   color: var(--muted);
   line-height: 1.65;
   display: -webkit-box;
@@ -177,7 +177,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.73rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--muted-light);
   letter-spacing: 0.04em;
@@ -262,7 +262,7 @@
 @media (max-width: 720px) {
   .masonry-loading-inner {
     padding: 11px 28px;
-    font-size: 0.82rem;
+    font-size: 1.0rem;
   }
 }
 
@@ -300,23 +300,23 @@
   }
 
   .card-title {
-    font-size: 1.06rem;
+    font-size: 1.35rem;
   }
 
   .card-subtitle {
-    font-size: 0.82rem;
+    font-size: 1.0rem;
   }
 
   .card-excerpt {
-    font-size: 0.86rem;
+    font-size: 1.05rem;
   }
 
   .card-category {
-    font-size: 0.66rem;
+    font-size: 0.8rem;
   }
 
   .card-meta {
-    font-size: 0.73rem;
+    font-size: 0.88rem;
   }
 }
 

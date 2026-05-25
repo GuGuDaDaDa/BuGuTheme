@@ -87,11 +87,13 @@
 
 /* ---------- Search trigger ---------- */
 .search-trigger {
+  width: 34px;
+  height: 34px;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--muted);
-  padding: 4px;
+  padding: 0;
   display: grid;
   place-items: center;
   transition: color 0.2s;
@@ -177,6 +179,10 @@
 
   .header-right {
     gap: 14px;
+  }
+
+  .search-trigger {
+    order: -1;
   }
 
   .site-nav {

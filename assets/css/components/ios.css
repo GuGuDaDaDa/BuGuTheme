@@ -53,19 +53,19 @@
 
 /* ---------- Featured layout typography ---------- */
 .ios .featured-info-title {
-  font-size: 1.0rem;
+  font-size: 1.2rem;
 }
 
 .ios .featured-info-excerpt {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
 }
 
 .ios .featured-info-category {
-  font-size: 0.66rem;
+  font-size: 0.72rem;
 }
 
 .ios .featured-info-meta {
-  font-size: 0.76rem;
+  font-size: 0.82rem;
 }
 
 .ios .section-ornament {
@@ -87,27 +87,27 @@
 }
 
 .ios .card-title {
-  font-size: 1.06rem;
+  font-size: 1.35rem;
 }
 
 .ios .card-subtitle {
-  font-size: 0.82rem;
+  font-size: 1.0rem;
 }
 
 .ios .card-excerpt {
-  font-size: 0.86rem;
+  font-size: 1.05rem;
 }
 
 .ios .card-category {
-  font-size: 0.66rem;
+  font-size: 0.8rem;
 }
 
 .ios .card-meta {
-  font-size: 0.73rem;
+  font-size: 0.88rem;
 }
 
 .ios .masonry-loading-inner {
-  font-size: 0.82rem;
+  font-size: 1.0rem;
 }
 
 /* ---------- Footnotes ---------- */
@@ -213,7 +213,7 @@
 }
 
 .ios .featured-side-title {
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   -webkit-line-clamp: 1;
 }
 

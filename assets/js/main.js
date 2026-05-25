@@ -28,34 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initFootnotes();
   document.querySelectorAll('.photo-stack').forEach(el => initPhotoStack(el));
 
-  /* ---------- Theme toggle ---------- */
-  /** @type {HTMLButtonElement|null} */
-  const themeToggle = document.getElementById('theme-toggle');
+  /* ---------- Theme (follow system preference) ---------- */
   /** @type {HTMLElement} */
   const html = document.documentElement;
 
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
   /**
-   * Apply a theme to the document and persist.
-   * @param {'light'|'dark'} theme
+   * Apply system color scheme.
    */
-  function setTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    try { localStorage.setItem('bugublog-theme', theme); } catch (_) {}
+  function applySystemTheme() {
+    html.setAttribute('data-theme', systemDark.matches ? 'dark' : 'light');
   }
 
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      setTheme(next);
-    });
-  }
-
-  // Cross-tab sync
-  window.addEventListener('storage', (e) => {
-    if (e.key === 'bugublog-theme' && (e.newValue === 'dark' || e.newValue === 'light')) {
-      setTheme(e.newValue);
-    }
-  });
+  applySystemTheme();
+  systemDark.addEventListener('change', applySystemTheme);
 
   /* ---------- Hamburger menu ---------- */
   /** @type {HTMLButtonElement|null} */
