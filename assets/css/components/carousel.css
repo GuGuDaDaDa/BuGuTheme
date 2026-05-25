@@ -13,6 +13,7 @@
 /* ---------- Main card ---------- */
 .featured-main {
   flex: 3;
+  margin-left: auto;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -22,7 +23,8 @@
   background: var(--surface-alt);
   min-width: 0;
   aspect-ratio: 16 / 9;
-  max-height: 50vh;
+  max-width: 96vh;
+  max-height: 54vh;
 }
 
 .featured-main:hover {
@@ -133,6 +135,7 @@
 .featured-side-wrap {
   flex: 1;
   min-width: 280px;
+  max-width: calc(48vh );
   contain: size;
   overflow: hidden;
 }
@@ -259,6 +262,7 @@
 
   .featured-main {
     flex: auto;
+    margin-left: 0;
     aspect-ratio: 16 / 9;
     min-height: 260px;
     height: auto;
@@ -278,6 +282,7 @@
   .featured-side-wrap {
     flex: auto;
     min-width: 0;
+    max-width: none;
     contain: none;
     overflow: visible;
   }
@@ -342,6 +347,7 @@
 
   .featured-main {
     flex: auto;
+    margin-left: 0;
     aspect-ratio: 16 / 9;
     min-height: 200px;
     height: auto;
@@ -361,6 +367,7 @@
   .featured-side-wrap {
     flex: auto;
     min-width: 0;
+    max-width: none;
     contain: none;
     overflow: visible;
   }
