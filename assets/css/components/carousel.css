@@ -361,7 +361,7 @@
   }
 
   .featured-info-title {
-    font-size: 1.15rem;
+    font-size: 1.0rem;
   }
 
   .featured-side-wrap {
@@ -411,7 +411,7 @@
   }
 
   .featured-side-title {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     -webkit-line-clamp: 1;
   }
 }
@@ -454,7 +454,7 @@
 
 @media (max-width: 720px) {
   .section-ornament {
-    font-size: 0.8rem;
+    font-size: 0.64rem;
     gap: 10px;
     margin-top: 12px;
     margin-bottom: 22px;

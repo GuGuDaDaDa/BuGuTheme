@@ -3,50 +3,71 @@
    Applied via .ios class on <html> (set by main.js)
    ============================================================ */
 
-/* ---------- Typography (mirrors ≤768px article + ≤720px home) ---------- */
+/* ---------- Typography (mirrors mobile breakpoints) ---------- */
 .ios .article-title {
-  font-size: 1.8rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
 }
 
 .ios .article-content {
-  font-size: 1.25rem;
+  font-size: 1.0625rem;
 }
 
 .ios .article-content p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.03em;
   text-indent: 1.5em;
 }
 
 .ios .article-content h2 {
-  font-size: 1.55rem;
+  font-size: 1.625rem;
+  line-height: 1.4;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 .ios .article-content h3 {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
 }
 
 .ios .article-content blockquote {
-  font-size: 1.15rem;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.ios .article-meta {
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
 }
 
 /* ---------- Featured layout typography ---------- */
 .ios .featured-info-title {
-  font-size: 1.15rem;
+  font-size: 1.0rem;
 }
 
 .ios .featured-info-excerpt {
-  font-size: 0.9rem;
+  font-size: 0.82rem;
 }
 
 .ios .featured-info-category {
-  font-size: 0.72rem;
+  font-size: 0.66rem;
 }
 
 .ios .featured-info-meta {
-  font-size: 0.84rem;
+  font-size: 0.76rem;
 }
 
 .ios .section-ornament {
-  font-size: 0.8rem;
+  font-size: 0.64rem;
 }
 
 /* ---------- Cards ---------- */
@@ -64,27 +85,27 @@
 }
 
 .ios .card-title {
-  font-size: 1.3rem;
+  font-size: 1.06rem;
 }
 
 .ios .card-subtitle {
-  font-size: 1.0rem;
+  font-size: 0.82rem;
 }
 
 .ios .card-excerpt {
-  font-size: 1.05rem;
+  font-size: 0.86rem;
 }
 
 .ios .card-category {
-  font-size: 0.8rem;
+  font-size: 0.66rem;
 }
 
 .ios .card-meta {
-  font-size: 0.88rem;
+  font-size: 0.73rem;
 }
 
 .ios .masonry-loading-inner {
-  font-size: 1.0rem;
+  font-size: 0.82rem;
 }
 
 /* ---------- Footnotes ---------- */
@@ -129,6 +150,8 @@
 
 .ios .featured-main {
   flex: auto;
+  margin-left: 0;
+  max-width: none;
   aspect-ratio: 16 / 9;
   min-height: 200px;
   height: auto;
@@ -142,8 +165,9 @@
 }
 
 .ios .featured-side-wrap {
-  width: auto;
-  flex-shrink: 1;
+  flex: auto;
+  min-width: 0;
+  max-width: none;
   contain: none;
   overflow: visible;
 }
@@ -166,9 +190,8 @@
 
 .ios .featured-side-item {
   flex: 0 0 auto;
-  width: 48vw;
-  max-width: 200px;
-  min-width: 170px;
+  width: calc(100% * 2 / 3);
+  aspect-ratio: 5 / 2;
   padding: 12px;
   gap: 10px;
   scroll-snap-align: start;
@@ -181,15 +204,15 @@
 }
 
 .ios .featured-side-thumb {
-  width: 68px;
-  height: 48px;
-  aspect-ratio: auto;
+  height: 80%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   flex-shrink: 0;
 }
 
 .ios .featured-side-title {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  -webkit-line-clamp: 1;
 }
 
 /* ---------- Card corner accents ---------- */

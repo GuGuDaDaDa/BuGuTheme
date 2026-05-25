@@ -262,7 +262,7 @@
 @media (max-width: 720px) {
   .masonry-loading-inner {
     padding: 11px 28px;
-    font-size: 1.0rem;
+    font-size: 0.82rem;
   }
 }
 
@@ -300,23 +300,23 @@
   }
 
   .card-title {
-    font-size: 1.3rem;
+    font-size: 1.06rem;
   }
 
   .card-subtitle {
-    font-size: 1.0rem;
+    font-size: 0.82rem;
   }
 
   .card-excerpt {
-    font-size: 1.05rem;
+    font-size: 0.86rem;
   }
 
   .card-category {
-    font-size: 0.8rem;
+    font-size: 0.66rem;
   }
 
   .card-meta {
-    font-size: 0.88rem;
+    font-size: 0.73rem;
   }
 }
 

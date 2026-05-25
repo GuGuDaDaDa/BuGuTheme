@@ -200,7 +200,7 @@
 
   .site-nav a {
     padding: 10px 20px;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
   }
 
   .site-nav a.active::after {
