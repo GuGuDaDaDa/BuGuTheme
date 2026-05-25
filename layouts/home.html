@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{- /* Query featured posts for carousel */}}
+  {{- /* Query featured posts for the featured layout */}}
   {{- $featured := where (where (where site.RegularPages "Params.featured" true) "Params.draft" "!=" true) "Layout" "ne" "about" }}
   {{- $featured = sort $featured "Date" "desc" | first 5 }}
   {{- $excludeSlugs := slice }}
@@ -8,39 +8,65 @@
   {{- end }}
 
   {{- if $featured }}
-  <section class="featured-carousel" id="featured-carousel" aria-label="编辑推荐">
-    <div class="carousel-accent"></div>
-    <div class="carousel-track" id="carousel-track">
-      {{- range $featured }}
-      <div class="carousel-slide" data-article-url="{{ .RelPermalink }}">
-        {{- $coverURL := "" }}{{- $hasCover := false }}
-        {{- if .Params.cover }}
-          {{- $img := .Resources.GetMatch .Params.cover }}
-          {{- if $img }}{{- $coverURL = $img.RelPermalink }}{{- $hasCover = true }}
-          {{- else }}{{- $coverURL = .Params.cover | absURL }}{{- $hasCover = true }}
+  {{- $first := index $featured 0 }}
+  <section class="featured-section">
+    <div class="featured-layout" id="featured-layout">
+      {{- /* Main card — shows first featured post */}}
+      {{- $mainCover := "" }}{{- $mainHasCover := false }}
+      {{- if $first.Params.cover }}
+        {{- $img := $first.Resources.GetMatch $first.Params.cover }}
+        {{- if $img }}{{- $mainCover = $img.RelPermalink }}{{- $mainHasCover = true }}
+        {{- else }}{{- $mainCover = $first.Params.cover | absURL }}{{- $mainHasCover = true }}
+        {{- end }}
+      {{- end }}
+      <div class="featured-main" id="featured-main" data-article-url="{{ $first.RelPermalink }}">
+        {{- if $mainHasCover }}<img class="featured-main-bg" id="featured-main-bg" src="{{ $mainCover }}" alt="{{ $first.Title }}" />
+        {{- else }}<div class="featured-main-bg featured-main-bg-fallback" id="featured-main-bg"></div>{{- end }}
+      </div>
+
+      {{- /* Info panel */}}
+      <div class="featured-info" id="featured-info">
+        {{- range $first.Params.categories | default slice | first 1 }}<span class="featured-info-category" id="featured-info-category">{{ . }}</span>{{- end }}
+        <h2 class="featured-info-title" id="featured-info-title" data-article-url="{{ $first.RelPermalink }}">{{ $first.Title }}</h2>
+        <p class="featured-info-excerpt" id="featured-info-excerpt">{{ $first.Params.subtitle | default $first.Params.description | truncate 120 }}</p>
+        <div class="featured-info-meta" id="featured-info-meta"><span>{{ $first.Date | time.Format "2006-01-02" }}</span><span class="dot"></span><span>{{ $first.ReadingTime }} 分钟</span></div>
+      </div>
+
+      {{- /* Side items */}}
+      <div class="featured-side" id="featured-side">
+        {{- range $i, $p := $featured }}
+        {{- $sideCover := "" }}{{- $sideHasCover := false }}
+        {{- if $p.Params.cover }}
+          {{- $img := $p.Resources.GetMatch $p.Params.cover }}
+          {{- if $img }}{{- $sideCover = $img.RelPermalink }}{{- $sideHasCover = true }}
+          {{- else }}{{- $sideCover = $p.Params.cover | absURL }}{{- $sideHasCover = true }}
           {{- end }}
         {{- end }}
-        {{- if $hasCover }}<img class="carousel-bg" src="{{ $coverURL }}" alt="{{ .Title }}" />
-        {{- else }}<div class="carousel-bg carousel-bg-fallback"></div>{{- end }}
-        <div class="carousel-overlay"></div>
-        <div class="carousel-content">
-          {{- range .Params.categories | default slice | first 3 }}<span class="carousel-category">{{ . }}</span>{{- end }}
-          <h2 class="carousel-title">{{ .Title }}</h2>
-          {{- with .Params.subtitle | default .Params.description }}
-          <p class="carousel-subtitle">{{ . }}</p>
-          {{- end }}
-          <div class="carousel-meta"><span>{{ .Date | time.Format "2006-01-02" }}</span><span class="dot"></span><span>{{ .ReadingTime }} 分钟</span></div>
+        {{- $excerpt := $p.Params.subtitle | default $p.Params.description | plainify | truncate 120 }}
+        <div class="featured-side-item{{ if eq $i 0 }} active{{ end }}"
+             data-index="{{ $i }}"
+             data-article-url="{{ $p.RelPermalink }}"
+             data-cover="{{ $sideCover }}"
+             data-category="{{ delimit ($p.Params.categories | default slice | first 1) "" }}"
+             data-title="{{ $p.Title }}"
+             data-date="{{ $p.Date | time.Format "2006-01-02" }}"
+             data-readtime="{{ $p.ReadingTime }} 分钟"
+             data-excerpt="{{ $excerpt }}">
+          {{- if $sideHasCover }}<img class="featured-side-thumb" src="{{ $sideCover }}" alt="{{ $p.Title }}" loading="eager" />
+          {{- else }}<div class="featured-side-thumb featured-side-thumb-fallback"></div>{{- end }}
+          <div class="featured-side-info">
+            {{- range $p.Params.categories | default slice | first 1 }}<span class="featured-side-cat">{{ . }}</span>{{- end }}
+            <h3 class="featured-side-title">{{ $p.Title }}</h3>
+            <span class="featured-side-date">{{ $p.Date | time.Format "2006-01-02" }}</span>
+          </div>
         </div>
+        {{- end }}
       </div>
-      {{- end }}
     </div>
-    <button class="carousel-btn prev" id="carousel-prev" aria-label="上一张">&#8249;</button>
-    <button class="carousel-btn next" id="carousel-next" aria-label="下一张">&#8250;</button>
-    <div class="carousel-dots" id="carousel-dots"></div>
   </section>
   {{- end }}
 
-  {{- /* Query non-draft, non-carousel articles for masonry — exclude about/friends pages */}}
+  {{- /* Query non-draft, non-featured articles for masonry — exclude about/friends pages */}}
   {{- $allPosts := where (where (where site.RegularPages "Params.draft" "!=" true) "Layout" "ne" "about") "Layout" "ne" "friends" }}
   {{- $masonryPosts := slice }}
   {{- range $allPosts }}

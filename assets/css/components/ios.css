@@ -28,21 +28,21 @@
   font-size: 1.15rem;
 }
 
-/* ---------- Carousel ---------- */
-.ios .carousel-title {
-  font-size: 1.75rem;
+/* ---------- Featured layout typography ---------- */
+.ios .featured-info-title {
+  font-size: 1.15rem;
 }
 
-.ios .carousel-subtitle {
-  font-size: 1.0rem;
+.ios .featured-info-excerpt {
+  font-size: 0.9rem;
 }
 
-.ios .carousel-category {
-  font-size: 0.8rem;
+.ios .featured-info-category {
+  font-size: 0.72rem;
 }
 
-.ios .carousel-meta {
-  font-size: 0.88rem;
+.ios .featured-info-meta {
+  font-size: 0.84rem;
 }
 
 .ios .section-ornament {
@@ -114,27 +114,74 @@
   bottom: 6px;
 }
 
-/* ---------- Carousel layout ---------- */
-.ios .featured-carousel {
-  aspect-ratio: 16 / 9;
-  min-height: 220px;
-  margin-bottom: 32px;
+/* ---------- Featured layout (force mobile) ---------- */
+.ios .featured-section {
+  margin: 28px 0 32px;
 }
 
-.ios .carousel-content {
+.ios .featured-layout {
+  flex-direction: column;
+  gap: 16px;
   padding: 0 14px;
-  bottom: 8%;
+  height: auto;
+  min-height: auto;
 }
 
-.ios .carousel-btn {
+.ios .featured-main {
+  flex: auto;
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
+  height: auto;
+  max-height: 300px;
+}
+
+.ios .featured-info {
+  width: auto;
+  flex-shrink: 1;
+  padding: 4px 0;
+}
+
+.ios .featured-side {
+  flex-direction: row;
+  gap: 10px;
+  width: auto;
+  height: auto;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.ios .featured-side::-webkit-scrollbar {
   display: none;
 }
 
-.ios .carousel-accent {
-  width: 30px;
-  height: 30px;
-  top: 16px;
-  right: 18px;
+.ios .featured-side-item {
+  flex: 0 0 auto;
+  width: 48vw;
+  max-width: 200px;
+  min-width: 170px;
+  padding: 12px;
+  gap: 10px;
+  scroll-snap-align: start;
+  align-items: center;
+}
+
+.ios .featured-side-item:hover,
+.ios .featured-side-item.active {
+  transform: none;
+}
+
+.ios .featured-side-thumb {
+  width: 68px;
+  height: 48px;
+  aspect-ratio: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.ios .featured-side-title {
+  font-size: 0.8rem;
 }
 
 /* ---------- Card corner accents ---------- */
