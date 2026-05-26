@@ -122,6 +122,125 @@
   opacity: 0;
 }
 
+/* ---------- Fold (collapsible details) ---------- */
+.fold {
+  margin: 26px 0 20px;
+  background: var(--surface-alt);
+  border: 1px solid var(--hairline);
+  overflow: visible;
+  position: relative;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.fold::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 20px; height: 20px;
+  border-top: 2px solid var(--accent-soft);
+  border-left: 2px solid var(--accent-soft);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: all 0.35s ease;
+}
+.fold:hover::before { opacity: 1; width: 24px; height: 24px; }
+
+.fold::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 20px; height: 20px;
+  border-bottom: 2px solid var(--accent-soft);
+  border-right: 2px solid var(--accent-soft);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: all 0.35s ease;
+}
+.fold:hover::after { opacity: 1; width: 24px; height: 24px; }
+
+.fold-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  user-select: none;
+}
+
+.fold-icon {
+  width: 8px; height: 8px;
+  background: var(--accent-soft);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.fold:hover .fold-icon { opacity: 1; }
+
+.fold-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--fg-strong);
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+}
+
+.fold-toggle {
+  margin-left: auto;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.25s;
+  color: var(--muted-light);
+  flex-shrink: 0;
+}
+.fold-toggle:hover {
+  border-color: var(--accent-soft);
+  color: var(--accent);
+  background: var(--surface);
+}
+.fold-toggle:active { transform: scale(0.94); }
+
+.fold-chevron {
+  display: block;
+  width: 8px; height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-135deg);
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  margin-top: 2px;
+}
+.fold.collapsed .fold-chevron {
+  transform: rotate(45deg);
+  margin-top: -3px;
+}
+
+.fold-body {
+  padding: 0 20px 20px;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--fg-soft);
+  max-height: 1200px;
+  overflow: hidden;
+  transition: max-height 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
+              opacity    0.3s ease,
+              padding    0.3s ease;
+}
+.fold-body p { margin-bottom: 0.7em; }
+.fold-body p:last-child { margin-bottom: 0; }
+
+.fold.collapsed .fold-body {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+}
+
 /* ---------- AI Warning (disclosure) ---------- */
 .ai-disclosure {
   display: flex;
@@ -233,6 +352,13 @@
   .ai-summary:hover::after { width: 18px; height: 18px; }
   .ai-summary-header    { padding: 14px 16px; }
   .ai-summary-body      { padding: 0 16px 16px; font-size: 0.85rem; }
+
+  .fold::before,
+  .fold::after          { width: 14px; height: 14px; border-width: 1.5px; }
+  .fold:hover::before,
+  .fold:hover::after    { width: 18px; height: 18px; }
+  .fold-header          { padding: 14px 16px; }
+  .fold-body            { padding: 0 16px 16px; font-size: 0.85rem; }
 
   .ai-disclosure        { font-size: 0.74rem; padding: 12px 16px; }
 

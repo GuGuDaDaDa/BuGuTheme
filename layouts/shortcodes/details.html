@@ -1,0 +1,15 @@
+{{- $summary := .Get 0 | default (.Get "summary") | default "展开" -}}
+<div class="fold">
+  <div class="fold-header">
+    <span class="fold-icon"></span>
+    <span class="fold-label">{{ $summary }}</span>
+    <button class="fold-toggle"
+            onclick="(function(btn){var box=btn.closest('.fold');box.classList.toggle('collapsed');btn.setAttribute('aria-label',box.classList.contains('collapsed')?'展开':'收起');})(this)"
+            aria-label="收起">
+      <span class="fold-chevron"></span>
+    </button>
+  </div>
+  <div class="fold-body">
+    {{- .Inner | markdownify -}}
+  </div>
+</div>

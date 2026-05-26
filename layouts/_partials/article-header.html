@@ -3,11 +3,9 @@
 
 {{- with .Params.cover }}
   {{- $img := $.Resources.GetMatch . }}
-  {{- if $img }}
+  {{- with $img }}
     {{- $cover := $img.RelPermalink }}
     <img class="article-cover" src="{{ $cover }}" alt="{{ $.Title }}" />
-  {{- else }}
-    <img class="article-cover" src="{{ . | absURL }}" alt="{{ $.Title }}" />
   {{- end }}
 {{- end }}
 
