@@ -77,6 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- Fold header keyboard ---------- */
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const header = /** @type {HTMLElement|null} */ (e.target.closest('.fold-header'));
+    if (!header) return;
+    e.preventDefault();
+    header.click();
+  });
+
   /* ---------- Spoiler click-to-reveal ---------- */
   document.addEventListener('click', (e) => {
     const spoiler = /** @type {HTMLElement|null} */ (e.target.closest('.spoiler'));

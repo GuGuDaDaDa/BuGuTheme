@@ -1,13 +1,14 @@
-{{- $summary := .Get 0 | default (.Get "summary") | default "展开" -}}
-<div class="fold">
-  <div class="fold-header">
+{{- $summary := .Get 0 | default (.Get "summary") | default "详情" -}}
+<div class="fold collapsed">
+  <div class="fold-header"
+       onclick="(function(el){var box=el.closest('.fold');var collapsed=box.classList.toggle('collapsed');box.querySelector('.fold-toggle').setAttribute('aria-label',collapsed?'展开':'收起');})(this)"
+       role="button" tabindex="0"
+       aria-label="展开">
     <span class="fold-icon"></span>
     <span class="fold-label">{{ $summary }}</span>
-    <button class="fold-toggle"
-            onclick="(function(btn){var box=btn.closest('.fold');box.classList.toggle('collapsed');btn.setAttribute('aria-label',box.classList.contains('collapsed')?'展开':'收起');})(this)"
-            aria-label="收起">
+    <span class="fold-toggle" aria-hidden="true">
       <span class="fold-chevron"></span>
-    </button>
+    </span>
   </div>
   <div class="fold-body">
     {{- .Inner | markdownify -}}

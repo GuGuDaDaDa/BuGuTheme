@@ -166,7 +166,11 @@
   gap: 8px;
   padding: 16px 20px;
   user-select: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
+.fold-header:hover { background: var(--surface-alpha); }
+.fold-header:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: -2px; }
 
 .fold-icon {
   width: 8px; height: 8px;
@@ -190,21 +194,12 @@
   margin-left: auto;
   width: 26px; height: 26px;
   border-radius: 50%;
-  border: 1px solid transparent;
-  background: transparent;
-  cursor: pointer;
   display: grid;
   place-items: center;
   transition: all 0.25s;
   color: var(--muted-light);
   flex-shrink: 0;
 }
-.fold-toggle:hover {
-  border-color: var(--accent-soft);
-  color: var(--accent);
-  background: var(--surface);
-}
-.fold-toggle:active { transform: scale(0.94); }
 
 .fold-chevron {
   display: block;
