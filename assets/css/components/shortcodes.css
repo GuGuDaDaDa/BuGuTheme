@@ -321,10 +321,10 @@
 
 /* ---------- Spoiler ---------- */
 .spoiler {
-  background: var(--fg-strong);
-  color: var(--fg-strong);
+  background: #000;
+  color: #000;
   padding: 0.1em 0.25em;
-  border-radius: 3px;
+  border-radius: 0;
   cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease;
   outline: none;
