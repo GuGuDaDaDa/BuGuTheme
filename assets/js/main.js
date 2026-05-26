@@ -77,6 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- Spoiler click-to-reveal ---------- */
+  document.addEventListener('click', (e) => {
+    const spoiler = /** @type {HTMLElement|null} */ (e.target.closest('.spoiler'));
+    if (!spoiler) return;
+    spoiler.classList.toggle('revealed');
+    spoiler.setAttribute('aria-expanded', spoiler.classList.contains('revealed') ? 'true' : 'false');
+  });
+
   /* ---------- Card click delegation ---------- */
   document.addEventListener('click', (e) => {
     const card = /** @type {HTMLElement|null} */ (e.target.closest('.card'));

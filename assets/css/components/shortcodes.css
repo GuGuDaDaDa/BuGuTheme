@@ -205,6 +205,24 @@
 }
 .ai-disclosure-close:active { transform: scale(0.92); }
 
+/* ---------- Spoiler ---------- */
+.spoiler {
+  background: var(--fg-strong);
+  color: var(--fg-strong);
+  padding: 0.1em 0.25em;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+  outline: none;
+}
+
+.spoiler:hover,
+.spoiler:focus-visible,
+.spoiler.revealed {
+  background: transparent;
+  color: inherit;
+}
+
 /* ---------- References — now handled by footnotes.css ---------- */
 
 /* ---------- Responsive ---------- */
