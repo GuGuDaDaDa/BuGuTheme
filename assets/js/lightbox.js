@@ -292,18 +292,23 @@ class Lightbox {
    Initialisation
    ================================================================ */
 
-/** @type {LazyLoader|null} */
-let lazyLoader = null;
 /** @type {Lightbox|null} */
 let lightbox = null;
 
 /**
- * Initialise lazy loading and lightbox.
+ * Initialise the lightbox (one-time, persistent DOM elements).
  * Exported for main.js.
  */
 export function initLightbox() {
-  lazyLoader = new LazyLoader();
-  lazyLoader.init();
-
   lightbox = new Lightbox();
+}
+
+/**
+ * Initialise lazy loading for images in the current page content.
+ * Call after each PJAX content swap.
+ * Exported for main.js reinit.
+ */
+export function initLazyLoader() {
+  const loader = new LazyLoader();
+  loader.init();
 }

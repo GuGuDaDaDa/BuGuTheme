@@ -17,7 +17,9 @@ function renderCard(d) {
   const article = document.createElement('article');
   article.className = 'card card-appear';
   article.setAttribute('data-article-slug', d.slug);
-  article.addEventListener('click', () => { window.location.href = d.permalink; });
+  article.addEventListener('click', () => {
+    if (window.pjaxNavigate) { window.pjaxNavigate(d.permalink); } else { window.location.href = d.permalink; }
+  });
 
   if (d.cover) {
     const img = document.createElement('img');

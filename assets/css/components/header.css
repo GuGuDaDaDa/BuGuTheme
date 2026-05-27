@@ -3,7 +3,14 @@
   width: 100%;
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
-  transition: border-color 0.5s ease, background 0.5s ease;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
+}
+
+.site-header.headroom-hidden {
+  transform: translateY(-100%);
 }
 
 /* ---------- Header accent bar ---------- */
@@ -22,7 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 42px 0 20px;
+  padding: 12px 0 12px;
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -170,7 +177,7 @@
   }
 
   .site-header-inner {
-    padding: 28px 0 14px;
+    padding: 8px 0 8px;
   }
 
   .site-brand {

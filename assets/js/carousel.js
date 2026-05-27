@@ -103,13 +103,17 @@ export function initCarousel() {
   /* ---------- Main card click → navigate to article ---------- */
   main.addEventListener('click', function () {
     var url = main.getAttribute('data-article-url');
-    if (url) window.location.href = url;
+    if (url) {
+      if (window.pjaxNavigate) { window.pjaxNavigate(url); } else { window.location.href = url; }
+    }
   });
 
   /* ---------- Info title click → navigate to article ---------- */
   infoTitle.addEventListener('click', function (e) {
     e.stopPropagation();
     var url = infoTitle.getAttribute('data-article-url');
-    if (url) window.location.href = url;
+    if (url) {
+      if (window.pjaxNavigate) { window.pjaxNavigate(url); } else { window.location.href = url; }
+    }
   });
 }

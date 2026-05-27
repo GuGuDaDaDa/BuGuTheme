@@ -4,54 +4,15 @@
 {{- $category := site.Params.giscusCategory | default "" }}
 {{- $categoryId := site.Params.giscusCategoryId | default "" }}
 {{- if and (eq .Kind "page") (ne $repo "") (ne $repoId "") (ne $category "") (ne $categoryId "") }}
-<div class="giscus"></div>
-<script>
-  (function () {
-    var container = document.querySelector('.giscus');
-    if (!container) return;
-
-    function giscusTheme() {
-      var t = document.documentElement.getAttribute('data-theme');
-      return t === 'dark' ? 'dark' : 'light';
-    }
-
-    var loaded = false;
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !loaded) {
-          loaded = true;
-          observer.disconnect();
-          var script = document.createElement('script');
-          script.src = 'https://giscus.app/client.js';
-          script.setAttribute('data-repo', '{{ $repo }}');
-          script.setAttribute('data-repo-id', '{{ $repoId }}');
-          script.setAttribute('data-category', '{{ $category }}');
-          script.setAttribute('data-category-id', '{{ $categoryId }}');
-          script.setAttribute('data-mapping', '{{ site.Params.giscusMapping | default "pathname" }}');
-          script.setAttribute('data-strict', '0');
-          script.setAttribute('data-reactions-enabled', '{{ site.Params.giscusReactionsEnabled | default "0" }}');
-          script.setAttribute('data-emit-metadata', '0');
-          script.setAttribute('data-input-position', 'top');
-          script.setAttribute('data-loading', 'lazy');
-          script.setAttribute('data-theme', giscusTheme());
-          script.setAttribute('data-lang', '{{ site.Params.giscusLang | default site.Language.Lang | default "zh-CN" }}');
-          script.setAttribute('crossorigin', 'anonymous');
-          script.async = true;
-          container.appendChild(script);
-        }
-      });
-    }, { rootMargin: '200px' });
-    observer.observe(container);
-
-    var themeObserver = new MutationObserver(function () {
-      var iframe = container.querySelector('iframe');
-      if (iframe && iframe.contentWindow) {
-        iframe.contentWindow.postMessage({
-          giscus: { setConfig: { theme: giscusTheme() } }
-        }, 'https://giscus.app');
-      }
-    });
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  })();
-</script>
+<div class="giscus"
+  data-repo="{{ $repo }}"
+  data-repo-id="{{ $repoId }}"
+  data-category="{{ $category }}"
+  data-category-id="{{ $categoryId }}"
+  data-mapping="{{ site.Params.giscusMapping | default "pathname" }}"
+  data-reactions-enabled="{{ site.Params.giscusReactionsEnabled | default "0" }}"
+  data-input-position="top"
+  data-lang="{{ site.Params.giscusLang | default site.Language.Lang | default "zh-CN" }}"
+  data-theme-sync="true"
+></div>
 {{- end }}
