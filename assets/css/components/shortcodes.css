@@ -330,11 +330,22 @@
   outline: none;
 }
 
-.spoiler:hover,
-.spoiler:focus-visible,
-.spoiler.revealed {
-  background: transparent;
-  color: inherit;
+/* Desktop: hover to reveal, no toggle needed */
+@media (hover: hover) {
+  .spoiler:hover,
+  .spoiler:focus-visible {
+    background: transparent;
+    color: inherit;
+  }
+}
+
+/* Mobile: click to toggle */
+@media (hover: none) {
+  .spoiler:focus-visible,
+  .spoiler.revealed {
+    background: transparent;
+    color: inherit;
+  }
 }
 
 /* ---------- References — now handled by footnotes.css ---------- */
