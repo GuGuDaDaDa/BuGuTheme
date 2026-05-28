@@ -20,13 +20,28 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'Mac
 
 start();
 
+let _giscusIntObserver = null;
+let _giscusThemeObserver = null;
+
 /**
  * Giscus comment system — lazy-load via IntersectionObserver.
  * Reads config from data attributes on .giscus container.
+ * Safe to call multiple times (e.g. after PJAX content swaps) —
+ * old observers are disconnected before new ones are created.
  */
 function initGiscus() {
   const container = document.querySelector('.giscus');
   if (!container || container.dataset.giscusReady) return;
+
+  // Disconnect observers from a previous Giscus instance before re-initializing
+  if (_giscusIntObserver) {
+    _giscusIntObserver.disconnect();
+    _giscusIntObserver = null;
+  }
+  if (_giscusThemeObserver) {
+    _giscusThemeObserver.disconnect();
+    _giscusThemeObserver = null;
+  }
 
   function giscusTheme() {
     const t = document.documentElement.getAttribute('data-theme');
@@ -34,11 +49,11 @@ function initGiscus() {
   }
 
   let loaded = false;
-  const observer = new IntersectionObserver(function (entries) {
+  _giscusIntObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting && !loaded) {
         loaded = true;
-        observer.disconnect();
+        _giscusIntObserver.disconnect();
         const script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';
         script.setAttribute('data-repo', container.dataset.repo);
@@ -59,18 +74,19 @@ function initGiscus() {
       }
     });
   }, { rootMargin: '200px' });
-  observer.observe(container);
+  _giscusIntObserver.observe(container);
 
-  // Theme sync via MutationObserver
-  const themeObserver = new MutationObserver(function () {
-    const iframe = container.querySelector('iframe');
+  // Theme sync via MutationObserver — queries the live DOM so it
+  // always targets the current .giscus iframe, not a stale one.
+  _giscusThemeObserver = new MutationObserver(function () {
+    const iframe = document.querySelector('.giscus iframe');
     if (iframe && iframe.contentWindow) {
       iframe.contentWindow.postMessage({
         giscus: { setConfig: { theme: giscusTheme() } }
       }, 'https://giscus.app');
     }
   });
-  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  _giscusThemeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   container.dataset.giscusReady = 'true';
 }

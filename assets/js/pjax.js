@@ -79,10 +79,30 @@ async function navigate(url, push) {
 
     if (!newMain) throw new Error('No <main> in response');
 
+    // Preserve Giscus iframe across the swap so we can update its
+    // discussion term via postMessage instead of re-injecting client.js
+    // (which would trigger frame-ancestors CSP violations on re-init).
+    const currentMain = document.querySelector('main');
+    const oldGiscus = currentMain.querySelector('.giscus');
+    const giscusIframe = oldGiscus ? oldGiscus.querySelector('iframe') : null;
+    if (giscusIframe) giscusIframe.remove();
+
     // Swap content
     document.title = newTitle;
-    const currentMain = document.querySelector('main');
     currentMain.innerHTML = newMain.innerHTML;
+
+    // If we had a Giscus iframe and the new page also has a .giscus container,
+    // move the old iframe into it and update the discussion term — no new client.js needed.
+    if (giscusIframe) {
+      const newGiscus = currentMain.querySelector('.giscus');
+      if (newGiscus) {
+        newGiscus.appendChild(giscusIframe);
+        newGiscus.dataset.giscusReady = 'true';
+        giscusIframe.contentWindow.postMessage({
+          giscus: { setConfig: { term: location.pathname } }
+        }, 'https://giscus.app');
+      }
+    }
 
     // Update URL
     if (push) {
