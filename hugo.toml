@@ -59,10 +59,6 @@ defaultContentLanguage = 'zh-cn'
 
     [languages.'zh-cn'.params]
       googleAnalytics = ""
-      giscusRepo = ""
-      giscusRepoId = ""
-      giscusCategory = ""
-      giscusCategoryId = ""
       footerText = 'BuGu · 海雾深处，字字为灯'
       copyright = 'BuGuBuGu'
       themeName = 'BuGuTheme'

@@ -79,10 +79,6 @@ async function navigate(url, push) {
 
     if (!newMain) throw new Error('No <main> in response');
 
-    // Read the new page kind before swapping so we know whether to show/hide Giscus.
-    // Giscus lives outside <main> (in baseof.html), so PJAX never touches it.
-    const newPageKind = doc.body ? doc.body.dataset.pageKind : '';
-
     // Swap content
     document.title = newTitle;
     const currentMain = document.querySelector('main');
@@ -96,11 +92,6 @@ async function navigate(url, push) {
     // Re-init page-specific components
     if (typeof window.reinit === 'function') {
       window.reinit();
-    }
-
-    // Show/hide Giscus and update discussion term if this is an article page
-    if (typeof window.updateGiscus === 'function') {
-      window.updateGiscus(newPageKind === 'page');
     }
 
     syncNavActive();

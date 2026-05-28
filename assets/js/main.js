@@ -20,81 +20,9 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'Mac
 
 start();
 
-let _giscusIntObserver = null;
-let _giscusThemeObserver = null;
-
-/**
- * Giscus comment system — lazy-load via IntersectionObserver.
- * Reads config from data attributes on .giscus container.
- * Safe to call multiple times (e.g. after PJAX content swaps) —
- * old observers are disconnected before new ones are created.
- */
-function initGiscus() {
-  const container = document.querySelector('.giscus');
-  if (!container || container.dataset.giscusReady) return;
-
-  // Disconnect observers from a previous Giscus instance before re-initializing
-  if (_giscusIntObserver) {
-    _giscusIntObserver.disconnect();
-    _giscusIntObserver = null;
-  }
-  if (_giscusThemeObserver) {
-    _giscusThemeObserver.disconnect();
-    _giscusThemeObserver = null;
-  }
-
-  function giscusTheme() {
-    const t = document.documentElement.getAttribute('data-theme');
-    return t === 'dark' ? 'dark' : 'light';
-  }
-
-  let loaded = false;
-  _giscusIntObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting && !loaded) {
-        loaded = true;
-        _giscusIntObserver.disconnect();
-        const script = document.createElement('script');
-        script.src = 'https://giscus.app/client.js';
-        script.setAttribute('data-repo', container.dataset.repo);
-        script.setAttribute('data-repo-id', container.dataset.repoId);
-        script.setAttribute('data-category', container.dataset.category);
-        script.setAttribute('data-category-id', container.dataset.categoryId);
-        script.setAttribute('data-mapping', container.dataset.mapping);
-        script.setAttribute('data-strict', '0');
-        script.setAttribute('data-reactions-enabled', container.dataset.reactionsEnabled);
-        script.setAttribute('data-emit-metadata', '0');
-        script.setAttribute('data-input-position', container.dataset.inputPosition);
-        script.setAttribute('data-loading', 'lazy');
-        script.setAttribute('data-theme', giscusTheme());
-        script.setAttribute('data-lang', container.dataset.lang);
-        script.setAttribute('crossorigin', 'anonymous');
-        script.async = true;
-        container.appendChild(script);
-      }
-    });
-  }, { rootMargin: '200px' });
-  _giscusIntObserver.observe(container);
-
-  // Theme sync via MutationObserver — queries the live DOM so it
-  // always targets the current .giscus iframe, not a stale one.
-  _giscusThemeObserver = new MutationObserver(function () {
-    const iframe = document.querySelector('.giscus iframe');
-    if (iframe && iframe.contentWindow) {
-      iframe.contentWindow.postMessage({
-        giscus: { setConfig: { theme: giscusTheme() } }
-      }, 'https://giscus.app');
-    }
-  });
-  _giscusThemeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-  container.dataset.giscusReady = 'true';
-}
-
 /**
  * Re-initialise page-specific components after a PJAX content swap.
  * Each init function no-ops if its target element is absent.
- * Giscus is handled separately via updateGiscus() — it lives outside <main>.
  */
 function reinit() {
   initCarousel();
@@ -105,33 +33,8 @@ function reinit() {
   bindFootnoteRefs();
 }
 
-/**
- * Show/hide the Giscus container and update the discussion term.
- * Call after PJAX navigations (the .giscus div lives outside <main> in baseof.html).
- * @param {boolean} hasComments - whether the current page should show comments.
- */
-function updateGiscus(hasComments) {
-  const container = document.querySelector('.giscus');
-  if (!container) return;
-
-  if (hasComments) {
-    container.hidden = false;
-    const iframe = container.querySelector('iframe');
-    if (iframe && iframe.contentWindow) {
-      iframe.contentWindow.postMessage({
-        giscus: { setConfig: { term: location.pathname } }
-      }, 'https://giscus.app');
-    } else {
-      initGiscus();
-    }
-  } else {
-    container.hidden = true;
-  }
-}
-
 // Expose for pjax.js to call after content swap
 window.reinit = reinit;
-window.updateGiscus = updateGiscus;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -220,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Per-page inits (first load) ---------- */
   reinit();
-  updateGiscus(document.body.dataset.pageKind === 'page');
 
   /* ---------- Fold header keyboard (document delegation) ---------- */
   document.addEventListener('keydown', (e) => {

@@ -3,13 +3,12 @@
 <head>
   {{ partial "head.html" . }}
 </head>
-<body data-page-kind="{{ .Kind }}">
+<body>
   <div class="app-shell">
     {{ partial "header.html" . }}
     <main>
       {{ block "main" . }}{{ end }}
     </main>
-    {{ partial "giscus.html" . }}
     {{ partial "footer.html" . }}
   </div>
   {{ partialCached "head/js.html" . }}
