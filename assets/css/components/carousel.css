@@ -23,8 +23,8 @@
   background: var(--surface-alt);
   min-width: 0;
   aspect-ratio: 16 / 9;
-  max-width: 96vh;
-  max-height: 54vh;
+  max-width: 80vh;
+  max-height: 45vh;
 }
 
 .featured-main:hover {

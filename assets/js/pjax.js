@@ -18,7 +18,7 @@ export function initPjax() {
   if (!window.history.pushState) return;
 
   // Expose for programmatic navigation (card clicks, carousel, etc.)
-  window.pjaxNavigate = navigate;
+  window.pjaxNavigate = (url) => navigate(url, true);
 
   document.addEventListener('click', handleClick);
   window.addEventListener('popstate', handlePopState);
@@ -58,9 +58,16 @@ function handleClick(e) {
  * @param {boolean} push - whether to pushState (false for popstate)
  */
 async function navigate(url, push) {
+  if (navigate._pending) return;
+  navigate._pending = true;
   start();
 
   try {
+    // Save current scroll position to the current history entry before leaving
+    if (push) {
+      history.replaceState({ scrollY: window.scrollY }, '', location.href);
+    }
+
     const resp = await fetch(url);
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
 
@@ -93,10 +100,19 @@ async function navigate(url, push) {
     const header = document.querySelector('.site-header');
     if (header) header.classList.remove('headroom-hidden');
 
-    window.scrollTo(0, 0);
+    // Restore scroll position for back/forward, otherwise scroll to top
+    var state = history.state;
+    if (state && typeof state.scrollY === 'number') {
+      window.scrollTo(0, state.scrollY);
+    } else {
+      window.scrollTo(0, 0);
+    }
+
     done();
+    navigate._pending = false;
 
   } catch (_err) {
+    navigate._pending = false;
     // Fallback to hard navigation
     window.location.href = url;
   }
