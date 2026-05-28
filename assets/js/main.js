@@ -94,6 +94,7 @@ function initGiscus() {
 /**
  * Re-initialise page-specific components after a PJAX content swap.
  * Each init function no-ops if its target element is absent.
+ * Giscus is handled separately via updateGiscus() — it lives outside <main>.
  */
 function reinit() {
   initCarousel();
@@ -102,11 +103,35 @@ function reinit() {
   initLazyLoader();
   document.querySelectorAll('.photo-stack').forEach(el => initPhotoStack(el));
   bindFootnoteRefs();
-  initGiscus();
+}
+
+/**
+ * Show/hide the Giscus container and update the discussion term.
+ * Call after PJAX navigations (the .giscus div lives outside <main> in baseof.html).
+ * @param {boolean} hasComments - whether the current page should show comments.
+ */
+function updateGiscus(hasComments) {
+  const container = document.querySelector('.giscus');
+  if (!container) return;
+
+  if (hasComments) {
+    container.hidden = false;
+    const iframe = container.querySelector('iframe');
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage({
+        giscus: { setConfig: { term: location.pathname } }
+      }, 'https://giscus.app');
+    } else {
+      initGiscus();
+    }
+  } else {
+    container.hidden = true;
+  }
 }
 
 // Expose for pjax.js to call after content swap
 window.reinit = reinit;
+window.updateGiscus = updateGiscus;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -195,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Per-page inits (first load) ---------- */
   reinit();
+  updateGiscus(document.body.dataset.pageKind === 'page');
 
   /* ---------- Fold header keyboard (document delegation) ---------- */
   document.addEventListener('keydown', (e) => {

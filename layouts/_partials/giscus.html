@@ -1,10 +1,11 @@
-{{- /* Giscus comments with Intersection Observer lazy loading and theme sync. */}}
+{{- /* Giscus comments — div rendered unconditionally so the iframe can live
+      outside <main> and persist across PJAX navigations. JS controls visibility. */}}
 {{- $repo := site.Params.giscusRepo | default "" }}
 {{- $repoId := site.Params.giscusRepoId | default "" }}
 {{- $category := site.Params.giscusCategory | default "" }}
 {{- $categoryId := site.Params.giscusCategoryId | default "" }}
-{{- if and (eq .Kind "page") (ne $repo "") (ne $repoId "") (ne $category "") (ne $categoryId "") }}
-<div class="giscus"
+{{- if and (ne $repo "") (ne $repoId "") (ne $category "") (ne $categoryId "") }}
+<div class="giscus" hidden
   data-repo="{{ $repo }}"
   data-repo-id="{{ $repoId }}"
   data-category="{{ $category }}"
