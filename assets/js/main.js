@@ -49,29 +49,38 @@ document.addEventListener('DOMContentLoaded', () => {
   applySystemTheme();
   systemDark.addEventListener('change', applySystemTheme);
 
-  // Hamburger menu
+  // Hamburger menu — overlay + slide-in panel
   const hamburger = document.getElementById('hamburger');
-  const siteNav = document.getElementById('site-nav');
-  if (hamburger && siteNav) {
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuPanel = document.getElementById('menuPanel');
+  const menuClose = document.getElementById('menuClose');
+
+  function openMenu() {
+    hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    menuOverlay.classList.add('open');
+    menuPanel.classList.add('open');
+    document.body.classList.add('nav-open');
+  }
+
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    menuOverlay.classList.remove('open');
+    menuPanel.classList.remove('open');
+    document.body.classList.remove('nav-open');
+  }
+
+  if (hamburger && menuOverlay && menuPanel) {
     hamburger.addEventListener('click', () => {
-      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', String(!expanded));
-      hamburger.classList.toggle('active');
-      siteNav.classList.toggle('open');
+      hamburger.classList.contains('active') ? closeMenu() : openMenu();
     });
-    siteNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.classList.remove('active');
-        siteNav.classList.remove('open');
-      });
-    });
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(/** @type {Node} */ (e.target)) && !siteNav.contains(/** @type {Node} */ (e.target))) {
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.classList.remove('active');
-        siteNav.classList.remove('open');
-      }
+    menuOverlay.addEventListener('click', closeMenu);
+    if (menuClose) {
+      menuClose.addEventListener('click', closeMenu);
+    }
+    menuPanel.querySelectorAll('.menu-nav a').forEach(link => {
+      link.addEventListener('click', closeMenu);
     });
   }
 
@@ -92,11 +101,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.site-header');
     if (!header) return;
 
+    const mobileHeaderQuery = window.matchMedia('(max-width: 720px)');
     let lastY = window.scrollY;
     let upDelta = 0;
     let hidden = false;
 
+    /**
+     * Keep mobile headers pinned and clear any desktop hidden state.
+     */
+    function resetMobileHeader() {
+      if (!mobileHeaderQuery.matches) return;
+      header.classList.remove('headroom-hidden');
+      hidden = false;
+      upDelta = 0;
+      lastY = window.scrollY;
+    }
+
+    resetMobileHeader();
+    mobileHeaderQuery.addEventListener('change', resetMobileHeader);
+
     window.addEventListener('scroll', () => {
+      if (mobileHeaderQuery.matches) {
+        resetMobileHeader();
+        return;
+      }
+
       const y = window.scrollY;
       const diff = y - lastY;
 
@@ -126,6 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Fold header keyboard (document delegation) ---------- */
   document.addEventListener('keydown', (e) => {
+    // Close mobile menu on Escape
+    if (e.key === 'Escape' && hamburger && hamburger.classList.contains('active')) {
+      closeMenu();
+      hamburger.focus();
+      return;
+    }
     if (e.key !== 'Enter' && e.key !== ' ') return;
     const header = /** @type {HTMLElement|null} */ (e.target.closest('.fold-header'));
     if (!header) return;

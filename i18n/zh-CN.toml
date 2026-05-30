@@ -21,6 +21,8 @@
     other = "切换深浅模式"
   [header.navMenu]
     other = "菜单"
+  [header.closeMenu]
+    other = "关闭菜单"
 
 # Search modal
 [search]

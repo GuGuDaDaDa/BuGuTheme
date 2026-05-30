@@ -126,11 +126,11 @@ function handlePopState() {
 }
 
 /**
- * Update .site-nav active dot indicator to reflect current URL.
+ * Update desktop .site-nav and mobile .menu-nav active states to reflect current URL.
  */
 function syncNavActive() {
   const currentPath = location.pathname.replace(/\/$/, '') || '/';
-  document.querySelectorAll('.site-nav a').forEach(link => {
+  document.querySelectorAll('.site-nav a, .menu-nav a').forEach(link => {
     const href = link.getAttribute('href');
     if (!href) return;
     const linkPath = new URL(href, location.origin).pathname.replace(/\/$/, '') || '/';

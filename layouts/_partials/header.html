@@ -1,4 +1,4 @@
-<header class="site-header">
+<header class="site-header" id="header">
   <div class="app-inner">
     <div class="header-accent"></div>
     <div class="site-header-inner">
@@ -8,7 +8,42 @@
         <button class="search-trigger" id="search-trigger" aria-label="{{ i18n `header.search` }}" title="{{ i18n `header.search` }}">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        <button class="hamburger" id="hamburger" aria-label="{{ i18n `header.navMenu` }}" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </div>
 </header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<div class="menu-panel" id="menuPanel">
+  <div class="menu-panel-top">
+    <button class="menu-close" id="menuClose" aria-label="{{ i18n `header.closeMenu` }}">✕</button>
+  </div>
+  <div class="menu-panel-body">
+    <nav class="menu-nav">
+    {{- $currentPage := . }}
+    {{- range site.Menus.main }}
+      {{- $active := or ($currentPage.IsMenuCurrent "main" .) (and .Page (ne .Page.Kind "home") ($currentPage.HasMenuCurrent "main" .)) }}
+      {{- $label := or (and .Identifier (i18n (printf "menu.%s" .Identifier))) .Name }}
+      <a href="{{ .URL }}" class="{{ if $active }}active{{ end }}">{{ $label }}</a>
+    {{- end }}
+    </nav>
+  </div>
+  <div class="menu-panel-footer">
+    <p class="menu-tagline">{{ site.Params.footerText }}</p>
+    <div class="menu-meta">
+      {{- with site.Params.social.github }}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+      {{- end }}
+      {{- with site.Params.social.twitter }}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+      {{- end }}
+      {{- with site.Params.social.email }}
+      <a href="mailto:{{ . }}">邮件</a>
+      {{- end }}
+      <span>&copy; {{ now.Year }} {{ site.Params.copyright | default site.Title }}</span>
+    </div>
+  </div>
+</div>

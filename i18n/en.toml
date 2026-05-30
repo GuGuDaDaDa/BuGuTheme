@@ -21,6 +21,8 @@
     other = "Toggle theme"
   [header.navMenu]
     other = "Menu"
+  [header.closeMenu]
+    other = "Close menu"
 
 # Search modal
 [search]
