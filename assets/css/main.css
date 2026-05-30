@@ -100,6 +100,19 @@ body {
   overflow-x: clip;
 }
 
+/* ---------- iOS safe-area cover ---------- */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top);
+  background: var(--surface);
+  pointer-events: none;
+  z-index: 49;
+}
+
 /* ---------- SVG noise texture ---------- */
 body::after {
   content: '';

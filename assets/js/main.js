@@ -13,8 +13,8 @@ import { start, done } from './progress.js';
 import { initFootnotes, setupFootnoteEvents, bindFootnoteRefs } from './footnotes.js';
 import { initPjax } from './pjax.js';
 
-// Detect iOS/Android devices and tag <html> for mobile layout
-if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || /Android/.test(navigator.userAgent)) {
+// Detect phone-class touch devices and tag <html> for mobile layout.
+if (/iPhone|iPod/.test(navigator.userAgent) || /Android/.test(navigator.userAgent)) {
   document.documentElement.classList.add('ios');
 }
 

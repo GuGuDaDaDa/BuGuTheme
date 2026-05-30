@@ -1,5 +1,5 @@
 /* ============================================================
-   iOS overrides — force mobile layout on iPads/iPhones
+   iOS overrides — force mobile layout on phone-class devices
    Applied via .ios class on <html> (set by main.js)
    ============================================================ */
 
@@ -51,6 +51,15 @@
 }
 
 /* ---------- Featured layout typography ---------- */
+.ios body::before {
+  height: max(env(safe-area-inset-top), 0px);
+  z-index: 10001;
+}
+
+.ios .progress-bar {
+  top: env(safe-area-inset-top);
+}
+
 .ios .featured-info-title {
   font-size: 1.2rem;
 }
@@ -138,31 +147,30 @@
 
 /* ---------- Featured layout (force mobile) ---------- */
 .ios .featured-section {
-  margin: 28px 0 32px;
+  margin: 24px 0 34px;
 }
 
 .ios .featured-layout {
   flex-direction: column;
-  gap: 16px;
-  padding: 0 14px;
-  height: auto;
-  min-height: auto;
+  gap: 15px;
+  width: 100vw;
+  padding: 0;
 }
 
 .ios .featured-main {
   flex: auto;
-  margin-left: 0;
-  max-width: none;
+  width: 100vw;
   aspect-ratio: 16 / 9;
-  min-height: 200px;
   height: auto;
-  max-height: 300px;
+  border-left: 0;
+  border-right: 0;
 }
 
 .ios .featured-info {
+  flex: none;
   width: auto;
-  flex-shrink: 1;
-  padding: 4px 0;
+  min-width: 0;
+  padding: 0 14px;
 }
 
 .ios .featured-side-wrap {
@@ -170,7 +178,8 @@
   min-width: 0;
   max-width: none;
   contain: none;
-  overflow: visible;
+  overflow: hidden;
+  padding-left: 14px;
 }
 
 .ios .featured-side {
@@ -182,7 +191,7 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding-bottom: 4px;
+  padding: 0 14px 4px 0;
 }
 
 .ios .featured-side::-webkit-scrollbar {
@@ -191,8 +200,8 @@
 
 .ios .featured-side-item {
   flex: 0 0 auto;
-  width: calc(100% * 2 / 3);
-  aspect-ratio: 5 / 2;
+  width: clamp(260px, 78vw, 360px);
+  min-height: 118px;
   padding: 12px;
   gap: 10px;
   scroll-snap-align: start;
@@ -205,7 +214,7 @@
 }
 
 .ios .featured-side-thumb {
-  height: 80%;
+  height: 82px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   flex-shrink: 0;
