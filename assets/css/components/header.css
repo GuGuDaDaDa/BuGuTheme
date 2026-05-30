@@ -165,7 +165,10 @@
 /* ---------- Menu overlay backdrop ---------- */
 .menu-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1050;
   background: rgba(0,0,0,0.45);
   opacity: 0;
@@ -186,7 +189,9 @@
   z-index: 1060;
   width: 100%;
   max-width: 420px;
-  height: 100dvh;
+  height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
   background: var(--surface);
   display: flex;
   flex-direction: column;
