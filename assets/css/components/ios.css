@@ -60,6 +60,23 @@
   top: env(safe-area-inset-top);
 }
 
+.ios .site-header::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: max(env(safe-area-inset-top), 0px);
+  background: var(--surface);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ios .site-header > .app-inner {
+  position: relative;
+  z-index: 2;
+}
+
 .ios .featured-info-title {
   font-size: 1.2rem;
 }
