@@ -190,6 +190,8 @@
   width: 100%;
   max-width: 420px;
   height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
   background: var(--surface);
   display: flex;
   flex-direction: column;
