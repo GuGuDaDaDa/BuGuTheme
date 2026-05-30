@@ -30,7 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
+  padding: 8px 0;
   gap: 12px;
 }
 
@@ -189,9 +189,7 @@
   z-index: 1060;
   width: 100%;
   max-width: 420px;
-  height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
+  height: 100dvh;
   background: var(--surface);
   display: flex;
   flex-direction: column;
@@ -334,7 +332,7 @@ body.nav-open {
   }
 
   .site-header-inner {
-    padding: 8px 0;
+    padding: 4px 0;
   }
 
   .site-brand {
