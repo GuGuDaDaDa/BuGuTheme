@@ -11,7 +11,6 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  padding-top: var(--header-safe-top);
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
 }
 
