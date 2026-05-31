@@ -117,6 +117,35 @@ body::after {
   opacity: 0.04;
 }
 
+/* ---------- iOS safe area bars ----------
+   Fixed-position bars that fill the notch / Dynamic Island (top)
+   and home indicator (bottom) areas with the surface colour.
+   These sit above the header but below the menu panel so they
+   are always visible regardless of sticky/fixed element quirks. */
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--surface);
+  z-index: 51;
+  pointer-events: none;
+}
+
+html::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-bottom, 0px);
+  background: var(--surface);
+  z-index: 51;
+  pointer-events: none;
+}
+
 /* ---------- Base elements ---------- */
 a {
   color: var(--fg-strong);
