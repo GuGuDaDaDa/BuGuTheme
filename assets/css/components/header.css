@@ -329,10 +329,6 @@ html.nav-open {
   background: var(--surface);
 }
 
-body.nav-open .app-shell {
-  background: var(--surface);
-}
-
 body.nav-open .app-shell > main,
 body.nav-open .site-footer {
   visibility: hidden;

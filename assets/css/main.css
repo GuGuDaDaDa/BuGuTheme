@@ -90,7 +90,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--surface);
+  background: var(--bg);
   color: var(--fg);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
@@ -135,7 +135,6 @@ a:hover {
   min-height: 100vh;
   position: relative;
   z-index: 1;
-  background: var(--bg);
 }
 
 .app-shell > main {
