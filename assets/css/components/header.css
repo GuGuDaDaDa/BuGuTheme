@@ -1,21 +1,37 @@
 /* ---------- Site header ---------- */
+:root {
+  --viewport-safe-top: env(safe-area-inset-top, 0px);
+  --viewport-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --viewport-mask-top: env(safe-area-inset-top, 0px);
+  --viewport-mask-bottom: env(safe-area-inset-bottom, 0px);
+  --viewport-mask-overlap-top: 0px;
+  --viewport-mask-overlap-bottom: 0px;
+}
+
+.ios {
+  --viewport-mask-top: max(env(safe-area-inset-top, 0px), 96px);
+  --viewport-mask-bottom: max(env(safe-area-inset-bottom, 0px), 128px);
+  --viewport-mask-overlap-top: 72px;
+  --viewport-mask-overlap-bottom: 96px;
+}
+
 .site-header {
   width: 100%;
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
   position: sticky;
-  top: env(safe-area-inset-top, 0px);
+  top: 0;
   z-index: 50;
-  transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
+  transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease, padding 0.3s ease;
 }
 
 .site-header::before {
   content: '';
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
-  bottom: 100%;
-  height: env(safe-area-inset-top, 0px);
+  top: calc(var(--viewport-mask-top) * -1);
+  height: calc(var(--viewport-mask-top) + var(--viewport-mask-overlap-top));
   background: var(--surface);
   pointer-events: none;
   transition: background 0.5s ease;
@@ -92,12 +108,10 @@
 
 .site-nav-links a:hover {
   color: var(--fg-strong);
-  background: var(--accent-wash);
 }
 
 .site-nav-links a.active {
   color: var(--accent);
-  background: var(--accent-wash);
 }
 
 .site-nav-links a.active::after {
@@ -176,10 +190,10 @@
 /* ---------- Menu overlay backdrop ---------- */
 .menu-overlay {
   position: fixed;
-  top: 0;
+  top: calc(var(--viewport-mask-top) * -1);
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: calc(var(--viewport-mask-bottom) * -1);
   z-index: 1050;
   background: rgba(0,0,0,0.45);
   opacity: 0;
@@ -198,19 +212,20 @@
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 1;
   background: var(--surface);
   pointer-events: none;
   transition: background 0.5s ease;
 }
 
 .menu-overlay::before {
-  top: 0;
-  height: env(safe-area-inset-top, 0px);
+  top: calc(var(--viewport-mask-top) * -1);
+  height: calc(var(--viewport-mask-top) + var(--viewport-mask-overlap-top));
 }
 
 .menu-overlay::after {
-  bottom: 0;
-  height: env(safe-area-inset-bottom, 0px);
+  bottom: calc(var(--viewport-mask-bottom) * -1);
+  height: calc(var(--viewport-mask-bottom) + var(--viewport-mask-overlap-bottom));
 }
 
 /* ---------- Menu slide-in panel ---------- */
@@ -239,8 +254,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
-  height: calc(60px + env(safe-area-inset-top, 0px));
+  padding: var(--viewport-safe-top) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
+  height: calc(60px + var(--viewport-safe-top));
   flex-shrink: 0;
 }
 
@@ -319,7 +334,7 @@
 /* Panel footer */
 .menu-panel-footer {
   flex-shrink: 0;
-  padding: 24px max(40px, env(safe-area-inset-right, 0px)) calc(32px + env(safe-area-inset-bottom, 0px)) max(40px, env(safe-area-inset-left, 0px));
+  padding: 24px max(40px, env(safe-area-inset-right, 0px)) calc(32px + var(--viewport-safe-bottom)) max(40px, env(safe-area-inset-left, 0px));
   border-top: 1px solid var(--hairline);
 }
 
@@ -354,6 +369,15 @@ body.nav-open {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
+  .ios {
+    --viewport-mask-top: max(env(safe-area-inset-top, 0px), 160px);
+    --viewport-mask-bottom: max(env(safe-area-inset-bottom, 0px), 180px);
+  }
+
+  .ios .site-header {
+    padding-top: var(--viewport-safe-top);
+  }
+
   .header-accent {
     width: 28px;
     height: 2px;

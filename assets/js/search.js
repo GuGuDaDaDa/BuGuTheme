@@ -73,6 +73,13 @@ class SearchController {
       }
     });
 
+    // Close the persistent modal before PJAX swaps page content.
+    this.results.addEventListener('click', (e) => {
+      const link = /** @type {HTMLAnchorElement|null} */ (e.target.closest('a.search-result-item'));
+      if (!link || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+      this.close();
+    });
+
     // Search input with debounce
     this.input.addEventListener('input', () => {
       const query = this.input.value.trim();
