@@ -6,7 +6,7 @@
 }
 
 .ios-safe-area {
-  --header-mask-height: max(calc(var(--header-safe-top) + 60px), 96px);
+  --header-mask-height: max(calc(var(--header-safe-top) + 88px), 156px);
 }
 
 .site-header {
@@ -27,8 +27,8 @@
 
 .ios-safe-area .site-header::before {
   content: '';
-  position: fixed;
-  top: 0;
+  position: absolute;
+  bottom: 100%;
   left: 0;
   right: 0;
   height: var(--header-mask-height);
