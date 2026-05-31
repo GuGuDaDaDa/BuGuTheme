@@ -2,6 +2,20 @@
 :root {
   --header-safe-top: env(safe-area-inset-top, 0px);
   --header-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --header-cover-height: 0px;
+  --header-cover-offset: 0px;
+}
+
+.ios-header-cover {
+  --header-cover-height: 156px;
+}
+
+.ios-header-cover body {
+  background: var(--surface);
+}
+
+.ios-header-cover main {
+  clip-path: inset(var(--header-cover-offset) 0 0 0);
 }
 
 .site-header {
