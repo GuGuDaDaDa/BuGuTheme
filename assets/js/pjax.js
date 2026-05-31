@@ -99,8 +99,6 @@ async function navigate(url, push) {
     // Reset header visibility
     const header = document.querySelector('.site-header');
     if (header) header.classList.remove('headroom-hidden');
-    document.documentElement.classList.remove('ios-header-cover');
-    document.documentElement.style.removeProperty('--header-cover-offset');
 
     // Restore scroll position for back/forward, otherwise scroll to top
     var state = history.state;

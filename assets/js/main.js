@@ -14,10 +14,9 @@ import { initFootnotes, setupFootnoteEvents, bindFootnoteRefs } from './footnote
 import { initPjax } from './pjax.js';
 
 const isIpadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
-const isAppleTouch = /iPhone|iPod|iPad/.test(navigator.userAgent) || isIpadOS;
 
 // Detect touch devices and tag <html> for mobile/tablet layout overrides.
-if (isAppleTouch || /Android/.test(navigator.userAgent)) {
+if (/iPhone|iPod|iPad/.test(navigator.userAgent) || isIpadOS || /Android/.test(navigator.userAgent)) {
   document.documentElement.classList.add('ios');
 }
 
@@ -63,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.setAttribute('aria-expanded', 'true');
     menuOverlay.classList.add('open');
     menuPanel.classList.add('open');
-    document.documentElement.classList.remove('ios-header-cover');
-    document.documentElement.style.removeProperty('--header-cover-offset');
     document.documentElement.classList.add('nav-open');
     document.body.classList.add('nav-open');
   }
@@ -76,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     menuPanel.classList.remove('open');
     document.documentElement.classList.remove('nav-open');
     document.body.classList.remove('nav-open');
-    window.dispatchEvent(new Event('header-cover:update'));
   }
 
   if (hamburger && menuOverlay && menuPanel) {
@@ -113,34 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let upDelta = 0;
     let hidden = false;
 
-    function updateHeaderCover() {
-      if (!isAppleTouch || hidden || document.body.classList.contains('nav-open')) {
-        document.documentElement.classList.remove('ios-header-cover');
-        document.documentElement.style.removeProperty('--header-cover-offset');
-        return;
-      }
-
-      const main = document.querySelector('main');
-      if (!main) return;
-
-      const headerRect = header.getBoundingClientRect();
-      const mainRect = main.getBoundingClientRect();
-      const minimumCover = Math.max(
-        parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-cover-height')) || 0,
-        0
-      );
-      const coverBottom = Math.max(headerRect.bottom, minimumCover);
-      const offset = Math.max(coverBottom - mainRect.top, 0);
-
-      if (offset > 0) {
-        document.documentElement.classList.add('ios-header-cover');
-        document.documentElement.style.setProperty('--header-cover-offset', `${offset}px`);
-      } else {
-        document.documentElement.classList.remove('ios-header-cover');
-        document.documentElement.style.removeProperty('--header-cover-offset');
-      }
-    }
-
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       const diff = y - lastY;
@@ -151,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!hidden && y > 150) {
           header.classList.add('headroom-hidden');
           hidden = true;
-          updateHeaderCover();
         }
       } else if (diff < 0) {
         // Scrolling up — show after 50px accumulated upward scroll
@@ -164,12 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       lastY = y;
-      updateHeaderCover();
     }, { passive: true });
-
-    window.addEventListener('resize', updateHeaderCover, { passive: true });
-    window.addEventListener('header-cover:update', updateHeaderCover);
-    updateHeaderCover();
   })();
 
   /* ---------- Per-page inits (first load) ---------- */
