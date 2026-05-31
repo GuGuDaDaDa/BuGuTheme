@@ -101,31 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.site-header');
     if (!header) return;
 
-    const mobileHeaderQuery = window.matchMedia('(max-width: 720px)');
     let lastY = window.scrollY;
     let upDelta = 0;
     let hidden = false;
 
-    /**
-     * Keep mobile headers pinned and clear any desktop hidden state.
-     */
-    function resetMobileHeader() {
-      if (!mobileHeaderQuery.matches) return;
-      header.classList.remove('headroom-hidden');
-      hidden = false;
-      upDelta = 0;
-      lastY = window.scrollY;
-    }
-
-    resetMobileHeader();
-    mobileHeaderQuery.addEventListener('change', resetMobileHeader);
-
     window.addEventListener('scroll', () => {
-      if (mobileHeaderQuery.matches) {
-        resetMobileHeader();
-        return;
-      }
-
       const y = window.scrollY;
       const diff = y - lastY;
 

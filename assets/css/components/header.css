@@ -321,10 +321,6 @@ body.nav-open {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
-  .site-header.headroom-hidden {
-    transform: none;
-  }
-
   .header-accent {
     width: 28px;
     height: 2px;
