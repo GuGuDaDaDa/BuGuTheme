@@ -14,15 +14,10 @@ import { initFootnotes, setupFootnoteEvents, bindFootnoteRefs } from './footnote
 import { initPjax } from './pjax.js';
 
 const isIpadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
-const isAppleTouch = /iPhone|iPod|iPad/.test(navigator.userAgent) || isIpadOS;
 
 // Detect touch devices and tag <html> for mobile/tablet layout overrides.
-if (isAppleTouch || /Android/.test(navigator.userAgent)) {
+if (/iPhone|iPod|iPad/.test(navigator.userAgent) || isIpadOS || /Android/.test(navigator.userAgent)) {
   document.documentElement.classList.add('ios');
-}
-
-if (isAppleTouch) {
-  document.documentElement.classList.add('ios-safe-area');
 }
 
 start();
@@ -123,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         upDelta = 0;
         if (!hidden && y > 150) {
           header.classList.add('headroom-hidden');
-          document.documentElement.classList.add('header-hidden');
           hidden = true;
         }
       } else if (diff < 0) {
@@ -131,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
         upDelta += Math.abs(diff);
         if (hidden && upDelta >= 50) {
           header.classList.remove('headroom-hidden');
-          document.documentElement.classList.remove('header-hidden');
           hidden = false;
           upDelta = 0;
         }

@@ -10,13 +10,15 @@
   })();
 </script>
 <style>
-  html { background-color: #fcfcfb; }
-  html[data-theme="dark"] { background-color: #1a1a1a; }
+  html { background-color: #ffffff; }
+  html[data-theme="dark"] { background-color: #272727; }
   .theme-icon::before { content: '🌙'; }
   html[data-theme="dark"] .theme-icon::before { content: '☀️'; }
 </style>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#272727" media="(prefers-color-scheme: dark)">
 {{ block "meta" . }}{{ end }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

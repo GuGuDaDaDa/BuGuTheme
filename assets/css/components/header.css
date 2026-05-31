@@ -2,15 +2,6 @@
 :root {
   --header-safe-top: env(safe-area-inset-top, 0px);
   --header-safe-bottom: env(safe-area-inset-bottom, 0px);
-  --header-mask-height: var(--header-safe-top);
-}
-
-.ios-safe-area {
-  --header-mask-height: max(calc(var(--header-safe-top) + 88px), 156px);
-}
-
-.header-safe-mask {
-  display: none;
 }
 
 .site-header {
@@ -26,29 +17,6 @@
 
 .site-header.headroom-hidden {
   transform: translateY(-100%);
-}
-
-.ios-safe-area .header-safe-mask {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--header-mask-height);
-  z-index: 49;
-  background: var(--surface);
-  box-shadow: 0 calc(var(--header-mask-height) * -1) 0 var(--surface);
-  pointer-events: none;
-  opacity: 1;
-  visibility: visible;
-  transform: translateZ(0);
-  transition: opacity 0.3s ease, visibility 0s linear 0s, background 0.5s ease, box-shadow 0.5s ease;
-}
-
-.ios-safe-area.header-hidden .header-safe-mask {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0s linear 0.2s, background 0.5s ease;
 }
 
 /* ---------- Header accent bar ---------- */
