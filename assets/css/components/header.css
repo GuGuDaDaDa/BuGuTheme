@@ -2,6 +2,11 @@
 :root {
   --header-safe-top: env(safe-area-inset-top, 0px);
   --header-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --header-mask-height: var(--header-safe-top);
+}
+
+.ios-safe-area {
+  --header-mask-height: max(calc(var(--header-safe-top) + 60px), 96px);
 }
 
 .site-header {
@@ -12,11 +17,38 @@
   top: 0;
   z-index: 50;
   padding-top: var(--header-safe-top);
+  isolation: isolate;
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
 }
 
 .site-header.headroom-hidden {
   transform: translateY(-100%);
+}
+
+.ios-safe-area .site-header::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-mask-height);
+  z-index: 0;
+  background: var(--surface);
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s linear 0s, background 0.5s ease;
+}
+
+.ios-safe-area.header-hidden .site-header::before {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s, background 0.5s ease;
+}
+
+.site-header > .app-inner {
+  position: relative;
+  z-index: 1;
 }
 
 /* ---------- Header accent bar ---------- */
