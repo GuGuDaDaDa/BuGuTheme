@@ -14,10 +14,15 @@ import { initFootnotes, setupFootnoteEvents, bindFootnoteRefs } from './footnote
 import { initPjax } from './pjax.js';
 
 const isIpadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+const isAppleTouch = /iPhone|iPod|iPad/.test(navigator.userAgent) || isIpadOS;
 
 // Detect touch devices and tag <html> for mobile/tablet layout overrides.
-if (/iPhone|iPod|iPad/.test(navigator.userAgent) || isIpadOS || /Android/.test(navigator.userAgent)) {
+if (isAppleTouch || /Android/.test(navigator.userAgent)) {
   document.documentElement.classList.add('ios');
+}
+
+if (isAppleTouch) {
+  document.documentElement.classList.add('apple-safe-area');
 }
 
 start();
