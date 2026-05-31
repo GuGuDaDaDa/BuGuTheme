@@ -1,18 +1,7 @@
 /* ---------- Site header ---------- */
 :root {
-  --viewport-safe-top: env(safe-area-inset-top, 0px);
-  --viewport-safe-bottom: env(safe-area-inset-bottom, 0px);
-  --viewport-mask-top: env(safe-area-inset-top, 0px);
-  --viewport-mask-bottom: env(safe-area-inset-bottom, 0px);
-  --viewport-mask-overlap-top: 0px;
-  --viewport-mask-overlap-bottom: 0px;
-}
-
-.ios {
-  --viewport-mask-top: max(env(safe-area-inset-top, 0px), 96px);
-  --viewport-mask-bottom: max(env(safe-area-inset-bottom, 0px), 128px);
-  --viewport-mask-overlap-top: 72px;
-  --viewport-mask-overlap-bottom: 96px;
+  --header-safe-top: env(safe-area-inset-top, 0px);
+  --header-safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .site-header {
@@ -22,23 +11,12 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease, padding 0.3s ease;
-}
-
-.site-header::before {
-  content: '';
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: calc(var(--viewport-mask-top) * -1);
-  height: calc(var(--viewport-mask-top) + var(--viewport-mask-overlap-top));
-  background: var(--surface);
-  pointer-events: none;
-  transition: background 0.5s ease;
+  padding-top: var(--header-safe-top);
+  transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
 }
 
 .site-header.headroom-hidden {
-  transform: translateY(calc(-100% - env(safe-area-inset-top, 0px)));
+  transform: translateY(-100%);
 }
 
 /* ---------- Header accent bar ---------- */
@@ -190,10 +168,10 @@
 /* ---------- Menu overlay backdrop ---------- */
 .menu-overlay {
   position: fixed;
-  top: calc(var(--viewport-mask-top) * -1);
+  top: 0;
   left: 0;
   right: 0;
-  bottom: calc(var(--viewport-mask-bottom) * -1);
+  bottom: 0;
   z-index: 1050;
   background: rgba(0,0,0,0.45);
   opacity: 0;
@@ -204,28 +182,6 @@
 .menu-overlay.open {
   opacity: 1;
   pointer-events: auto;
-}
-
-.menu-overlay::before,
-.menu-overlay::after {
-  content: '';
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  background: var(--surface);
-  pointer-events: none;
-  transition: background 0.5s ease;
-}
-
-.menu-overlay::before {
-  top: calc(var(--viewport-mask-top) * -1);
-  height: calc(var(--viewport-mask-top) + var(--viewport-mask-overlap-top));
-}
-
-.menu-overlay::after {
-  bottom: calc(var(--viewport-mask-bottom) * -1);
-  height: calc(var(--viewport-mask-bottom) + var(--viewport-mask-overlap-bottom));
 }
 
 /* ---------- Menu slide-in panel ---------- */
@@ -254,8 +210,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: var(--viewport-safe-top) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
-  height: calc(60px + var(--viewport-safe-top));
+  padding: var(--header-safe-top) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
+  height: calc(60px + var(--header-safe-top));
   flex-shrink: 0;
 }
 
@@ -334,7 +290,7 @@
 /* Panel footer */
 .menu-panel-footer {
   flex-shrink: 0;
-  padding: 24px max(40px, env(safe-area-inset-right, 0px)) calc(32px + var(--viewport-safe-bottom)) max(40px, env(safe-area-inset-left, 0px));
+  padding: 24px max(40px, env(safe-area-inset-right, 0px)) calc(32px + var(--header-safe-bottom)) max(40px, env(safe-area-inset-left, 0px));
   border-top: 1px solid var(--hairline);
 }
 
@@ -363,21 +319,23 @@
 
 /* ---------- Body state when menu is open ---------- */
 body.nav-open {
+  background: var(--surface);
   overflow: hidden;
   touch-action: none;
+  overscroll-behavior: none;
+}
+
+html.nav-open {
+  background: var(--surface);
+}
+
+body.nav-open .app-shell > main,
+body.nav-open .site-footer {
+  visibility: hidden;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
-  .ios {
-    --viewport-mask-top: max(env(safe-area-inset-top, 0px), 160px);
-    --viewport-mask-bottom: max(env(safe-area-inset-bottom, 0px), 180px);
-  }
-
-  .ios .site-header {
-    padding-top: var(--viewport-safe-top);
-  }
-
   .header-accent {
     width: 28px;
     height: 2px;

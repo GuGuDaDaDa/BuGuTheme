@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.setAttribute('aria-expanded', 'true');
     menuOverlay.classList.add('open');
     menuPanel.classList.add('open');
+    document.documentElement.classList.add('nav-open');
     document.body.classList.add('nav-open');
   }
 
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.setAttribute('aria-expanded', 'false');
     menuOverlay.classList.remove('open');
     menuPanel.classList.remove('open');
+    document.documentElement.classList.remove('nav-open');
     document.body.classList.remove('nav-open');
   }
 
