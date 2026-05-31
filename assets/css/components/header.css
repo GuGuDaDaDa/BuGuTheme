@@ -1,5 +1,6 @@
 /* ---------- Site header ---------- */
 :root {
+  --header-safe-top: constant(safe-area-inset-top);
   --header-safe-top: env(safe-area-inset-top, 0px);
   --header-safe-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -335,6 +336,15 @@ body.nav-open .site-footer {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
+  .site-header {
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .site-header.headroom-hidden {
+    transform: none;
+  }
+
   .header-accent {
     width: 28px;
     height: 2px;

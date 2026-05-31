@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
   (function () {
     const header = document.querySelector('.site-header');
     if (!header) return;
+    if (window.matchMedia('(max-width: 720px)').matches) return;
 
     let lastY = window.scrollY;
     let upDelta = 0;
