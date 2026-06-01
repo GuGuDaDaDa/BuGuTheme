@@ -18,7 +18,9 @@ html {
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
   position: fixed;
-  inset: 0 0 auto;
+  top: calc(-1 * var(--site-safe-top));
+  left: 0;
+  right: 0;
   z-index: 50;
   padding-top: var(--site-safe-top);
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
