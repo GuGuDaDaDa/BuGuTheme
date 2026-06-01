@@ -1,10 +1,22 @@
 /* ---------- Site header ---------- */
+:root {
+  --site-header-height: 54px;
+}
+
+html {
+  scroll-padding-top: var(--site-header-height);
+}
+
+.app-shell > main {
+  padding-top: var(--site-header-height);
+}
+
 .site-header {
   width: 100%;
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
-  position: sticky;
-  top: 0;
+  position: fixed;
+  inset: 0 0 auto;
   z-index: 50;
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
 }
