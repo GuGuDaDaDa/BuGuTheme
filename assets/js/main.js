@@ -12,6 +12,7 @@ import { initPhotoStack } from './photo-stack.js';
 import { start, done } from './progress.js';
 import { initFootnotes, setupFootnoteEvents, bindFootnoteRefs } from './footnotes.js';
 import { initPjax } from './pjax.js';
+import { initGiscus } from './giscus.js';
 
 const isIpadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
 
@@ -33,6 +34,7 @@ function reinit() {
   initLazyLoader();
   document.querySelectorAll('.photo-stack').forEach(el => initPhotoStack(el));
   bindFootnoteRefs();
+  initGiscus();
 }
 
 // Expose for pjax.js to call after content swap

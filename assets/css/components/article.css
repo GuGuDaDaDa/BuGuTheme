@@ -365,6 +365,17 @@
   color: var(--muted-light);
 }
 
+/* ---------- Comments ---------- */
+.article-comments {
+  margin: 54px 0 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+}
+
+.giscus-container {
+  min-height: 180px;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .article-header-wrapper {
@@ -413,6 +424,11 @@
   .article-meta {
     font-size: 0.875rem;
     margin-bottom: 2rem;
+  }
+
+  .article-comments {
+    margin: 44px 0 52px;
+    padding-top: 28px;
   }
 }
 

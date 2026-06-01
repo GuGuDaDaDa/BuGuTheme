@@ -13,6 +13,7 @@ A minimalist, content-focused Hugo theme with masonry layout, featured carousel,
 - **References** — inline footnote references with desktop tooltip + mobile bottom panel, styled footnotes section via `{{< refers >}}` + `{{< refer >}}` + `{{< fnref >}}`
 - **Client-side search** — Fuse.js fuzzy search with modal UI
 - **Image lightbox** — click to enlarge images in article content
+- **Giscus comments** — optional GitHub Discussions comments with PJAX reloading
 - **Dark mode** — system-aware theme toggle with persistent preference
 - **i18n** — Chinese (zh-CN) and English (en) translations for all UI text
 - **Custom scrollbar** — thin overlay-style scrollbar, no layout width
@@ -385,6 +386,7 @@ Extra references without a body superscript — set `noref="true"` to omit the b
 | `cover` | string | Cover image filename (page resource) or external URL |
 | `toc` | bool | Show table of contents sidebar on this article |
 | `draft` | bool | Draft mode (not published) |
+| `comments` | bool | Set to `false` to hide Giscus comments on a single post |
 | `layout` | string | Page layout: `"about"` or `"friends"` |
 
 ---
@@ -430,6 +432,31 @@ All params live under `[languages.<lang>.params]` in `hugo.toml`.
 | `social.twitter` | string | — | Full Twitter/X profile URL |
 | `social.email` | string | — | Email address (generates `mailto:` link) |
 | `googleAnalytics` | string | — | Google Analytics measurement ID |
+
+### Giscus Comments
+
+Enable GitHub Discussions comments by filling the values generated at [giscus.app](https://giscus.app/):
+
+```toml
+[languages.'zh-cn'.params.giscus]
+  enable = true
+  repo = 'owner/repo'
+  repoId = 'R_kgDO...'
+  category = 'Announcements'
+  categoryId = 'DIC_kwDO...'
+  mapping = 'pathname'
+  strict = '0'
+  reactionsEnabled = '1'
+  emitMetadata = '0'
+  inputPosition = 'bottom'
+  theme = 'auto'
+  lightTheme = 'light'
+  darkTheme = 'dark'
+  lang = 'zh-CN'
+  loading = 'lazy'
+```
+
+`theme = 'auto'` follows the site's `data-theme` and updates the Giscus iframe after PJAX navigation. Use `comments = false` in a post's front matter to disable comments for that page.
 
 ---
 

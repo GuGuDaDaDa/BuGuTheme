@@ -1,0 +1,33 @@
+{{- $commentsEnabled := ne .Params.comments false -}}
+{{- $giscus := site.Params.giscus -}}
+{{- if and .IsPage $commentsEnabled $giscus.enable $giscus.repo $giscus.repoid $giscus.category $giscus.categoryid -}}
+  {{- $mapping := default "pathname" $giscus.mapping -}}
+  {{- $strict := default "0" $giscus.strict -}}
+  {{- $reactionsEnabled := default "1" $giscus.reactionsenabled -}}
+  {{- $emitMetadata := default "0" $giscus.emitmetadata -}}
+  {{- $inputPosition := default "bottom" $giscus.inputposition -}}
+  {{- $theme := default "preferred_color_scheme" $giscus.theme -}}
+  {{- $darkTheme := default "dark" $giscus.darktheme -}}
+  {{- $lightTheme := default "light" $giscus.lighttheme -}}
+  {{- $lang := default (or site.Language.Lang site.Language.LanguageCode "zh-CN") $giscus.lang -}}
+  {{- $loading := default "lazy" $giscus.loading -}}
+  <section class="article-comments" aria-label="Comments">
+    <div
+      class="giscus-container"
+      data-giscus
+      data-repo="{{ $giscus.repo }}"
+      data-repo-id="{{ $giscus.repoid }}"
+      data-category="{{ $giscus.category }}"
+      data-category-id="{{ $giscus.categoryid }}"
+      data-mapping="{{ $mapping }}"
+      data-strict="{{ $strict }}"
+      data-reactions-enabled="{{ $reactionsEnabled }}"
+      data-emit-metadata="{{ $emitMetadata }}"
+      data-input-position="{{ $inputPosition }}"
+      data-theme="{{ $theme }}"
+      data-light-theme="{{ $lightTheme }}"
+      data-dark-theme="{{ $darkTheme }}"
+      data-lang="{{ $lang }}"
+      data-loading="{{ $loading }}"></div>
+  </section>
+{{- end -}}
