@@ -1,10 +1,4 @@
 /* ---------- Site header ---------- */
-:root {
-  --header-safe-top: constant(safe-area-inset-top);
-  --header-safe-top: env(safe-area-inset-top, 0px);
-  --header-safe-bottom: env(safe-area-inset-bottom, 0px);
-}
-
 .site-header {
   width: 100%;
   background: var(--surface);
@@ -210,8 +204,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: var(--header-safe-top) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
-  height: calc(60px + var(--header-safe-top));
+  padding: 0 16px;
+  height: 60px;
   flex-shrink: 0;
 }
 
@@ -241,7 +235,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 max(40px, env(safe-area-inset-right, 0px)) 40px max(40px, env(safe-area-inset-left, 0px));
+  padding: 0 40px 40px;
   overflow-y: auto;
 }
 
@@ -290,7 +284,7 @@
 /* Panel footer */
 .menu-panel-footer {
   flex-shrink: 0;
-  padding: 24px max(40px, env(safe-area-inset-right, 0px)) calc(32px + var(--header-safe-bottom)) max(40px, env(safe-area-inset-left, 0px));
+  padding: 24px 40px 32px;
   border-top: 1px solid var(--hairline);
 }
 
@@ -336,11 +330,6 @@ body.nav-open .site-footer {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
-  .site-header {
-    padding-top: constant(safe-area-inset-top);
-    padding-top: env(safe-area-inset-top, 0px);
-  }
-
   .site-header.headroom-hidden {
     transform: none;
   }
