@@ -30,6 +30,21 @@ html {
   transform: translateY(-100%);
 }
 
+@media (max-width: 720px) {
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: max(var(--site-safe-top), 44px);
+    background: var(--surface);
+    pointer-events: none;
+    z-index: 49;
+    transition: background 0.5s ease;
+  }
+}
+
 /* ---------- Header accent bar ---------- */
 .header-accent {
   width: 40px;
