@@ -31,7 +31,7 @@ html {
 }
 
 @media (max-width: 720px) {
-  body::before {
+  .site-header::before {
     content: '';
     position: fixed;
     top: 0;
@@ -40,8 +40,13 @@ html {
     height: max(var(--site-safe-top), 44px);
     background: var(--surface);
     pointer-events: none;
-    z-index: 49;
+    z-index: -1;
     transition: background 0.5s ease;
+  }
+
+  .site-header .app-inner {
+    position: relative;
+    z-index: 1;
   }
 }
 
