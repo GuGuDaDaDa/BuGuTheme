@@ -1,16 +1,14 @@
 /* ---------- Site header ---------- */
 :root {
   --site-header-height: 54px;
-  --site-safe-top: env(safe-area-inset-top, 0px);
-  --site-header-total-height: calc(var(--site-header-height) + var(--site-safe-top));
 }
 
 html {
-  scroll-padding-top: var(--site-header-total-height);
+  scroll-padding-top: var(--site-header-height);
 }
 
 .app-shell > main {
-  padding-top: var(--site-header-total-height);
+  padding-top: var(--site-header-height);
 }
 
 .site-header {
@@ -22,32 +20,11 @@ html {
   left: 0;
   right: 0;
   z-index: 50;
-  padding-top: var(--site-safe-top);
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
 }
 
 .site-header.headroom-hidden {
   transform: translateY(-100%);
-}
-
-@media (max-width: 720px) {
-  .site-header::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: max(var(--site-safe-top), 44px);
-    background: var(--surface);
-    pointer-events: none;
-    z-index: -1;
-    transition: background 0.5s ease;
-  }
-
-  .site-header .app-inner {
-    position: relative;
-    z-index: 1;
-  }
 }
 
 /* ---------- Header accent bar ---------- */
@@ -224,7 +201,6 @@ html {
   width: 100%;
   max-width: 420px;
   height: 100dvh;
-  padding-top: var(--site-safe-top);
   background: var(--surface);
   display: flex;
   flex-direction: column;
