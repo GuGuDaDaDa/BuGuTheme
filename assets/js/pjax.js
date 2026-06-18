@@ -28,14 +28,16 @@ export function initPjax() {
  * @param {MouseEvent} e
  */
 function handleClick(e) {
+  if (e.defaultPrevented) return;
+
   const link = /** @type {HTMLElement|null} */ (e.target.closest('a'));
   if (!link) return;
 
   const href = link.getAttribute('href');
   if (!href || href === '#') return;
 
-  // Resolve relative URLs
-  const url = new URL(href, location.origin);
+  // Resolve relative URLs against the current page so "#id" stays in-page.
+  const url = new URL(href, location.href);
 
   // Only same-origin
   if (url.origin !== location.origin) return;
