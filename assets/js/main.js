@@ -106,21 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
   (function () {
     const header = document.querySelector('.site-header');
     if (!header) return;
-    const root = document.documentElement;
-
-    /**
-     * Keep the iOS status bar area on the same opaque surface as the header.
-     * @param {boolean} visible - Whether the site header is currently visible.
-     */
-    function setHeaderVisible(visible) {
-      root.classList.toggle('header-visible', visible);
-      document.body.classList.toggle('header-visible', visible);
-    }
 
     let lastY = window.scrollY;
     let upDelta = 0;
     let hidden = false;
-    setHeaderVisible(true);
 
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
@@ -131,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         upDelta = 0;
         if (!hidden && y > 150) {
           header.classList.add('headroom-hidden');
-          setHeaderVisible(false);
           hidden = true;
         }
       } else if (diff < 0) {
@@ -139,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
         upDelta += Math.abs(diff);
         if (hidden && upDelta >= 50) {
           header.classList.remove('headroom-hidden');
-          setHeaderVisible(true);
           hidden = false;
           upDelta = 0;
         }

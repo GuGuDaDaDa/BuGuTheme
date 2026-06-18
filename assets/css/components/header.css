@@ -25,6 +25,17 @@ html {
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
 }
 
+.site-header::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--safe-area-top);
+  background: var(--surface);
+  pointer-events: none;
+}
+
 .site-header.headroom-hidden {
   transform: translateY(-100%);
 }
@@ -328,15 +339,6 @@ html {
 }
 
 /* ---------- Body state when menu is open ---------- */
-html.header-visible,
-body.header-visible {
-  background: var(--surface);
-}
-
-body.header-visible .app-shell {
-  background: var(--bg);
-}
-
 body.nav-open {
   background: var(--surface);
   overflow: hidden;
