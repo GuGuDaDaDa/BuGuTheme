@@ -253,6 +253,7 @@ export function initPhotoStack(container) {
   container.addEventListener('click', (e) => {
     if (isAnimating) return;
     if (e.target.closest('.stack-nav')) return;
+    if (e.target.closest('.photo-image')) return;
     flipToNext();
   });
 

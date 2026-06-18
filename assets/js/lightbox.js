@@ -89,6 +89,8 @@ class Lightbox {
   nextBtn;
   /** @type {HTMLElement} */
   backdrop;
+  /** @type {HTMLElement} */
+  imageContainer;
   /** @type {HTMLButtonElement} */
   closeBtn;
 
@@ -110,6 +112,7 @@ class Lightbox {
     this.prevBtn = /** @type {HTMLButtonElement} */ (this.el.querySelector('.lightbox-prev'));
     this.nextBtn = /** @type {HTMLButtonElement} */ (this.el.querySelector('.lightbox-next'));
     this.backdrop = /** @type {HTMLElement} */ (this.el.querySelector('.lightbox-backdrop'));
+    this.imageContainer = /** @type {HTMLElement} */ (this.el.querySelector('.lightbox-image-container'));
     this.closeBtn = /** @type {HTMLButtonElement} */ (this.el.querySelector('.lightbox-close'));
 
     if (!this.el || !this.imgEl) return;
@@ -227,6 +230,9 @@ class Lightbox {
     // Close
     this.closeBtn.addEventListener('click', () => this.close());
     this.backdrop.addEventListener('click', () => this.close());
+    this.imageContainer.addEventListener('click', (e) => {
+      if (e.target === this.imageContainer) this.close();
+    });
 
     // Navigation
     this.prevBtn.addEventListener('click', () => this.prev());
