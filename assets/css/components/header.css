@@ -1,4 +1,4 @@
-﻿/* ---------- Site header ---------- */
+/* ---------- Site header ---------- */
 .app-shell > main {
   padding-top: var(--site-header-height);
 }
@@ -10,7 +10,8 @@
   right: 0;
   z-index: 900;
   width: 100%;
-  height: var(--site-header-bar);
+  min-height: var(--site-header-height);
+  padding-top: var(--safe-area-top);
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
   box-shadow: 0 1px 0 rgba(0,0,0,0.02);
@@ -18,7 +19,6 @@
 }
 
 .site-header.headroom-hidden {
-  -webkit-transform: translateY(-100%);
   transform: translateY(-100%);
 }
 
@@ -187,18 +187,17 @@
   display: flex;
   flex-direction: column;
   box-shadow: -10px 0 30px rgba(0,0,0,0.10);
-  transition: transform 0.36s var(--ease-out), background 0.5s ease;
-  -webkit-transform: translateX(100%);
   transform: translateX(100%);
+  transition: transform 0.36s var(--ease-out), background 0.5s ease;
 }
 
 .menu-panel.open {
-  -webkit-transform: translateX(0);
   transform: translateX(0);
 }
 
 .menu-panel-top {
-  height: var(--site-header-bar);
+  height: var(--site-header-height);
+  padding: var(--safe-area-top) 16px 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
