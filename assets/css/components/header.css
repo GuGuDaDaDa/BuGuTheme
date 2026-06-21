@@ -352,15 +352,6 @@ body.nav-open {
   overscroll-behavior: none;
 }
 
-html.nav-open {
-  background: var(--surface);
-}
-
-/* Hide noise when menu open */
-body.nav-open::after {
-  display: none;
-}
-
 body.nav-open .app-shell > main,
 body.nav-open .site-footer {
   visibility: hidden;

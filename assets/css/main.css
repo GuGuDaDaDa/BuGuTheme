@@ -87,7 +87,6 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   background: var(--bg);
-  transition: background 0.5s ease;
 }
 
 body {
