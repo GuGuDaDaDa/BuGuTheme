@@ -117,7 +117,6 @@ body {
   transition: background 0.5s ease, color 0.5s ease;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  padding-top: var(--safe-area-top);
   overflow-x: hidden;
   overflow-x: clip;
 }
@@ -131,7 +130,7 @@ body::before {
   height: var(--safe-area-top);
   pointer-events: none;
   background: var(--surface);
-  z-index: 1090;
+  z-index: 850;
   transition: background 0.5s ease;
 }
 
@@ -167,7 +166,8 @@ a:hover {
 .app-shell {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--safe-area-top));
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   position: relative;
   z-index: 1;
 }
