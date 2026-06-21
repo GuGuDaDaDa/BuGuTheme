@@ -1,17 +1,15 @@
 /* ---------- Site header ---------- */
 .app-shell > main {
-  padding-top: var(--site-header-height);
+  padding-top: var(--site-header-bar);
 }
 
 .site-header {
   position: fixed;
-  top: 0;
+  top: var(--safe-area-top);
   left: 0;
   right: 0;
   z-index: 900;
   width: 100%;
-  min-height: var(--site-header-height);
-  padding-top: var(--safe-area-top);
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
   box-shadow: 0 1px 0 rgba(0,0,0,0.02);
@@ -24,11 +22,11 @@
 
 .site-header .app-inner {
   height: var(--site-header-bar);
-  position: relative;
+  display: flex;
+  align-items: stretch;
 }
 
 .site-header-inner {
-  height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -37,11 +35,10 @@
 }
 
 .header-accent {
-  position: absolute;
-  top: 10px;
-  left: 32px;
   width: 40px;
   height: 3px;
+  margin-right: 2px;
+  flex: 0 0 auto;
   border-radius: 2px;
   background: var(--accent-soft);
   opacity: 0.5;
@@ -49,7 +46,8 @@
 }
 
 .site-brand {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+  min-width: 0;
   font-family: var(--font-serif);
   font-size: 1.58rem;
   font-weight: 500;
@@ -57,6 +55,8 @@
   letter-spacing: 0.05em;
   color: var(--fg-strong);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header-right,
@@ -177,7 +177,7 @@
 
 .menu-panel {
   position: fixed;
-  top: 0;
+  top: var(--safe-area-top);
   right: 0;
   bottom: 0;
   z-index: 1010;
@@ -196,8 +196,8 @@
 }
 
 .menu-panel-top {
-  height: var(--site-header-height);
-  padding: var(--safe-area-top) 16px 0;
+  height: var(--site-header-bar);
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -312,16 +312,11 @@ body.nav-open {
     font-size: 1.28rem;
   }
 
-  .header-right {
-    gap: 10px;
-  }
-
   .menu-nav a {
     font-size: 1.45rem;
   }
 
   .header-accent {
-    left: 18px;
     width: 28px;
     height: 2px;
   }
