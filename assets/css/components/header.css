@@ -1,181 +1,147 @@
 /* ---------- Site header ---------- */
-:root {
-  --safe-area-top: env(safe-area-inset-top, 0px);
-  --site-header-height: calc(54px + var(--safe-area-top));
-}
-
-html {
-  scroll-padding-top: var(--site-header-height);
-}
-
 .app-shell > main {
-  padding-top: var(--site-header-height);
+  padding-top: var(--site-header-bar);
 }
 
 .site-header {
+  position: fixed;
+  top: var(--safe-area-top);
+  left: 0;
+  right: 0;
+  z-index: 900;
   width: 100%;
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  padding-top: var(--safe-area-top);
-  transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  transition: transform 0.32s var(--ease-out), background 0.5s ease, border-color 0.5s ease;
 }
 
 .site-header.headroom-hidden {
   transform: translateY(-100%);
 }
 
-.site-header-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--site-header-height);
-  background: var(--surface);
-  z-index: 49;
-  pointer-events: none;
-  transition: transform 0.3s ease, background 0.5s ease;
+.site-header .app-inner {
+  height: var(--site-header-bar);
+  display: flex;
+  align-items: stretch;
 }
 
-.site-header.headroom-hidden + .site-header-mask {
-  transform: translateY(-100%);
-}
-
-/* ---------- Header accent bar ---------- */
-.header-accent {
-  width: 40px;
-  height: 3px;
-  background: var(--accent-soft);
-  border-radius: 2px;
-  margin-bottom: 0;
-  opacity: 0.5;
-  transition: opacity 0.5s ease, background 0.5s ease;
-}
-
-/* ---------- Header inner layout ---------- */
 .site-header-inner {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 0;
-  gap: 12px;
+  gap: 18px;
+}
+
+.header-accent {
+  width: 40px;
+  height: 3px;
+  margin-right: 2px;
+  flex: 0 0 auto;
+  border-radius: 2px;
+  background: var(--accent-soft);
+  opacity: 0.5;
+  transition: background 0.5s ease;
 }
 
 .site-brand {
+  flex: 1 1 auto;
+  min-width: 0;
   font-family: var(--font-serif);
-  font-size: 1.7rem;
+  font-size: 1.58rem;
   font-weight: 500;
-  color: var(--fg-strong);
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  transition: opacity 0.25s;
-  white-space: nowrap;
   line-height: 1;
+  letter-spacing: 0.05em;
+  color: var(--fg-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.site-brand:hover {
-  opacity: 0.65;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-/* ---------- Desktop navigation ---------- */
-.site-nav {
-  display: flex;
-  align-items: center;
-}
-
+.header-right,
 .site-nav-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+}
+
+.header-right {
+  flex: 0 0 auto;
+  gap: 16px;
+}
+
+.site-nav-links {
+  gap: 22px;
 }
 
 .site-nav-links a {
+  position: relative;
+  padding: 8px 0;
   color: var(--muted);
   font-size: 0.84rem;
   font-weight: 500;
   letter-spacing: 0.06em;
-  transition: color 0.2s, background 0.2s;
-  position: relative;
-  padding: 6px 14px;
   text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.site-nav-links a:hover {
-  color: var(--fg-strong);
-}
-
+.site-nav-links a:hover,
 .site-nav-links a.active {
-  color: var(--accent);
+  color: var(--fg-strong);
 }
 
 .site-nav-links a.active::after {
   content: '';
   position: absolute;
-  bottom: -6px;
   left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
   width: 4px;
   height: 4px;
   border-radius: 50%;
   background: var(--accent-soft);
-  transition: background 0.3s;
+  transform: translateX(-50%);
 }
 
-/* ---------- Search trigger ---------- */
-.search-trigger {
-  width: 34px;
-  height: 34px;
-  background: none;
-  border: none;
-  cursor: pointer;
+.search-trigger,
+.hamburger,
+.menu-close {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
   color: var(--muted);
-  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.search-trigger,
+.menu-close {
   display: grid;
   place-items: center;
-  transition: color 0.2s;
-  flex-shrink: 0;
 }
 
-.search-trigger:hover {
+.search-trigger:hover,
+.menu-close:hover {
   color: var(--fg-strong);
+  background: var(--accent-wash);
 }
 
-/* ---------- Hamburger button ---------- */
 .hamburger {
   display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 44px;
-  height: 44px;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
   position: relative;
-  z-index: 1100;
-  -webkit-tap-highlight-color: transparent;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .hamburger span {
-  display: block;
   width: 22px;
   height: 2px;
-  background: var(--fg-strong);
   border-radius: 1px;
-  transition: transform 0.3s var(--ease-out), opacity 0.2s var(--ease-out);
-  transform-origin: center;
+  background: var(--fg-strong);
+  transition: transform 0.28s var(--ease-out), opacity 0.2s ease;
 }
 
 .hamburger.active span:nth-child(1) {
@@ -184,25 +150,24 @@ html {
 
 .hamburger.active span:nth-child(2) {
   opacity: 0;
-  transform: scaleX(0);
 }
 
 .hamburger.active span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ---------- Menu overlay backdrop ---------- */
+/* ---------- Mobile sidebar ---------- */
 .menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1050;
+  z-index: 1000;
   background: rgba(0,0,0,0.45);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s var(--ease-out);
+  transition: opacity 0.32s var(--ease-out);
 }
 
 .menu-overlay.open {
@@ -210,173 +175,150 @@ html {
   pointer-events: auto;
 }
 
-/* ---------- Menu slide-in panel ---------- */
 .menu-panel {
   position: fixed;
-  top: 0;
+  top: var(--safe-area-top);
   right: 0;
-  z-index: 1060;
+  bottom: 0;
+  z-index: 1010;
   width: 100%;
   max-width: 420px;
-  height: 100dvh;
   background: var(--surface);
   display: flex;
   flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.10);
   transform: translateX(100%);
-  transition: transform 0.38s var(--ease-out);
-  box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+  transition: transform 0.36s var(--ease-out), background 0.5s ease;
 }
 
 .menu-panel.open {
   transform: translateX(0);
 }
 
-/* Panel close button row */
 .menu-panel-top {
+  height: var(--site-header-bar);
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: var(--safe-area-top) 16px 0;
-  height: calc(60px + var(--safe-area-top));
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .menu-close {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: none;
-  border-radius: 50%;
-  color: var(--muted);
-  font-size: 1.4rem;
-  transition: color 0.2s, background 0.2s;
-  -webkit-tap-highlight-color: transparent;
+  font-size: 1.6rem;
+  line-height: 1;
 }
 
-.menu-close:hover {
-  color: var(--fg-strong);
-  background: var(--bg);
-}
-
-/* Panel nav links */
 .menu-panel-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 40px 40px;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 28px 34px;
 }
 
 .menu-nav {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .menu-nav a {
+  position: relative;
   display: block;
+  padding: 14px 0 14px 18px;
   font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 5vw, 1.8rem);
+  font-size: 1.65rem;
   font-weight: 500;
+  line-height: 1.3;
   letter-spacing: 0.02em;
   color: var(--fg-strong);
-  padding: 14px 16px;
-  transition: color 0.2s, transform 0.2s;
-  position: relative;
-  -webkit-tap-highlight-color: transparent;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.menu-nav a:hover,
-.menu-nav a:active {
-  color: var(--accent);
-  background: var(--accent-wash);
-  transform: translateX(6px);
-}
-
-.menu-nav a.active {
-  color: var(--accent);
-}
-
-.menu-nav a.active::before {
+.menu-nav a::before {
   content: '';
   position: absolute;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
   width: 3px;
-  height: 24px;
+  height: 0;
   background: var(--accent-soft);
+  transform: translateY(-50%);
+  transition: height 0.2s ease;
 }
 
-/* Panel footer */
+.menu-nav a:hover,
+.menu-nav a:active,
+.menu-nav a.active {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.menu-nav a.active::before {
+  height: 24px;
+}
+
 .menu-panel-footer {
-  flex-shrink: 0;
-  padding: 24px 40px 32px;
+  flex: 0 0 auto;
+  padding: 22px 34px 28px;
   border-top: 1px solid var(--hairline);
 }
 
 .menu-tagline {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.6;
   margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .menu-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  font-size: 0.8rem;
+  gap: 10px 16px;
   color: var(--muted);
+  font-size: 0.8rem;
 }
 
 .menu-meta a {
-  transition: color 0.2s;
+  color: inherit;
 }
 
 .menu-meta a:hover {
   color: var(--fg-strong);
 }
 
-/* ---------- Body state when menu is open ---------- */
+html.nav-open,
 body.nav-open {
-  background: var(--surface);
   overflow: hidden;
   touch-action: none;
   overscroll-behavior: none;
 }
 
-html.nav-open {
-  background: var(--surface);
-}
-
-body.nav-open .app-shell > main,
-body.nav-open .site-footer {
-  visibility: hidden;
-}
-
-/* ---------- Responsive ---------- */
 @media (max-width: 720px) {
-  .header-accent {
-    width: 28px;
-    height: 2px;
+  :root {
+    --site-header-bar: 58px;
   }
 
-  .site-header-inner {
-    padding: 4px 0;
+  .app-inner {
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .site-brand {
-    font-size: 1.3rem;
+    font-size: 1.28rem;
   }
 
-  .header-right {
-    gap: 14px;
+  .menu-nav a {
+    font-size: 1.45rem;
+  }
+
+  .header-accent {
+    width: 28px;
+    height: 2px;
   }
 
   .site-nav {
@@ -388,7 +330,8 @@ body.nav-open .site-footer {
   }
 
   .search-trigger {
-    order: -1;
+    width: 38px;
+    height: 38px;
   }
 }
 

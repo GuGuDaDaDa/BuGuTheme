@@ -8,6 +8,21 @@
   --font-serif: 'Noto Serif SC', 'STSong', 'Songti SC', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Segoe UI', system-ui, sans-serif;
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --safe-area-top: 0px;
+  --site-header-bar: 64px;
+  --site-header-height: calc(var(--safe-area-top) + var(--site-header-bar));
+}
+
+@supports (padding-top: constant(safe-area-inset-top)) {
+  :root {
+    --safe-area-top: constant(safe-area-inset-top);
+  }
+}
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  :root {
+    --safe-area-top: env(safe-area-inset-top);
+  }
 }
 
 /* ---------- Light mode ---------- */
@@ -86,6 +101,10 @@ img, video {
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+  scroll-padding-top: var(--site-header-height);
+  background: var(--surface);
 }
 
 body {
@@ -97,7 +116,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.5s ease, color 0.5s ease;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
+  padding-top: var(--safe-area-top);
+  overflow-x: hidden;
   overflow-x: clip;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--safe-area-top);
+  pointer-events: none;
+  background: var(--surface);
+  z-index: 1090;
+  transition: background 0.5s ease;
 }
 
 /* ---------- SVG noise texture ---------- */
@@ -132,7 +167,7 @@ a:hover {
 .app-shell {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--safe-area-top));
   position: relative;
   z-index: 1;
 }
