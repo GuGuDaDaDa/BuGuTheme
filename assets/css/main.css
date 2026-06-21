@@ -1,5 +1,5 @@
 /* ============================================================
-   BuGuBlog Design System — CSS Variables & Base Styles
+   BuGuBlog Design System �?CSS Variables & Base Styles
    Per infer.md and bugublog-v13.html
    ============================================================ */
 
@@ -86,6 +86,8 @@ img, video {
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  background: var(--bg);
+  transition: background 0.5s ease;
 }
 
 body {
@@ -96,7 +98,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.5s ease, color 0.5s ease;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: clip;
 }
 
@@ -132,7 +134,7 @@ a:hover {
 .app-shell {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   z-index: 1;
 }
@@ -176,3 +178,4 @@ a:hover {
     padding: 0 14px;
   }
 }
+

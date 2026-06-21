@@ -225,6 +225,7 @@ html {
   transform: translateX(100%);
   transition: transform 0.38s var(--ease-out);
   box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .menu-panel.open {
@@ -316,7 +317,7 @@ html {
 /* Panel footer */
 .menu-panel-footer {
   flex-shrink: 0;
-  padding: 24px 40px 32px;
+  padding: 24px 40px calc(32px + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--hairline);
 }
 
@@ -353,6 +354,11 @@ body.nav-open {
 
 html.nav-open {
   background: var(--surface);
+}
+
+/* Hide noise when menu open */
+body.nav-open::after {
+  display: none;
 }
 
 body.nav-open .app-shell > main,

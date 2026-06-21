@@ -229,3 +229,13 @@
   width: 22px;
   height: 22px;
 }
+/* ---------- iOS safe area overrides for menu panel ---------- */
+.ios body.nav-open,
+.ios html.nav-open {
+  /* Ensure background covers entire viewport including safe areas */
+  min-height: 100dvh;
+}
+/* Prevent menu panel body content from being clipped by home indicator */
+.ios .menu-panel-body {
+  padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+}
