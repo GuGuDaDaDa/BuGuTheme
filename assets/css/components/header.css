@@ -15,12 +15,14 @@ html {
   width: 100%;
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
+  /* Keep Safari's status-bar region on the header's compositor layer. */
+  box-shadow: 0 -160px 0 160px var(--surface);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
-  transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
+  transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease, box-shadow 0.5s ease;
 }
 
 .site-header.headroom-hidden {
