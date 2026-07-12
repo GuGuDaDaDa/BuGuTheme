@@ -200,13 +200,16 @@ html {
   z-index: 1050;
   background: rgba(0,0,0,0.45);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.35s var(--ease-out);
+  transition: opacity 0.35s var(--ease-out), visibility 0s linear 0.35s;
 }
 
 .menu-overlay.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+  transition-delay: 0s;
 }
 
 /* ---------- Menu slide-in panel ---------- */
@@ -217,17 +220,22 @@ html {
   z-index: 1060;
   width: 100%;
   max-width: 420px;
-  height: 100dvh;
+  bottom: 0;
   background: var(--surface);
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 0.38s var(--ease-out);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.38s var(--ease-out), visibility 0s linear 0.38s;
   box-shadow: -4px 0 24px rgba(0,0,0,0.08);
 }
 
 .menu-panel.open {
   transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
 }
 
 /* Panel close button row */
@@ -343,16 +351,10 @@ html {
 }
 
 /* ---------- Body state when menu is open ---------- */
-html.nav-open,
 body.nav-open {
-  background: var(--surface);
   overflow: hidden;
   touch-action: none;
   overscroll-behavior: none;
-}
-
-body.nav-open .site-scrollport {
-  visibility: hidden;
 }
 
 /* ---------- Responsive ---------- */
