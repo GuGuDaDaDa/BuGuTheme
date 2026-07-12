@@ -1,235 +1,85 @@
 /* ============================================================
-   iOS overrides — force mobile layout on phone-class devices
-   Applied via .ios class on <html> (set by main.js)
+   Touch-device adjustments
+   The shared component breakpoints own responsive layout. These
+   rules only address platform behavior and tablet landscape layout.
    ============================================================ */
 
-/* ---------- Typography (mirrors mobile breakpoints) ---------- */
-.ios .article-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 1.5rem;
-}
-
+/* Prevent long text from widening article pages on WebKit. */
 .ios .article-content {
-  font-size: 1.0625rem;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
-.ios .article-content p {
-  font-size: 1.0625rem;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.03em;
-}
-
-.ios .article-content h2 {
-  font-size: 1.625rem;
-  line-height: 1.4;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.ios .article-content h3 {
-  font-size: 1.25rem;
-  line-height: 1.4;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-}
-
-.ios .article-content blockquote {
-  font-size: 1rem;
-  line-height: 1.75;
-}
-
-.ios .article-meta {
-  font-size: 0.875rem;
-  margin-bottom: 2rem;
-}
-
-/* ---------- Featured layout typography ---------- */
-.ios .featured-info-title {
-  font-size: 1.2rem;
-}
-
-.ios .featured-info-excerpt {
-  font-size: 0.88rem;
-}
-
-.ios .featured-info-category {
-  font-size: 0.72rem;
-}
-
-.ios .featured-info-meta {
-  font-size: 0.82rem;
-}
-
-.ios .section-ornament {
-  font-size: 0.64rem;
-}
-
-/* ---------- Cards ---------- */
-.ios .masonry {
-  columns: 1;
-  column-gap: 0;
-}
-
-.ios .masonry > * {
-  margin-bottom: 18px;
-}
-
-.ios .card-body {
-  padding: 18px 18px 20px;
-}
-
-.ios .card-title {
-  font-size: 1.35rem;
-}
-
-.ios .card-subtitle {
-  font-size: 1.0rem;
-}
-
-.ios .card-excerpt {
-  font-size: 1.05rem;
-}
-
-.ios .card-category {
-  font-size: 0.8rem;
-}
-
-.ios .card-meta {
-  font-size: 0.88rem;
-}
-
-.ios .masonry-loading-inner {
-  font-size: 1.0rem;
-}
-
-/* ---------- Footnotes ---------- */
-.ios .fn-item {
-  padding: 10px 0 10px 28px;
-}
-
-.ios .fn-item-num {
-  font-size: 0.75rem;
-  min-width: 20px;
-}
-
-/* ---------- Blockquote ---------- */
-.ios .article-content blockquote {
-  padding: 28px 42px 32px 72px;
-}
-
-.ios .article-content blockquote::before {
-  left: 28px;
-  font-size: 2.2rem;
-  top: 14px;
-}
-
-.ios .article-content blockquote::after {
-  right: 12px;
-  font-size: 2.2rem;
-  bottom: 6px;
-}
-
-/* ---------- Featured layout (force mobile) ---------- */
-.ios .featured-section {
-  margin: 24px 0 34px;
-}
-
-.ios .featured-layout {
-  flex-direction: column;
-  gap: 15px;
-  width: 100vw;
-  padding: 0;
-}
-
-.ios .featured-main {
-  flex: auto;
-  width: 100vw;
-  aspect-ratio: 16 / 9;
-  height: auto;
-  border-left: 0;
-  border-right: 0;
-}
-
-.ios .featured-info {
-  flex: none;
-  width: auto;
-  min-width: 0;
-  padding: 0 14px;
-}
-
-.ios .featured-side-wrap {
-  flex: auto;
-  min-width: 0;
-  max-width: none;
-  contain: none;
-  overflow: hidden;
-  padding-left: 14px;
-}
-
-.ios .featured-side {
-  flex-direction: row;
-  gap: 10px;
-  width: auto;
-  height: auto;
-  overflow-y: visible;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding: 0 14px 4px 0;
-}
-
-.ios .featured-side::-webkit-scrollbar {
-  display: none;
-}
-
-.ios .featured-side-item {
-  flex: 0 0 auto;
-  width: clamp(260px, 78vw, 360px);
-  min-height: 118px;
-  padding: 12px;
-  gap: 10px;
-  scroll-snap-align: start;
-  align-items: center;
-}
-
-.ios .featured-side-item:hover,
-.ios .featured-side-item.active {
-  transform: none;
-}
-
-.ios .featured-side-thumb {
-  height: 82px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.ios .featured-side-title {
-  font-size: 0.85rem;
-  -webkit-line-clamp: 1;
-}
-
-/* ---------- Card corner accents ---------- */
-.ios .card::before,
-.ios .card::after {
-  width: 18px;
-  height: 18px;
-  border-width: 2px;
-}
-
-.ios .card:hover::before,
-.ios .card:hover::after {
-  width: 22px;
-  height: 22px;
-}
-/* ---------- iOS menu spacing ---------- */
+/* The default viewport already excludes the unsafe bottom area. */
 .ios .menu-panel-body {
   padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Use the desktop featured composition on tablet-class landscape screens. */
+@media (min-width: 900px) and (max-width: 1100px) and (orientation: landscape) {
+  .ios .featured-layout {
+    flex-direction: row;
+    gap: clamp(16px, 2vw, 24px);
+    padding: 0 clamp(20px, 3vw, 36px);
+  }
+
+  .ios .featured-main {
+    flex: 1 1 58rem;
+    width: auto;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .ios .featured-info {
+    flex: 0 1 clamp(180px, 18vw, 240px);
+    width: auto;
+    min-width: 180px;
+    padding: 10px 0;
+  }
+
+  .ios .featured-info-title {
+    font-size: clamp(1.18rem, 1.7vw, 1.45rem);
+  }
+
+  .ios .featured-side-wrap {
+    flex: 0 0 clamp(230px, 24vw, 290px);
+    min-width: 0;
+    max-width: none;
+    contain: size;
+    overflow: hidden;
+  }
+
+  .ios .featured-side {
+    flex-direction: column;
+    gap: 10px;
+    width: auto;
+    height: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: none;
+    padding: 0 4px;
+  }
+
+  .ios .featured-side-item {
+    flex: 0 0 calc((100% - 20px) / 3);
+    width: auto;
+    min-height: 96px;
+    padding: 12px;
+    gap: 12px;
+    scroll-snap-align: none;
+    align-items: stretch;
+  }
+
+  .ios .featured-side-thumb {
+    height: 100%;
+    max-width: none;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .ios .featured-side-title {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 2;
+  }
 }
