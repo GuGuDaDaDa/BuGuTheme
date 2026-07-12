@@ -199,15 +199,14 @@ html {
   bottom: 0;
   z-index: 1050;
   background: rgba(0,0,0,0.45);
-  transform: scaleX(0);
-  transform-origin: left center;
+  opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: transform 0.38s var(--ease-out), visibility 0s linear 0.38s;
+  transition: opacity 0.38s var(--ease-out), visibility 0s linear 0.38s;
 }
 
 .menu-overlay.open {
-  transform: scaleX(1);
+  opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transition-delay: 0s;
