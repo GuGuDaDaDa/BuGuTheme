@@ -1,7 +1,6 @@
 /* ---------- Site header ---------- */
 :root {
-  --site-header-bar-height: 54px;
-  --site-header-height: calc(var(--site-header-bar-height) + var(--safe-area-top));
+  --site-header-height: 54px;
 }
 
 html {
@@ -20,23 +19,8 @@ html {
   top: 0;
   left: 0;
   right: 0;
-  padding-top: var(--safe-area-top);
   z-index: 50;
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
-}
-
-/* This surface stays in place when headroom hides the interactive header. */
-.app-shell::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--safe-area-top);
-  background: var(--surface);
-  pointer-events: none;
-  z-index: 51;
-  transition: background 0.5s ease;
 }
 
 .site-header.headroom-hidden {
