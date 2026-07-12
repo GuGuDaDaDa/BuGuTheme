@@ -87,6 +87,8 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   background: var(--bg);
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -97,8 +99,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.5s ease, color 0.5s ease;
-  min-height: 100dvh;
-  overflow-x: clip;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 /* ---------- SVG noise texture ---------- */
@@ -133,12 +137,26 @@ a:hover {
 .app-shell {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
   position: relative;
   z-index: 1;
 }
 
-.app-shell > main {
+.site-scrollport {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow-x: clip;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.site-scrollport > main {
   flex: 1;
 }
 

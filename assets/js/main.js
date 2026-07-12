@@ -13,6 +13,7 @@ import { start, done } from './progress.js';
 import { initFootnotes, setupFootnoteEvents, bindFootnoteRefs } from './footnotes.js';
 import { initPjax } from './pjax.js';
 import { initGiscus } from './giscus.js';
+import { getScrollEventTarget, getScrollTop } from './scroll-container.js';
 
 const isIpadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
 
@@ -107,12 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.site-header');
     if (!header) return;
 
-    let lastY = window.scrollY;
+    const scrollTarget = getScrollEventTarget();
+    let lastY = getScrollTop();
     let upDelta = 0;
     let hidden = false;
 
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
+    scrollTarget.addEventListener('scroll', () => {
+      const y = getScrollTop();
       const diff = y - lastY;
 
       if (diff > 0) {

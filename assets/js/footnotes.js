@@ -1,3 +1,5 @@
+import { getScrollEventTarget } from './scroll-container.js';
+
 /**
  * Footnotes — tooltip (desktop), bottom panel (mobile), scroll-to with highlight.
  * Reads footnote data from DOM .fn-item elements rather than duplicating in JS.
@@ -258,7 +260,7 @@ export function setupFootnoteEvents() {
   }
 
   /* Scroll dismiss */
-  window.addEventListener('scroll', () => {
+  getScrollEventTarget().addEventListener('scroll', () => {
     if (tooltip && tooltip.classList.contains('visible')) { if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; } dismissTooltip(); }
   }, { passive: true });
 

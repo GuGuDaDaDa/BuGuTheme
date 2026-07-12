@@ -9,6 +9,7 @@
  */
 
 import { start, done } from './progress.js';
+import { getScrollTop, scrollToPosition } from './scroll-container.js';
 
 /**
  * Start intercepting clicks for PJAX navigation.
@@ -71,7 +72,7 @@ async function navigate(url, push) {
   try {
     // Save current scroll position to the current history entry before leaving
     if (push) {
-      history.replaceState({ scrollY: window.scrollY }, '', location.href);
+      history.replaceState({ scrollY: getScrollTop() }, '', location.href);
     }
 
     const resp = await fetch(url);
@@ -138,8 +139,8 @@ function handlePopState() {
  * @param {number} top - Vertical scroll offset to restore.
  */
 function restoreScrollPosition(top) {
-  window.scrollTo(0, top);
-  requestAnimationFrame(() => window.scrollTo(0, top));
+  scrollToPosition(top);
+  requestAnimationFrame(() => scrollToPosition(top));
 }
 
 /**
