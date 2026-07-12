@@ -214,20 +214,17 @@ html {
 
 /* ---------- Menu slide-in panel ---------- */
 .menu-panel {
-  --menu-panel-overscan: 160px;
   position: fixed;
-  top: calc(0px - var(--menu-panel-overscan));
+  top: 0;
   right: 0;
   z-index: 1060;
   width: 100%;
   max-width: 420px;
-  bottom: calc(0px - var(--menu-panel-overscan));
-  padding-block: var(--menu-panel-overscan);
+  bottom: 0;
   background: var(--surface);
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  will-change: transform;
   visibility: hidden;
   pointer-events: none;
   transition: transform 0.38s var(--ease-out), visibility 0s linear 0.38s;
@@ -393,6 +390,10 @@ body.nav-open {
 }
 
 @media (max-width: 480px) {
+  .menu-overlay {
+    background: transparent;
+  }
+
   .menu-panel {
     max-width: none;
   }
