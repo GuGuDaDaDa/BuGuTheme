@@ -13,18 +13,35 @@ html {
 
 .site-header {
   width: 100%;
-  background: var(--surface);
-  border-bottom: 1px solid var(--hairline);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
+  pointer-events: none;
+}
+
+.site-header-surface {
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--hairline);
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
 }
 
-.site-header.headroom-hidden {
+.site-header > .app-inner {
+  position: relative;
+  pointer-events: auto;
+  transition: transform 0.3s ease;
+}
+
+.site-header.headroom-hidden .site-header-surface,
+.site-header.headroom-hidden > .app-inner {
   transform: translateY(-100%);
+}
+
+.site-header.headroom-hidden > .app-inner {
+  pointer-events: none;
 }
 
 /* ---------- Header accent bar ---------- */

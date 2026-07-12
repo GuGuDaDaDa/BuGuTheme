@@ -92,9 +92,6 @@ html {
   scroll-padding-bottom: var(--safe-area-bottom);
   font-size: 16px;
   background: var(--bg);
-  min-height: 100%;
-  overflow-x: clip;
-  overflow-y: auto;
 }
 
 body {
@@ -104,10 +101,10 @@ body {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   transition: background 0.5s ease, color 0.5s ease;
-  min-height: 100dvh;
-  overflow-x: clip;
-  overflow-y: visible;
+  min-height: 100vh;
 }
 
 /* ---------- SVG noise texture ---------- */
@@ -127,6 +124,15 @@ body::after {
   opacity: 0.04;
 }
 
+/* Keep iOS Safari's root background out of the fixed-layer compositor. */
+@supports (-webkit-touch-callout: none) {
+  @media (hover: none) {
+    body::after {
+      display: none;
+    }
+  }
+}
+
 /* ---------- Base elements ---------- */
 a {
   color: var(--fg-strong);
@@ -142,9 +148,8 @@ a:hover {
 .app-shell {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
-  position: relative;
-  z-index: 1;
+  min-height: 100vh;
+  overflow-x: clip;
 }
 
 .site-scrollport {
@@ -152,8 +157,6 @@ a:hover {
   flex: 1;
   flex-direction: column;
   min-height: 0;
-  overflow-x: clip;
-  overflow-y: visible;
 }
 
 .site-scrollport > main {
