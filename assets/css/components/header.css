@@ -1,7 +1,8 @@
 /* ---------- Site header ---------- */
 :root {
   --safe-area-top: env(safe-area-inset-top, 0px);
-  --site-header-height: calc(54px + var(--safe-area-top));
+  --site-header-bar-height: 54px;
+  --site-header-height: calc(var(--site-header-bar-height) + var(--safe-area-top));
 }
 
 html {
@@ -17,11 +18,10 @@ html {
   background: var(--surface);
   border-bottom: 1px solid var(--hairline);
   position: fixed;
-  top: 0;
+  top: var(--safe-area-top);
   left: 0;
   right: 0;
   z-index: 50;
-  padding-top: var(--safe-area-top);
   transition: transform 0.3s ease, border-color 0.5s ease, background 0.5s ease;
 }
 
@@ -29,20 +29,17 @@ html {
   transform: translateY(-100%);
 }
 
-.site-header-mask {
+/* The browser safe area is a viewport surface, independent of header visibility. */
+.site-safe-area-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: var(--site-header-height);
+  height: var(--safe-area-top);
   background: var(--surface);
-  z-index: 49;
+  z-index: 51;
   pointer-events: none;
-  transition: transform 0.3s ease, background 0.5s ease;
-}
-
-.site-header.headroom-hidden + .site-header-mask {
-  transform: translateY(-100%);
+  transition: background 0.5s ease;
 }
 
 /* ---------- Header accent bar ---------- */
