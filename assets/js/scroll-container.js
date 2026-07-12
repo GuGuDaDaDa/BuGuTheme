@@ -1,15 +1,15 @@
 /**
- * Shared accessors for the site's internal scrolling viewport.
+ * Shared accessors for the document scrolling viewport.
  *
  * @module scroll-container
  */
 
 /**
  * Return the element that owns page scrolling.
- * @returns {HTMLElement|null}
+ * @returns {Element|null}
  */
 export function getScrollContainer() {
-  return document.getElementById('site-scrollport');
+  return document.scrollingElement;
 }
 
 /**
@@ -23,10 +23,10 @@ export function getScrollTop() {
 
 /**
  * Return the target that dispatches page scroll events.
- * @returns {HTMLElement|Window}
+ * @returns {Window}
  */
 export function getScrollEventTarget() {
-  return getScrollContainer() || window;
+  return window;
 }
 
 /**
@@ -35,10 +35,5 @@ export function getScrollEventTarget() {
  * @param {ScrollBehavior} [behavior='auto'] - Scrolling animation mode.
  */
 export function scrollToPosition(top, behavior = 'auto') {
-  const container = getScrollContainer();
-  if (container) {
-    container.scrollTo({ top, left: 0, behavior });
-    return;
-  }
   window.scrollTo({ top, left: 0, behavior });
 }

@@ -11,6 +11,11 @@
 }
 
 /* ---------- Lightbox ---------- */
+html.lightbox-open,
+body.lightbox-open {
+  overflow: hidden;
+}
+
 .lightbox {
   position: fixed;
   inset: 0;

@@ -140,7 +140,8 @@ class Lightbox {
     this.showImage();
     this.el.classList.add('active');
     this.el.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    document.documentElement.classList.add('lightbox-open');
+    document.body.classList.add('lightbox-open');
     this.resetZoom();
 
     // Hide arrows if only one image
@@ -153,7 +154,8 @@ class Lightbox {
   close() {
     this.el.classList.remove('active');
     this.el.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    document.documentElement.classList.remove('lightbox-open');
+    document.body.classList.remove('lightbox-open');
     this.imgEl.src = '';
   }
 

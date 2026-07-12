@@ -4,7 +4,7 @@
   --site-header-height: calc(var(--site-header-bar-height) + var(--safe-area-top));
 }
 
-.site-scrollport {
+html {
   scroll-padding-top: var(--site-header-height);
 }
 
@@ -342,6 +342,7 @@
 }
 
 /* ---------- Body state when menu is open ---------- */
+html.nav-open,
 body.nav-open {
   background: var(--surface);
   overflow: hidden;
