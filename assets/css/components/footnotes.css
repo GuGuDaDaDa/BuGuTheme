@@ -247,7 +247,7 @@
 }
 
 .fn-panel-body {
-  padding: 14px 20px 28px;
+  padding: 14px max(20px, var(--safe-area-right)) calc(28px + var(--safe-area-bottom)) max(20px, var(--safe-area-left));
 }
 
 .fn-panel-item-num {

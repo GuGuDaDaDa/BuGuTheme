@@ -1,7 +1,7 @@
 /* ---------- Progress bar (top of viewport) ---------- */
 .progress-bar {
   position: fixed;
-  top: 0;
+  top: var(--safe-area-top);
   left: 0;
   width: 0;
   height: 2px;
