@@ -19,7 +19,7 @@ const isIpadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints >
 
 // Detect touch devices and tag <html> for mobile/tablet layout overrides.
 if (/iPhone|iPod|iPad/.test(navigator.userAgent) || isIpadOS || /Android/.test(navigator.userAgent)) {
-  document.documentElement.classList.add('ios');
+  document.documentElement.classList.add('mobile');
 }
 
 start();

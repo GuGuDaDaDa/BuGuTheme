@@ -124,7 +124,7 @@ body::after {
   opacity: 0.04;
 }
 
-/* Keep iOS Safari's root background out of the fixed-layer compositor. */
+/* Keep mobile Safari's root background out of the fixed-layer compositor. */
 @supports (-webkit-touch-callout: none) {
   @media (hover: none) {
     body::after {
