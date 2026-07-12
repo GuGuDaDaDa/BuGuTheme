@@ -17,6 +17,10 @@ import { start, done } from './progress.js';
 export function initPjax() {
   if (!window.history.pushState) return;
 
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+
   // Expose for programmatic navigation (card clicks, carousel, etc.)
   window.pjaxNavigate = (url) => navigate(url, true);
 
@@ -102,12 +106,12 @@ async function navigate(url, push) {
     const header = document.querySelector('.site-header');
     if (header) header.classList.remove('headroom-hidden');
 
-    // Restore scroll position for back/forward, otherwise scroll to top
-    var state = history.state;
-    if (state && typeof state.scrollY === 'number') {
-      window.scrollTo(0, state.scrollY);
+    // Restore scroll position for back/forward, otherwise scroll to top.
+    if (push) {
+      restoreScrollPosition(0);
     } else {
-      window.scrollTo(0, 0);
+      const state = history.state;
+      restoreScrollPosition(state && typeof state.scrollY === 'number' ? state.scrollY : 0);
     }
 
     done();
@@ -125,6 +129,17 @@ async function navigate(url, push) {
  */
 function handlePopState() {
   navigate(location.href, false);
+}
+
+/**
+ * Set the page scroll position after PJAX swaps content.
+ * Re-apply on the next frame so browser scroll anchoring cannot leave
+ * article prev/next navigation at the original click position.
+ * @param {number} top - Vertical scroll offset to restore.
+ */
+function restoreScrollPosition(top) {
+  window.scrollTo(0, top);
+  requestAnimationFrame(() => window.scrollTo(0, top));
 }
 
 /**
