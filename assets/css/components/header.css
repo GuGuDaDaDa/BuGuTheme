@@ -214,17 +214,20 @@ html {
 
 /* ---------- Menu slide-in panel ---------- */
 .menu-panel {
+  --menu-panel-overscan: 160px;
   position: fixed;
-  top: 0;
+  top: calc(0px - var(--menu-panel-overscan));
   right: 0;
   z-index: 1060;
   width: 100%;
   max-width: 420px;
-  bottom: 0;
+  bottom: calc(0px - var(--menu-panel-overscan));
+  padding-block: var(--menu-panel-overscan);
   background: var(--surface);
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
+  will-change: transform;
   visibility: hidden;
   pointer-events: none;
   transition: transform 0.38s var(--ease-out), visibility 0s linear 0.38s;
@@ -386,6 +389,12 @@ body.nav-open {
 
   .search-trigger {
     order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-panel {
+    max-width: none;
   }
 }
 
